@@ -12,23 +12,23 @@ redirect_from:
 next: hello-world.html
 ---
 
-React is flexible and can be used in a variety of projects. You can create new apps with it, but you can also gradually introduce it into an existing codebase without doing a rewrite.
+React 的灵活性使其可以应用在各种类型的项目上。你可以用它创建新的应用，也可以将它逐步地引入到现有的代码库中，而无需重写。
 
-Here are a couple of ways to get started:
+以下是几种上手的方法：
 
-* [Try React](#trying-out-react)
-* [Create a New App](#creating-a-new-application)
-* [Add React to an Existing App](#adding-react-to-an-existing-application)
+* [尝试 React](#trying-out-react)
+* [创建新应用](#creating-a-new-application)
+* [添加 React 到现有的应用](#adding-react-to-an-existing-application)
 
-## Trying Out React
+## 尝试 React
 
-If you're just interested in playing around with React, you can use CodePen. Try starting from [this Hello World example code](http://codepen.io/gaearon/pen/rrpgNB?editors=0010). You don't need to install anything; you can just modify the code and see if it works.
+如果你只是想尝试以下，那你可以使用 CodePen。先从 [这个 Hello World 的示例代码](http://codepen.io/gaearon/pen/rrpgNB?editors=0010)开始，你不需要安装任何东西就可以通过修改代码来看到效果。
 
-If you prefer to use your own text editor, you can also [download this HTML file](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html), edit it, and open it from the local filesystem in your browser. It does a slow runtime code transformation, so don't use it in production.
+如果你喜欢使用自己的文本编辑器，那你也可以[下载这个 HTML 文件](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html)，编辑并在本地浏览器中打开。它会缓慢地运行代码转换，所以不要在生产环境下使用。
 
-If you want to use it for a full application, there are two popular ways to get started with React: using Create React App, or adding it to an existing application.
+如果你想用 React 来编写一个完整的应用，有两种流行的方式：使用 [Create React App](http://github.com/facebookincubator/create-react-app) 或者将它添加到现有的应用中。
 
-## Creating a New Application
+## 创建新应用
 
 [Create React App](http://github.com/facebookincubator/create-react-app) is the best way to start building a new React single page application. It sets up your development environment so that you can use the latest JavaScript features, provides a nice developer experience, and optimizes your app for production. You’ll need to have Node >= 6 on your machine.
 
@@ -53,7 +53,7 @@ Create React App doesn't handle backend logic or databases; it just creates a fr
 
 When you're ready to deploy to production, running `npm run build` will create an optimized build of your app in the `build` folder. You can learn more about Create React App [from its README](https://github.com/facebookincubator/create-react-app#create-react-app-) and the [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#table-of-contents).
 
-## Adding React to an Existing Application
+## 添加 React 到现有的应用
 
 You don't need to rewrite your app to start using React.
 
