@@ -59,7 +59,7 @@ Typically, elements are not used directly, but get returned from components.
 
 ## [Components](/docs/components-and-props.html)
 
-React components are small, resuable pieces of code that return a React element to be rendered to the page. The simplest version of React component is a plain JavaScript function that returns a React element:
+React components are small, reusable pieces of code that return a React element to be rendered to the page. The simplest version of React component is a plain JavaScript function that returns a React element:
 
 ```js
 function Welcome(props) {
@@ -161,6 +161,6 @@ Handling events with React elements has some syntactic differences:
 * React event handlers are named using camelCase, rather than lowercase.
 * With JSX you pass a function as the event handler, rather than a string.
 
-## [Reconciliation](/reconciliation.html)
+## [Reconciliation](/docs/reconciliation.html)
 
 When a component's props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM. This process is called "reconciliation".

@@ -1,7 +1,5 @@
 # reactjs.org
 
-> 译者出于研读 React 官方文档目的对其进行中文翻译。翻译进行中……
-
 This repo contains the source code and documentation powering [reactjs.org](https://reactjs.org/).
 
 ## Getting started
