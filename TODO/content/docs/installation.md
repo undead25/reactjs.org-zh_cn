@@ -30,7 +30,7 @@ React 的灵活性使其可以应用在各种类型的项目上。你可以用�
 
 ## 创建新应用
 
-[Create React App](http://github.com/facebookincubator/create-react-app) is the best way to start building a new React single page application. It sets up your development environment so that you can use the latest JavaScript features, provides a nice developer experience, and optimizes your app for production. You’ll need to have Node >= 6 on your machine.
+[Create React App](http://github.com/facebookincubator/create-react-app) 是搭建一个新的 React 单页应用的最佳方式。它配置好了开发环境以便你可以使用最新的 JavaScript 特性，提供不错的开发体验，以及优化用于生产环境的应用。你需要在你的设备上安装 Node >= 6。
 
 ```bash
 npm install -g create-react-app
@@ -40,7 +40,7 @@ cd my-app
 npm start
 ```
 
-If you have npm 5.2.0+ installed, you may use [npx](https://www.npmjs.com/package/npx) instead.
+如果你安装了 npm 5.2.0+，也可以使用 [npx](https://www.npmjs.com/package/npx)。
 
 ```bash
 npx create-react-app my-app
@@ -49,15 +49,15 @@ cd my-app
 npm start
 ```
 
-Create React App doesn't handle backend logic or databases; it just creates a frontend build pipeline, so you can use it with any backend you want. It uses build tools like [Babel](http://babeljs.io/) and [webpack](https://webpack.js.org/) under the hood, but works with zero configuration.
+Create React App 不会处理后端逻辑或者数据库，它只是创建了一个前端的构建管道，所以你可以和任何后端搭配使用。它使用了像 [Babel](http://babeljs.io/) 和 [webpack](https://webpack.js.org/) 这样的构建工具，但使用起来零配置。
 
-When you're ready to deploy to production, running `npm run build` will create an optimized build of your app in the `build` folder. You can learn more about Create React App [from its README](https://github.com/facebookincubator/create-react-app#create-react-app-) and the [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#table-of-contents).
+当你准备部署到生产环境时，运行 `npm run build` 将会在 `build` 文件夹中创建一个优化后的应用。你可以从 Create React App 的 [README](https://github.com/facebookincubator/create-react-app#create-react-app-) 和 [用户指南](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#table-of-contents) 中了解更多信息。
 
 ## 添加 React 到现有的应用
 
-You don't need to rewrite your app to start using React.
+你不需要为了使用 React 重写你的应用。
 
-We recommend adding React to a small part of your application, such as an individual widget, so you can see if it works well for your use case.
+我们建议在应用的一小部分中使用 React，例如某个独立部件，以便你可以验证它是否合适。
 
 While React [can be used](/docs/react-without-es6.html) without a build pipeline, we recommend setting it up so you can be more productive. A modern build pipeline typically consists of:
 
@@ -65,22 +65,22 @@ While React [can be used](/docs/react-without-es6.html) without a build pipeline
 * A **bundler**, such as [webpack](https://webpack.js.org/) or [Browserify](http://browserify.org/). It lets you write modular code and bundle it together into small packages to optimize load time.
 * A **compiler** such as [Babel](http://babeljs.io/). It lets you write modern JavaScript code that still works in older browsers.
 
-### Installing React
+### 安装 React
 
->**Note:**
+>**注意：**
 >
 >Once installed, we strongly recommend setting up a [production build process](/docs/optimizing-performance.html#use-the-production-build) to ensure you're using the fast version of React in production.
 
 We recommend using [Yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/) for managing front-end dependencies. If you're new to package managers, the [Yarn documentation](https://yarnpkg.com/en/docs/getting-started) is a good place to get started.
 
-To install React with Yarn, run:
+使用 Yarn 安装：
 
 ```bash
 yarn init
 yarn add react react-dom
 ```
 
-To install React with npm, run:
+使用 npm 安装：
 
 ```bash
 npm init
