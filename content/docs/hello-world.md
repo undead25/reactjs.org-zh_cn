@@ -12,9 +12,9 @@ redirect_from:
   - "docs/getting-started-zh-CN.html"
 ---
 
-The easiest way to get started with React is to use [this Hello World example code on CodePen](codepen://hello-world). You don't need to install anything; you can just open it in another tab and follow along as we go through examples. If you'd rather use a local development environment, check out the [Installation](/docs/installation.html) page.
+开始使用 React 最简单的方式就是使用[这个在 CodePen 上的 Hello World 示例](codepen://hello-world)。你不需要安装任何东西，只要在新标签页中打开它，然后按照示例进行操作。如果你想使用本地开发环境，请查看[安装](/docs/installation.html)页面。
 
-The smallest React example looks like this:
+最基本的 React 示例：
 
 ```js
 ReactDOM.render(
@@ -23,12 +23,12 @@ ReactDOM.render(
 );
 ```
 
-It renders a header saying "Hello, world!" on the page.
+它渲染了一个 “Hello, world!” 的标题。
 
-The next few sections will gradually introduce you to using React. We will examine the building blocks of React apps: elements and components. Once you master them, you can create complex apps from small reusable pieces.
+接下来的几个章节将逐步向你介绍如何使用 React。我们将了解到 React 应用的构成模块：元素和组件。一旦掌握了它们，你就可以使用简单可复用的代码来创建复杂的应用。
 
-## A Note on JavaScript
+## JavaScript 注意事项
 
-React is a JavaScript library, and so it assumes you have a basic understanding of the JavaScript language. If you don't feel very confident, we recommend [refreshing your JavaScript knowledge](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) so you can follow along more easily.
+React 是一个 JavaScript 库，所以这需要你对 JavaScript 有一个基本的了解。如果你还不是很了解，我们建议你[温习下你的 JavaScript 知识](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)以便更轻松地学习 React。
 
-We also use some of the ES6 syntax in the examples. We try to use it sparingly because it's still relatively new, but we encourage you to get familiar with [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), [template literals](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals), [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), and [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) statements. You can use the [Babel REPL](babel://es5-syntax-example) to check what ES6 code compiles to.
+我们在示例中也使用了一些 ES6 的语法。由于它们还比较新，我们也是尽量少用，但还是鼓励你去熟悉下 [`箭头函数`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)、[`类`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)、[`模板字符串`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals)、[`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) 和 [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)。你可以使用 [Babel REPL](babel://es5-syntax-example) 来查看 ES6 的编译结果.
