@@ -6,33 +6,33 @@ prev: hello-world.html
 next: rendering-elements.html
 ---
 
-Consider this variable declaration:
+看下这个变量：
 
 ```js
 const element = <h1>Hello, world!</h1>;
 ```
 
-This funny tag syntax is neither a string nor HTML.
+这个有趣的标签语法既不是一个字符串也不是 HTML。
 
-It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.
+它叫做 JSX，是 JavaScript 的语法拓展。我们建议 React 中使用它来描述用户界面。JSX 可能让你想起了模板余元，但它具有 JavaScript 的全部功能。
 
-JSX produces React "elements". We will explore rendering them to the DOM in the [next section](/docs/rendering-elements.html). Below, you can find the basics of JSX necessary to get you started.
+JSX 生成 React “元素”。我们将在[后面的章节](/docs/rendering-elements.html)中探索如何将它们渲染到 DOM 中。接下来你会了解到 JSX 的基本使用方法。
 
-### Why JSX?
+### 为什么是 JSX？
 
-React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.
+React 信奉渲染逻辑与其他 UI 逻辑耦合的事实：事件是如何处理，状态如何随时间改变以及数据如何准备显示。
 
-Instead of artificially separating *technologies* by putting markup and logic in separate files, React [separates *concerns*](https://en.wikipedia.org/wiki/Separation_of_concerns) with loosely coupled units called "components" that contain both. We will come back to components in a [further section](/docs/components-and-props.html), but if you're not yet comfortable putting markup in JS, [this talk](https://www.youtube.com/watch?v=x7cQ3mrcKaY) might convince you otherwise.
+React 通过松散耦合的单元 —— “组件”，来做到[关注点**分离**](https://en.wikipedia.org/wiki/Separation_of_concerns)，而不是使用人为的分离**技术** —— 将标记（HTML）和逻辑放在不同的文件中。我们将在[后面的章节](/docs/components-and-props.html)中讨论组件，但是如果你不习惯在 JS 中添加标记，[这个演讲](https://www.youtube.com/watch?v=x7cQ3mrcKaY)可能会说服你。
 
-React [doesn't require](/docs/react-without-jsx.html) using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages.
+React 可以[不需要](/docs/react-without-jsx.html) 使用 JSX，但是大多数人发现在 JavaScript 代码中编写 UI 时，它可以作为视觉辅助工具。它还允许 React 显示更多有用的错误和警告消息。
 
-With that out of the way, let's get started!
+就这样，让我们开始吧！
 
-### Embedding Expressions in JSX
+### 在 JSX 中使用表达式
 
-You can embed any [JavaScript expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) in JSX by wrapping it in curly braces.
+你可以通过大括号在 JSX 中嵌入任何 [JavaScript 表达式](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions)
 
-For example, `2 + 2`, `user.firstName`, and `formatName(user)` are all valid expressions:
+例如 `2 + 2`、`user.firstName` 和 `formatName(user)` 都是有效的表达式：
 
 ```js{12}
 function formatName(user) {
@@ -58,13 +58,13 @@ ReactDOM.render(
 
 [](codepen://introducing-jsx).
 
-We split JSX over multiple lines for readability. While it isn't required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of [automatic semicolon insertion](http://stackoverflow.com/q/2846283).
+为了便于阅读，我们将 JSX 分成了多行。虽然这不是必需的，但当这样做的时候，我们建议把它们放在圆括号中以避免[自动分号插入](http://stackoverflow.com/q/2846283)的缺陷。
 
-### JSX is an Expression Too
+### JSX 自身也是一个表达式
 
-After compilation, JSX expressions become regular JavaScript objects.
+经过编译后，JSX 会被转换成普通的 JavaScript 对象。
 
-This means that you can use JSX inside of `if` statements and `for` loops, assign it to variables, accept it as arguments, and return it from functions:
+这意味着你可以在 `if` 或者 `for` 循环中使用 JSX、将它赋值给变量、作为参数传入、以及从函数中返回。
 
 ```js{3,5}
 function getGreeting(user) {
@@ -75,27 +75,27 @@ function getGreeting(user) {
 }
 ```
 
-### Specifying Attributes with JSX
+### 在 JSX 中指定属性
 
-You may use quotes to specify string literals as attributes:
+你可以使用引号将字符串文字指定为属性：
 
 ```js
 const element = <div tabIndex="0"></div>;
 ```
 
-You may also use curly braces to embed a JavaScript expression in an attribute:
+你也可以使用大括号将 JavaScript 表达式嵌入到属性中：
 
 ```js
 const element = <img src={user.avatarUrl}></img>;
 ```
 
-Don't put quotes around curly braces when embedding a JavaScript expression in an attribute. You should either use quotes (for string values) or curly braces (for expressions), but not both in the same attribute.
+在属性中嵌入 JavaScript 表达式时，不要用引号包住大括号。对于同样的属性，应该使用引号（用于字符串值）或者大括号（用于表达式），但不能同时使用。
 
->**Warning:**
+>**警告:**
 >
->Since JSX is closer to JavaScript than HTML, React DOM uses `camelCase` property naming convention instead of HTML attribute names.
+> 由于 JSX 更接近 JavaScript 而不是 HTML，所以 React DOM 使用 `camelCase` 属性名称，而不是 HTML 属性名称。
 >
->For example, `class` becomes [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) in JSX, and `tabindex` becomes [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex).
+> 例如在 JSX 中 `class` 变成了 [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className)，`tabindex` 变成了 [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex)。
 
 ### Specifying Children with JSX
 
@@ -167,6 +167,6 @@ These objects are called "React elements". You can think of them as descriptions
 
 We will explore rendering React elements to the DOM in the next section.
 
->**Tip:**
+>**建议：**
 >
 >We recommend using the ["Babel" language definition](http://babeljs.io/docs/editors) for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) color scheme which is compatible with it.
