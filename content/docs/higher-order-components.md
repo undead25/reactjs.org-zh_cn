@@ -1,32 +1,32 @@
 ---
 id: higher-order-components
-title: Higher-Order Components
+title: 高阶组件
 permalink: docs/higher-order-components.html
 ---
 
-A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React's compositional nature.
+高阶组件（HOC）是 React 用来复用组件逻辑的高级技术，但它不是一个 React API，它是 React 组合性质必然产生的一种模式。
 
-Concretely, **a higher-order component is a function that takes a component and returns a new component.**
+具体来说，**高阶组件是一个使用组件作为参数并返回一个新组件的函数**
 
 ```js
 const EnhancedComponent = higherOrderComponent(WrappedComponent);
 ```
 
-Whereas a component transforms props into UI, a higher-order component transforms a component into another component.
+鉴于组件将 props 转换成 UI，高阶组件则是将一个组件转换成另一个组件。
 
-HOCs are common in third-party React libraries, such as Redux's [`connect`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) and Relay's [`createContainer`](https://facebook.github.io/relay/docs/api-reference-relay.html#createcontainer-static-method).
+HOC 在 React 第三方库中是很常见的，例如 Redux 的 [`connect`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) 和 Relay 的 [`createContainer`](https://facebook.github.io/relay/docs/api-reference-relay.html#createcontainer-static-method)。
 
-In this document, we'll discuss why higher-order components are useful, and how to write your own.
+本文将讨论为什么高阶组件很有用，以及如何编写一个高阶组件。
 
-## Use HOCs For Cross-Cutting Concerns
+## Use HOCs For Cross-Cutting Concerns 使用高阶组件解决交叉问题
 
-> **Note**
+> **注意**
 >
-> We previously recommended mixins as a way to handle cross-cutting concerns. We've since realized that mixins create more trouble than they are worth. [Read more](/blog/2016/07/13/mixins-considered-harmful.html) about why we've moved away from mixins and how you can transition your existing components.
+> 我们以前推荐使用混合（mixins）来解决交叉问题，然而我们发现使用混合会产生更多问题。阅读关于为什么我们移除混合，以及如何转换已有组件的[更多信息](/blog/2016/07/13/mixins-considered-harmful.html)
 
-Components are the primary unit of code reuse in React. However, you'll find that some patterns aren't a straightforward fit for traditional components.
+组件是 React 代码复用的主要单元，但你会发现有一些模式并不适合传统组件。
 
-For example, say you have a `CommentList` component that subscribes to an external data source to render a list of comments:
+例如，假设你有一个 `CommentList` 组件来订阅外部数据源并渲染评论列表：
 
 ```js
 class CommentList extends React.Component {
@@ -34,23 +34,23 @@ class CommentList extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      // "DataSource" is some global data source
+      // “DataSource”是某个全局数据源
       comments: DataSource.getComments()
     };
   }
 
   componentDidMount() {
-    // Subscribe to changes
+    // 订阅变化
     DataSource.addChangeListener(this.handleChange);
   }
 
   componentWillUnmount() {
-    // Clean up listener
+    // 取消订阅
     DataSource.removeChangeListener(this.handleChange);
   }
 
   handleChange() {
-    // Update component state whenever the data source changes
+    // 数据源变化时更新组件状态
     this.setState({
       comments: DataSource.getComments()
     });
@@ -68,7 +68,7 @@ class CommentList extends React.Component {
 }
 ```
 
-Later, you write a component for subscribing to a single blog post, which follows a similar pattern:
+然后，你写了一个订阅单个博文的组件，它遵循类似的模式：
 
 ```js
 class BlogPost extends React.Component {
@@ -100,13 +100,13 @@ class BlogPost extends React.Component {
 }
 ```
 
-`CommentList` and `BlogPost` aren't identical — they call different methods on `DataSource`, and they render different output. But much of their implementation is the same:
+`CommentList` 和 `BlogPost` 并不相同，它们调用 `DataSource` 上不同的方法，渲染不同的输出数据。但它们的大部分实现逻辑是相同的：
 
-- On mount, add a change listener to `DataSource`.
-- Inside the listener, call `setState` whenever the data source changes.
-- On unmount, remove the change listener.
+- 组件挂载后，添加一个变化监听器到 `DataSource`。
+- 在监听器内，当数据源变化时，调用 `setState`。
+- 组件卸载后，移除变化监听器。
 
-You can imagine that in a large app, this same pattern of subscribing to `DataSource` and calling `setState` will occur over and over again. We want an abstraction that allows us to define this logic in a single place and share them across many components. This is where higher-order components excel.
+可以想象，在一个大型应用中，类似这样的订阅 `DataSource` 和调用 `setState` 的模式会不断发生。我们需要一个抽象，使我们能够在一个地方定义这个逻辑，并在多个组件之间共享，这就是高阶组件所擅长的。
 
 We can write a function that creates components, like `CommentList` and `BlogPost`, that subscribe to `DataSource`. The function will accept as one of its arguments a child component that receives the subscribed data as a prop. Let's call the function `withSubscription`:
 
