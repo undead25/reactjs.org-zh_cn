@@ -97,15 +97,15 @@ const element = <img src={user.avatarUrl}></img>;
 >
 > 例如在 JSX 中 `class` 变成了 [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className)，`tabindex` 变成了 [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex)。
 
-### Specifying Children with JSX
+### 在 JSX 中指定子节点
 
-If a tag is empty, you may close it immediately with `/>`, like XML:
+如果标签自闭和的，你应该像 XML 那样用 `/>` 来立即关闭它。
 
 ```js
 const element = <img src={user.avatarUrl} />;
 ```
 
-JSX tags may contain children:
+JSX 标签可以包含子节点：
 
 ```js
 const element = (
@@ -116,23 +116,23 @@ const element = (
 );
 ```
 
-### JSX Prevents Injection Attacks
+### JSX 防注入攻击
 
-It is safe to embed user input in JSX:
+在 JSX 中嵌入用户输入是安全的：
 
 ```js
 const title = response.potentiallyMaliciousInput;
-// This is safe:
+// 这样是安全的：
 const element = <h1>{title}</h1>;
 ```
 
-By default, React DOM [escapes](http://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html) any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that's not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent [XSS (cross-site-scripting)](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks.
+默认情况下，React DOM 在渲染之前会 [转义](http://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html) 所有嵌入在 JSX 中的值。因此，它可以确保应用永远不会被注入任何未明确写入的内容。所有内容在渲染之前都被转换为字符串。这有助于防止 [XSS（跨站点脚本）](https://en.wikipedia.org/wiki/Cross-site_scripting)攻击。
 
-### JSX Represents Objects
+### JSX 表示对象
 
-Babel compiles JSX down to `React.createElement()` calls.
+Babel 将 JSX 编译成 `React.createElement()` 的调用。
 
-These two examples are identical:
+这两个示例是相同的：
 
 ```js
 const element = (
@@ -150,10 +150,10 @@ const element = React.createElement(
 );
 ```
 
-`React.createElement()` performs a few checks to help you write bug-free code but essentially it creates an object like this:
+`React.createElement()` 会执行一些避免 bug 的检查，它本质上是创建了一个像这样的对象：
 
 ```js
-// Note: this structure is simplified
+// 注意：这个结构是简化过的
 const element = {
   type: 'h1',
   props: {
@@ -163,10 +163,10 @@ const element = {
 };
 ```
 
-These objects are called "React elements". You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date.
+这样的对象被称为“React 元素”。可以将它们理解为你想显示在屏幕上内容的描述。React 通过读取和使用这些对象来构建 DOM 并保持更新。
 
-We will explore rendering React elements to the DOM in the next section.
+我们将在下个章节来探索如何渲染 React 元素到 DOM 中。
 
 >**建议：**
 >
->We recommend using the ["Babel" language definition](http://babeljs.io/docs/editors) for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) color scheme which is compatible with it.
+>我们建议在你选择的编辑器中使用[“Babel” 语言定义](http://babeljs.io/docs/editors)来高亮 ES6 和 JSX 代码。本网站使用了与其兼容的 [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) 配色方案。
