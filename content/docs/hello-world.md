@@ -2,7 +2,7 @@
 id: hello-world
 title: Hello World
 permalink: docs/hello-world.html
-prev: installation.html
+prev: cdn-links.html
 next: introducing-jsx.html
 redirect_from:
   - "docs/"
@@ -12,7 +12,7 @@ redirect_from:
   - "docs/getting-started-zh-CN.html"
 ---
 
-开始使用 React 最简单的方式就是使用[这个在 CodePen 上的 Hello World 示例](codepen://hello-world)。你不需要安装任何东西，只要在新标签页中打开它，然后按照示例进行操作。如果你想使用本地开发环境，请查看[安装](/docs/installation.html)页面。
+开始使用 React 最简单的方式就是使用[这个在 CodePen 上的 Hello World 示例](codepen://hello-world)。你不需要安装任何东西，只要在新标签页中打开它，然后按照示例进行操作。如果你想使用本地开发环境，请查看[安装](/docs/try-react.html)章节。
 
 最基本的 React 示例：
 

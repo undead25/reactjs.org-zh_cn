@@ -62,7 +62,7 @@ ReactDOM.render(
 
 ### JSX 自身也是一个表达式
 
-经过编译后，JSX 会被转换成普通的 JavaScript 对象。
+经过编译后，JSX 会被转换成普通的 JavaScript 函数调用，并被计算为 JavaScript 对象。
 
 这意味着你可以在 `if` 或者 `for` 循环中使用 JSX、将它赋值给变量、作为参数传入、以及从函数中返回。
 
