@@ -108,7 +108,7 @@ class BlogPost extends React.Component {
 
 可以想象，在一个大型应用中，类似这样的订阅 `DataSource` 和调用 `setState` 的模式会不断发生。我们需要一个抽象，使我们能够在一个地方定义这个逻辑，并在多个组件之间共享，这就是高阶组件所擅长的。
 
-We can write a function that creates components, like `CommentList` and `BlogPost`, that subscribe to `DataSource`. The function will accept as one of its arguments a child component that receives the subscribed data as a prop. Let's call the function `withSubscription`:
+我们可以写一个函数来创建像 `CommentList` 和 `BlogPost` 那样订阅 `DataSource`的组件。这个函数接受一个子组件作为其参数，并将获取的订阅数据作为属性。让我们称这个函数为 `withSubscription`。
 
 ```js
 const CommentListWithSubscription = withSubscription(
@@ -122,14 +122,14 @@ const BlogPostWithSubscription = withSubscription(
 );
 ```
 
-The first parameter is the wrapped component. The second parameter retrieves the data we're interested in, given a `DataSource` and the current props.
+第一个参数是被包裹的组件，第二个参数是一个函数，它将通过 `DataSource` 和当前的 props 来检索出我们感兴趣的数据。
 
-When `CommentListWithSubscription` and `BlogPostWithSubscription` are rendered, `CommentList` and `BlogPost` will be passed a `data` prop with the most current data retrieved from `DataSource`:
+当渲染 `CommentListWithSubscription` 和 `BlogPostWithSubscription` 时，会向 `CommentList` 和 `BlogPost` 传入一个 从 `DataSource` 检索出的最新数据的 `data` 属性。
 
 ```js
-// This function takes a component...
+// 这个函数接受一个组件作为参数...
 function withSubscription(WrappedComponent, selectData) {
-  // ...and returns another component...
+  // ...并返回另一个组件...
   return class extends React.Component {
     constructor(props) {
       super(props);
@@ -140,7 +140,7 @@ function withSubscription(WrappedComponent, selectData) {
     }
 
     componentDidMount() {
-      // ... that takes care of the subscription...
+      // ... 关心订阅...
       DataSource.addChangeListener(this.handleChange);
     }
 
@@ -155,8 +155,8 @@ function withSubscription(WrappedComponent, selectData) {
     }
 
     render() {
-      // ... and renders the wrapped component with the fresh data!
-      // Notice that we pass through any additional props
+      // ... 并用最新的数据渲染被包裹的组件！
+      // 注意将任何附加的属性传递给被包裹的组件
       return <WrappedComponent data={this.state.data} {...this.props} />;
     }
   };
@@ -164,6 +164,7 @@ function withSubscription(WrappedComponent, selectData) {
 ```
 
 Note that a HOC doesn't modify the input component, nor does it use inheritance to copy its behavior. Rather, a HOC *composes* the original component by *wrapping* it in a container component. A HOC is a pure function with zero side-effects.
+需要注意的是，高阶组件既不会修改输入的组件，也不会使用继承来复制它的行为。相反，高阶组件通过将原始组件包裹在一个容器组件中来**组合**
 
 And that's it! The wrapped component receives all the props of the container, along with a new prop, `data`, which it uses to render its output. The HOC isn't concerned with how or why the data is used, and the wrapped component isn't concerned with where the data came from.
 
