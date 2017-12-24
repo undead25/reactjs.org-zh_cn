@@ -163,18 +163,19 @@ function withSubscription(WrappedComponent, selectData) {
 }
 ```
 
-Note that a HOC doesn't modify the input component, nor does it use inheritance to copy its behavior. Rather, a HOC *composes* the original component by *wrapping* it in a container component. A HOC is a pure function with zero side-effects.
-需要注意的是，高阶组件既不会修改输入的组件，也不会使用继承来复制它的行为。相反，高阶组件通过将原始组件包裹在一个容器组件中来**组合**
+需要注意的是，高阶组件既不会修改输入的组件，也不会使用继承来复制它的行为。相反，高阶组件通过将原始组件包裹在一个容器组件中来**组合**原始组件。高级组件是一个无副作用的纯函数。
 
-And that's it! The wrapped component receives all the props of the container, along with a new prop, `data`, which it uses to render its output. The HOC isn't concerned with how or why the data is used, and the wrapped component isn't concerned with where the data came from.
+就是这样，被包裹的组件接收容器组件所有的属性以及一个新的用来渲染其输出的 `data` 属性。高阶组件不关心数据如何或者为什么被使用，被包裹的组件也不关心数据是从哪里来的。
 
-Because `withSubscription` is a normal function, you can add as many or as few arguments as you like. For example, you may want to make the name of the `data` prop configurable, to further isolate the HOC from the wrapped component. Or you could accept an argument that configures `shouldComponentUpdate`, or one that configures the data source. These are all possible because the HOC has full control over how the component is defined.
+由于 `withSubscription` 是一个普通函数，你可以添加任意数量的参数。例如，你也许想让 `data` 属性可配置来进一步的分离高阶组件和被包裹的组件。或者你想接收一个用于配置 `shouldComponentUpdate` 的参数，或者一个配置数据源的参数。所有的这些都是可能的，因为高阶组件可以完全控制组件的定义。
 
-Like components, the contract between `withSubscription` and the wrapped component is entirely props-based. This makes it easy to swap one HOC for a different one, as long as they provide the same props to the wrapped component. This may be useful if you change data-fetching libraries, for example.
+像组件一样，`withSubscription` 和其包裹的组件之间的通信是完全基于属性的。这让你可以很轻松地将一个高阶组件换成另外一个，只要它们提供同样的属性给被包裹的组件。例如，如果你变更获取数据的库，这会很有用。
 
-## Don't Mutate the Original Component. Use Composition.
+## 不要改变原始组件，使用组合
 
 Resist the temptation to modify a component's prototype (or otherwise mutate it) inside a HOC.
+
+
 
 ```js
 function logProps(InputComponent) {
