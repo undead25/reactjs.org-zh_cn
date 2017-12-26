@@ -14,7 +14,7 @@ const EnhancedComponent = higherOrderComponent(WrappedComponent);
 
 鉴于组件将 props 转换成 UI，高阶组件则是将一个组件转换成另一个组件。
 
-HOC 在 React 第三方库中是很常见的，例如 Redux 的 [`connect`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) 和 Relay 的 [`createContainer`](https://facebook.github.io/relay/docs/api-reference-relay.html#createcontainer-static-method)。
+HOC 在 React 第三方库中是很常见的，例如 Redux 的 [`connect`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) 和 Relay 的 [`createFragmentContainer`](http://facebook.github.io/relay/docs/en/fragment-container.html)。
 
 本文将讨论为什么高阶组件很有用，以及如何编写一个高阶组件。
 
@@ -173,9 +173,7 @@ function withSubscription(WrappedComponent, selectData) {
 
 ## 不要改变原始组件，使用组合
 
-Resist the temptation to modify a component's prototype (or otherwise mutate it) inside a HOC.
-
-
+不要在高阶组件内部修改（或者改变）组件的原型。
 
 ```js
 function logProps(InputComponent) {
@@ -183,20 +181,19 @@ function logProps(InputComponent) {
     console.log('Current props: ', this.props);
     console.log('Next props: ', nextProps);
   };
-  // The fact that we're returning the original input is a hint that it has
-  // been mutated.
+  // 实际上我们返回的原始组件已经发生了改变
   return InputComponent;
 }
 
-// EnhancedComponent will log whenever props are received
+// EnhancedComponent 会打印所有收到的 props
 const EnhancedComponent = logProps(InputComponent);
 ```
 
-There are a few problems with this. One is that the input component cannot be reused separately from the enhanced component. More crucially, if you apply another HOC to `EnhancedComponent` that *also* mutates `componentWillReceiveProps`, the first HOC's functionality will be overridden! This HOC also won't work with function components, which do not have lifecycle methods.
+这会有一些问题。一个是 input 组件不能够在脱离 `EnhancedComponent` 的情况下复用。更重要的是，如果 `EnhancedComponent` 也应用了一个改变 `componentWillReceiveProps` 的高阶组件，`EnhancedComponent` 的功能就会被覆盖！这个高阶组件也不适用于没有生命周期方法的函数式组件。
 
-Mutating HOCs are a leaky abstraction—the consumer must know how they are implemented in order to avoid conflicts with other HOCs.
+改变高阶组件泄露了组件的抽象性 —— 使用者必须知道它们是怎么实现的来避免和其他高阶组件的冲突。
 
-Instead of mutation, HOCs should use composition, by wrapping the input component in a container component:
+高阶组件应该使用组合而不是改变，通过将 input 组件包裹在一个容器组件中：
 
 ```js
 function logProps(WrappedComponent) {
@@ -206,34 +203,34 @@ function logProps(WrappedComponent) {
       console.log('Next props: ', nextProps);
     }
     render() {
-      // Wraps the input component in a container, without mutating it. Good!
+      // 将 input 组件包裹在一个容器中，而不是改变它。
       return <WrappedComponent {...this.props} />;
     }
   }
 }
 ```
 
-This HOC has the same functionality as the mutating version while avoiding the potential for clashes. It works equally well with class and functional components. And because it's a pure function, it's composable with other HOCs, or even with itself.
+这个高阶组件和上面改变原型的版本有着同样的功能，但它避免了发生冲突的可能性。它适用于类组件和函数式组件。由于它是一个纯函数，所以它可以和其它或者自身进行组合。
 
-You may have noticed similarities between HOCs and a pattern called **container components**. Container components are part of a strategy of separating responsibility between high-level and low-level concerns. Containers manage things like subscriptions and state, and pass props to components that handle things like rendering UI. HOCs use containers as part of their implementation. You can think of HOCs as parameterized container component definitions.
 
-## Convention: Pass Unrelated Props Through to the Wrapped Component
+你可能已经注意到高阶组件和**容器组件**的相似性。容器组件是高层和低层关注点之间，权责分离策略的一部分。容器组件管理类似订阅和状态的事情，并传递 props 给组件来渲染 UI。高阶组件使用容器作为其实现的一部分。你可以认为高阶组件是参数化的容器组件。
 
-HOCs add features to a component. They shouldn't drastically alter its contract. It's expected that the component returned from a HOC has a similar interface to the wrapped component.
+## 约定：向被包裹的组件传入无关的 Props
 
-HOCs should pass through props that are unrelated to its specific concern. Most HOCs contain a render method that looks something like this:
+高阶组件给组件添加了新功能。它们不应该大幅度地修改组件的原有功能，其返回的组件期望有着和被包裹的组件相同的接口。
+
+高阶组件应该传递与其具体实现无关的 props。大多数高阶组件都包含一个这样的 render 方法：
 
 ```js
 render() {
-  // Filter out extra props that are specific to this HOC and shouldn't be
-  // passed through
+  // Filter out extra props that are specific to this HOC and shouldn't be passed through
+  // 过滤掉这个高阶组件额外特有的，并且不应该传递的 props
   const { extraProp, ...passThroughProps } = this.props;
 
-  // Inject props into the wrapped component. These are usually state values or
-  // instance methods.
+  // 向被包裹组件注入 props，通常是状态值或者实例方法。
   const injectedProp = someStateOrInstanceMethod;
 
-  // Pass props to wrapped component
+  // 向被包裹的组件传递 props
   return (
     <WrappedComponent
       injectedProp={injectedProp}
@@ -243,30 +240,30 @@ render() {
 }
 ```
 
-This convention helps ensure that HOCs are as flexible and reusable as possible.
+这个约定帮助确保高阶组件尽可能的灵活和可复用。
 
-## Convention: Maximizing Composability
+## 约定：最大化组合性
 
-Not all HOCs look the same. Sometimes they accept only a single argument, the wrapped component:
+并不是所有的高阶组件看起来都是一样的。某些时候它们只接收一个参数，即被包裹的组件：
 
 ```js
 const NavbarWithRouter = withRouter(Navbar);
 ```
 
-Usually, HOCs accept additional arguments. In this example from Relay, a config object is used to specify a component's data dependencies:
+通常情况下，高阶组件会接收额外的参数。在下面这个来自 Relay 的例子中，配置对象用于指定组件的数据依赖关系：
 
 ```js
 const CommentWithRelay = Relay.createContainer(Comment, config);
 ```
 
-The most common signature for HOCs looks like this:
+最常见的高阶组件看起来像这样：
 
 ```js
-// React Redux's `connect`
+// React Redux 的 `connect`
 const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 ```
 
-*What?!* If you break it apart, it's easier to see what's going on.
+**这是啥**？！如果你将它拆解就很容易明白是怎么回事了。
 
 ```js
 // connect is a function that returns another function
