@@ -263,7 +263,7 @@ const CommentWithRelay = Relay.createContainer(Comment, config);
 const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 ```
 
-**这是啥**？！如果你将它拆解就很容易明白是怎么回事了。
+**这是啥**？！如果你将它拆解就能够很容易地明白是怎么回事了。
 
 ```js
 // connect is a function that returns another function
