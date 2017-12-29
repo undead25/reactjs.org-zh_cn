@@ -127,9 +127,9 @@ const BlogPostWithSubscription = withSubscription(
 当渲染 `CommentListWithSubscription` 和 `BlogPostWithSubscription` 时，会向 `CommentList` 和 `BlogPost` 传入一个 从 `DataSource` 检索出的最新数据的 `data` 属性。
 
 ```js
-// 这个函数接受一个组件作为参数...
+// 这个函数接受一个组件作为参数……
 function withSubscription(WrappedComponent, selectData) {
-  // ...并返回另一个组件...
+  // ……并返回另一个组件……
   return class extends React.Component {
     constructor(props) {
       super(props);
@@ -140,7 +140,7 @@ function withSubscription(WrappedComponent, selectData) {
     }
 
     componentDidMount() {
-      // ... 关心订阅...
+      // ……关心订阅……
       DataSource.addChangeListener(this.handleChange);
     }
 
@@ -155,7 +155,7 @@ function withSubscription(WrappedComponent, selectData) {
     }
 
     render() {
-      // ... 并用最新的数据渲染被包裹的组件！
+      // ……并用最新的数据渲染被包裹的组件！
       // 注意将任何附加的属性传递给被包裹的组件
       return <WrappedComponent data={this.state.data} {...this.props} />;
     }
@@ -223,7 +223,6 @@ function logProps(WrappedComponent) {
 
 ```js
 render() {
-  // Filter out extra props that are specific to this HOC and shouldn't be passed through
   // 过滤掉这个高阶组件额外特有的，并且不应该传递的 props
   const { extraProp, ...passThroughProps } = this.props;
 
@@ -266,39 +265,38 @@ const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 **这是啥**？！如果你将它拆解就能够很容易地明白是怎么回事了。
 
 ```js
-// connect is a function that returns another function
+// connect 是一个函数，它返回另一个函数
 const enhance = connect(commentListSelector, commentListActions);
-// The returned function is a HOC, which returns a component that is connected
-// to the Redux store
+// 返回的函数是一个高阶组件，这个高阶组件返回一个与 Redux store 关联的组件
 const ConnectedComment = enhance(CommentList);
 ```
-In other words, `connect` is a higher-order function that returns a higher-order component!
+换句话说，`connect` 是一个返回高阶组件的高阶函数！
 
-This form may seem confusing or unnecessary, but it has a useful property. Single-argument HOCs like the one returned by the `connect` function have the signature `Component => Component`. Functions whose output type is the same as its input type are really easy to compose together.
+这种形式看起来可能很困惑或者没有必要，但是它有一个实用的属性，那就是类似 `connect` 函数返回的单参数高阶组件具有 `Component => Component` 的签名。输出类型和输入类型相同的函数可以很容易地组合在一起。
 
 ```js
-// Instead of doing this...
+// 不要这样写……
 const EnhancedComponent = withRouter(connect(commentSelector)(WrappedComponent))
 
-// ... you can use a function composition utility
-// compose(f, g, h) is the same as (...args) => f(g(h(...args)))
+// ……你可以实用函数组合工具
+// compose(f, g, h) 和 (...args) => f(g(h(...args))) 是一样的
 const enhance = compose(
-  // These are both single-argument HOCs
+  // 它们都是单参数的高阶组件
   withRouter,
   connect(commentSelector)
 )
 const EnhancedComponent = enhance(WrappedComponent)
 ```
 
-(This same property also allows `connect` and other enhancer-style HOCs to be used as decorators, an experimental JavaScript proposal.)
+（同样的属性也允许 `connect` 和其它增强型高阶组件作为装饰器来使用，装饰器是一个实验性的 JavaScript 提议。）
 
-The `compose` utility function is provided by many third-party libraries including lodash (as [`lodash.flowRight`](https://lodash.com/docs/#flowRight)), [Redux](http://redux.js.org/docs/api/compose.html), and [Ramda](http://ramdajs.com/docs/#compose).
+包括 lodash（例如 [`lodash.flowRight`](https://lodash.com/docs/#flowRight)）、[Redux](http://redux.js.org/docs/api/compose.html) 和 [Ramda](http://ramdajs.com/docs/#compose) 在内的许多第三方库都提供了 `compose` 这个工具函数。
 
-## Convention: Wrap the Display Name for Easy Debugging
+## 约定：包装显示名称用于调试
 
-The container components created by HOCs show up in the [React Developer Tools](https://github.com/facebook/react-devtools) like any other component. To ease debugging, choose a display name that communicates that it's the result of a HOC.
+高阶组件创建的容器组件和其它组件在 [React Developer Tools](https://github.com/facebook/react-devtools) 中的显示是一样的。为了便于调试，选择一个显示名称来表述它是高阶组件返回的。
 
-The most common technique is to wrap the display name of the wrapped component. So if your higher-order component is named `withSubscription`, and the wrapped component's display name is `CommentList`, use the display name `WithSubscription(CommentList)`:
+最常见的做法是包装被包裹组件的显示名称。因此，如果你的高阶组件被命名为 `withSubscription`，并且被包裹组件的显示名称是`CommentList`，则使用 `WithSubscription(CommentList)` 作为显示名称：
 
 ```js
 function withSubscription(WrappedComponent) {
@@ -313,7 +311,7 @@ function getDisplayName(WrappedComponent) {
 ```
 
 
-## Caveats
+## 注意事项
 
 Higher-order components come with a few caveats that aren't immediately obvious if you're new to React.
 
