@@ -314,10 +314,13 @@ function getDisplayName(WrappedComponent) {
 ## 注意事项
 
 Higher-order components come with a few caveats that aren't immediately obvious if you're new to React.
+如果你是 React 新手，高阶组件的一些
 
-### Don't Use HOCs Inside the render Method
+### 不要在 render 方法中使用高阶组件
 
 React's diffing algorithm (called reconciliation) uses component identity to determine whether it should update the existing subtree or throw it away and mount a new one. If the component returned from `render` is identical (`===`) to the component from the previous render, React recursively updates the subtree by diffing it with the new one. If they're not equal, the previous subtree is unmounted completely.
+
+React 的 diff 算法（）使用组件标识来决定是否需要更新现有的子对象树或者
 
 Normally, you shouldn't need to think about this. But it matters for HOCs because it means you can't apply a HOC to a component within the render method of a component:
 
