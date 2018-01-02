@@ -329,41 +329,40 @@ render() {
 }
 ```
 
-The problem here isn't just about performance — remounting a component causes the state of that component and all of its children to be lost.
+这里的问题不仅仅是性能 —— 组件的重载会造成组件的状态和所有其子节点的丢失。
 
+而在组件定义之外使用高阶组件，使得新组件只被创建一次。在整个渲染过程中它的标识都是一致的。通常这才是你想要的。
 
-Instead, apply HOCs outside the component definition so that the resulting component is created only once. Then, its identity will be consistent across renders. This is usually what you want, anyway.
+在极少数情况下，你需要动态应用高阶组件，也可以在组件的生命周期方法或者其构造函数中执行此操作。
 
-In those rare cases where you need to apply a HOC dynamically, you can also do it inside a component's lifecycle methods or its constructor.
+### 必须拷贝静态方法
 
-### Static Methods Must Be Copied Over
+有时在 React 组件中定义静态方法很有用。例如，Relay 容器开放了一个 `getFragment` 的静态方法来帮组组合 GraphQL 的片段。
 
-Sometimes it's useful to define a static method on a React component. For example, Relay containers expose a static method `getFragment` to facilitate the composition of GraphQL fragments.
-
-When you apply a HOC to a component, though, the original component is wrapped with a container component. That means the new component does not have any of the static methods of the original component.
+当你将高阶组件应用到组件时，原始组件被容器组件包裹着。这就意味着新组件没有任何原始组件的静态方法。
 
 ```js
-// Define a static method
+// 定义静态方法
 WrappedComponent.staticMethod = function() {/*...*/}
-// Now apply a HOC
+// 应用高阶组件
 const EnhancedComponent = enhance(WrappedComponent);
 
-// The enhanced component has no static method
+// 增强的组件没有静态方法
 typeof EnhancedComponent.staticMethod === 'undefined' // true
 ```
 
-To solve this, you could copy the methods onto the container before returning it:
+要解决这个问题，你可以在返回新组件之前将这个方法拷贝下来：
 
 ```js
 function enhance(WrappedComponent) {
   class Enhance extends React.Component {/*...*/}
-  // Must know exactly which method(s) to copy :(
+  // 必须清楚地知道要拷贝的静态方法 :(
   Enhance.staticMethod = WrappedComponent.staticMethod;
   return Enhance;
 }
 ```
 
-However, this requires you to know exactly which methods need to be copied. You can use [hoist-non-react-statics](https://github.com/mridgway/hoist-non-react-statics) to automatically copy all non-React static methods:
+然而，这需要你清楚地知道有哪些静态方法需要拷贝。你可以使用 [hoist-non-react-statics](https://github.com/mridgway/hoist-non-react-statics) 来自动地拷贝所有非 React 的静态方法：
 
 ```js
 import hoistNonReactStatic from 'hoist-non-react-statics';
@@ -374,46 +373,46 @@ function enhance(WrappedComponent) {
 }
 ```
 
-Another possible solution is to export the static method separately from the component itself.
+另一个替代方案是单独导出组件自身的静态方法。
 
 ```js
-// Instead of...
+// 不要这样……
 MyComponent.someFunction = someFunction;
 export default MyComponent;
 
-// ...export the method separately...
+// ……而是单独导出静态方法……
 export { someFunction };
 
-// ...and in the consuming module, import both
+// ……然后在要使用它们的组件中导入
 import MyComponent, { someFunction } from './MyComponent.js';
 ```
 
-### Refs Aren't Passed Through
+### 不会传递 Refs
 
-While the convention for higher-order components is to pass through all props to the wrapped component, it's not possible to pass through refs. That's because `ref` is not really a prop — like `key`, it's handled specially by React. If you add a ref to an element whose component is the result of a HOC, the ref refers to an instance of the outermost container component, not the wrapped component.
+尽管按照约定，高阶组件会传递所有的 props 到被包裹的组件，但不能传递 refs。这是因为 `ref` 就像 `key` 一样，不是正真意义上的属性，React 对它进行了特别地处理。如果你给由高阶组件所创建的组件的元素添加 ref，那么 ref 指向的是最外层容器组件的实例，而不是被包裹的组件。
 
-If you find yourself facing this problem, the ideal solution is to figure out how to avoid using `ref` at all. Occasionally, users who are new to the React paradigm rely on refs in situations where a prop would work better.
+如果你碰到了这样的问题，比较理想的解决方案是找出如何避免使用 `ref` 的方法。有时候，刚刚接触 React 范例的用户在某种情况下使用 prop 要好过使用 ref。
 
-That said, there are times when refs are a necessary escape hatch — React wouldn't support them otherwise. Focusing an input field is an example where you may want imperative control of a component. In that case, one solution is to pass a ref callback as a normal prop, by giving it a different name:
+也就是说，有时候使用 ref 是没有办法的办法 —— React 在任何时候都不建议使用。例如在聚焦输入框时，你可能想要对组件进行必要的控制。在这种情况下，通过不同的命名，传递一个 ref 回调函数作为一个普通的属性是一个解决方案。
 
 ```js
 function Field({ inputRef, ...rest }) {
   return <input ref={inputRef} {...rest} />;
 }
 
-// Wrap Field in a higher-order component
+// 将 Field 包裹在高阶组件中
 const EnhancedField = enhance(Field);
 
-// Inside a class component's render method...
+// 类组件的 render 函数中……
 <EnhancedField
   inputRef={(inputEl) => {
-    // This callback gets passed through as a regular prop
+    // 该回调函数被作为普通的 prop 传递
     this.inputEl = inputEl
   }}
 />
 
-// Now you can call imperative methods
+// 现在你可以调用控制方法了
 this.inputEl.focus();
 ```
 
-This is not a perfect solution by any means. We prefer that refs remain a library concern, rather than require you to manually handle them. We are exploring ways to solve this problem so that using a HOC is unobservable.
+无论怎样，这都不是一个完美的解决方案。我们更愿意把 refs 问题留给库来解决，而不是你手动处理它们。我们正在探索解决这个问题的方法以便使用高阶组件是无所顾忌的。
