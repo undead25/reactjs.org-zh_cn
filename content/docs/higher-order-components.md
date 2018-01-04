@@ -18,7 +18,7 @@ HOC 在 React 第三方库中是很常见的，例如 Redux 的 [`connect`](http
 
 本文将讨论为什么高阶组件很有用，以及如何编写一个高阶组件。
 
-## Use HOCs For Cross-Cutting Concerns 使用高阶组件解决交叉问题
+## 使用高阶组件解决交叉问题
 
 > **注意**
 >
