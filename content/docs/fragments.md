@@ -1,10 +1,10 @@
 ---
 id: fragments
-title: Fragments
+title: 片段
 permalink: docs/fragments.html
 ---
 
-A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
+React 一个常见的模式是组件返回多个元素。片段可以让你集合一个子节点列表，而无需在 DOM 中添加额外的节点。
 
 ```js
 render() {
@@ -18,11 +18,11 @@ render() {
 }
 ```
 
-There is also a new [short syntax](#short-syntax) for declaring them, but it isn't supported by all popular tools yet.
+也有一个新的[简写语法](#short-syntax)，但并不是所有的工具都支持。
 
-## Motivation
+## 动机
 
-A common pattern is for a component to return a list of children. Take this example React snippet:
+一个常见的模式是组件返回一个子节点列表。请看下面的 React 代码片段示例：
 
 ```jsx
 class Table extends React.Component {
@@ -38,7 +38,7 @@ class Table extends React.Component {
 }
 ```
 
-`<Columns />` would need to return multiple `<td>` elements in order for the rendered HTML to be valid. If a parent div was used inside the `render()` of `<Columns />`, then the resulting HTML will be invalid.
+`<Columns />` 需要返回多个 `<td>` 元素来渲染有效的 HTML。如果在 `<Columns />` 的 `render()` 里使用父 div，那最终的 HTML 将是无效的。
 
 ```jsx
 class Columns extends React.Component {
@@ -53,7 +53,7 @@ class Columns extends React.Component {
 }
 ```
 
-results in a `<Table />` output of:
+`<Table />` 的输出结果：
 
 ```jsx
 <table>
@@ -66,9 +66,9 @@ results in a `<Table />` output of:
 </table>
 ```
 
-So, we introduce `Fragment`s.
+所以我们引入了 `Fragment`。
 
-## Usage
+## 用法
 
 ```jsx{4,7}
 class Columns extends React.Component {
@@ -83,7 +83,7 @@ class Columns extends React.Component {
 }
 ```
 
-which results in a correct `<Table />` output of:
+正确的 `<Table />` 输出结果：
 
 ```jsx
 <table>
@@ -94,9 +94,9 @@ which results in a correct `<Table />` output of:
 </table>
 ```
 
-### Short Syntax
+### 简写
 
-There is a new, shorter syntax you can use for declaring fragments. It looks like empty tags:
+有一个新的简写来声明片段，有点像空标签：
 
 ```jsx{4,7}
 class Columns extends React.Component {
@@ -111,20 +111,20 @@ class Columns extends React.Component {
 }
 ```
 
-You can use `<></>` the same way you'd use any other element except that it doesn't support keys or attributes.
+你可以像使用其他元素一样使用 `<></>`，除了不支持 key 或属性。
 
-Note that **[many tools don't support it yet](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)** so you might want to explicitly write `<React.Fragment>` until the tooling catches up.
+需要注意的是**[许多工具还不支持它](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)**，所以你可能需要明确地写 `<React.Fragment>` 直到工具支持。
 
-### Keyed Fragments
+### 带 key
 
-Fragments declared with the explicit `<React.Fragment>` syntax may have keys. A use case for this is mapping a collection to an array of fragments -- for example, to create a description list:
+`<React.Fragment>` 的写法来声明片段可以使用 key。一个使用场景是映射一个集合为片段数组 —— 例如，创建一个这样的描述列表：
 
 ```jsx
 function Glossary(props) {
   return (
     <dl>
       {props.items.map(item => (
-        // Without the `key`, React will fire a key warning
+        // 如果不带 `key` 将会触发 key 的警告
         <React.Fragment key={item.id}>
           <dt>{item.term}</dt>
           <dd>{item.description}</dd>
@@ -135,8 +135,10 @@ function Glossary(props) {
 }
 ```
 
-`key` is the only attribute that can be passed to `Fragment`. In the future, we may add support for additional attributes, such as event handlers.
+`key` 是 `Fragment` 唯一可以传递的属性。将来可能会支持其他属性，例如事件处理。
 
-### Live Demo
+### 在线示例
 
 You can try out the new JSX fragment syntax with this [CodePen](https://codepen.io/reactjs/pen/VrEbjE?editors=1000).
+
+你可以在 [CodePen](https://codepen.io/reactjs/pen/VrEbjE?editors=1000) 上尝试新的 JSX 片段语法。
