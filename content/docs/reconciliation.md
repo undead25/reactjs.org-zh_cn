@@ -25,11 +25,11 @@ React 提供声明式的 API 来让你无需关心每次更新背后的变化。
 
 ### 不同类型的元素
 
-Whenever the root elements have different types, React will tear down the old tree and build the new tree from scratch. Going from `<a>` to `<img>`, or from `<Article>` to `<Comment>`, or from `<Button>` to `<div>` - any of those will lead to a full rebuild.
+每当根元素具有不同的类型时，React 将拆掉旧的树并从头开始创建新的树。从 `<a>` 到 `<img>`、从 `<Article>` 到 `<Comment>` 或者从 `<Button>` 到 `<div>` —— 所有这些都会导致重建。
 
-When tearing down a tree, old DOM nodes are destroyed. Component instances receive `componentWillUnmount()`. When building up a new tree, new DOM nodes are inserted into the DOM. Component instances receive `componentWillMount()` and then `componentDidMount()`. Any state associated with the old tree is lost.
+当树被拆掉时，旧的 DOM 节点会被销毁。组件实例会接收 `componentWillUnmount()`。当创建新的树时，新的 DOM 节点会被插入到 DOM 中。组件实例会接收 `componentWillMount()` 以及之后的 `componentDidMount()`。任何旧树的 state 都会丢失。
 
-Any components below the root will also get unmounted and have their state destroyed. For example, when diffing:
+任何根元素下的组件也将会被卸载，而它们的 state 也会被销毁。例如，当进行对比时：
 
 ```xml
 <div>
@@ -41,11 +41,11 @@ Any components below the root will also get unmounted and have their state destr
 </span>
 ```
 
-This will destroy the old `Counter` and remount a new one.
+这将会销毁旧的 `Counter` 并重载一个新的。
 
-### DOM Elements Of The Same Type
+### 同类型的 DOM 元素
 
-When comparing two React DOM elements of the same type, React looks at the attributes of both, keeps the same underlying DOM node, and only updates the changed attributes. For example:
+当对比具有相同类型的 React DOM 元素时，React 会观察它们的属性，保持相同的底层 DOM 节点，仅更新变化的属性。例如：
 
 ```xml
 <div className="before" title="stuff" />
@@ -53,9 +53,9 @@ When comparing two React DOM elements of the same type, React looks at the attri
 <div className="after" title="stuff" />
 ```
 
-By comparing these two elements, React knows to only modify the `className` on the underlying DOM node.
+通过对比这两个元素，React 知道只需要修改底层 DOM 节点的 `className`。
 
-When updating `style`, React also knows to update only the properties that changed. For example:
+当更新 `style` 时，React 也知道只更新变化的属性。例如：
 
 ```xml
 <div style={{color: 'red', fontWeight: 'bold'}} />
@@ -63,17 +63,17 @@ When updating `style`, React also knows to update only the properties that chang
 <div style={{color: 'green', fontWeight: 'bold'}} />
 ```
 
-When converting between these two elements, React knows to only modify the `color` style, not the `fontWeight`.
+当在转换这两个元素时，React 知道需要修改的是 `color` 而不是 `fontWeight`。
 
-After handling the DOM node, React then recurses on the children.
+在处理完 DOM 节点后，React 会递归处理其子节点。
 
-### Component Elements Of The Same Type
+### 同类型的组件元素
 
-When a component updates, the instance stays the same, so that state is maintained across renders. React updates the props of the underlying component instance to match the new element, and calls `componentWillReceiveProps()` and `componentWillUpdate()` on the underlying instance.
+当组件更新时，其实例保持不变以便在渲染过程保留 state。React 更新底层组件实例的 props 来匹配新的元素，并在底层实例上调用 `componentWillReceiveProps()` 和 `componentWillUpdate()`。
 
-Next, the `render()` method is called and the diff algorithm recurses on the previous result and the new result.
+然后，`render()` 方法被调用，同时 diff 算法会递归处理之前的结果和新的结果。
 
-### Recursing On Children
+### 递归子节点
 
 By default, when recursing on the children of a DOM node, React just iterates over both lists of children at the same time and generates a mutation whenever there's a difference.
 
