@@ -31,7 +31,7 @@
     - [ ] React Without ES6
     - [ ] React Without JSX
     - [x] [Reconciliation](/content/docs/reconciliation.md)
-    - [ ] Context
+    - [ ] [Context](/content/docs/context.md)
     - [x] [Fragments](/content/docs/fragments.md)
     - [ ] Portals
     - [ ] Error Boundaries
