@@ -75,9 +75,9 @@ React 提供声明式的 API 来让你无需关心每次更新背后的变化。
 
 ### 递归子节点
 
-By default, when recursing on the children of a DOM node, React just iterates over both lists of children at the same time and generates a mutation whenever there's a difference.
+默认情况下，当递归 DOM 节点的子节点时，React 会同时迭代两个子节点列表，并在有差异时生成一个变更。
 
-For example, when adding an element at the end of the children, converting between these two trees works well:
+例如，当在子节点末尾添加一个元素时，两棵树的转换表现地很好：
 
 ```xml
 <ul>
@@ -92,9 +92,9 @@ For example, when adding an element at the end of the children, converting betwe
 </ul>
 ```
 
-React will match the two `<li>first</li>` trees, match the two `<li>second</li>` trees, and then insert the `<li>third</li>` tree.
+React 将匹配两棵  `<li>first</li>` 树，并匹配两棵 `<li>second</li>` 树，然后插入 `<li>third</li>` 树。
 
-If you implement it naively, inserting an element at the beginning has worse performance. For example, converting between these two trees works poorly:
+如果你在开始插入元素，那就会使得性能更差。例如，这两棵树之间的转换就不好：
 
 ```xml
 <ul>
@@ -109,11 +109,11 @@ If you implement it naively, inserting an element at the beginning has worse per
 </ul>
 ```
 
-React will mutate every child instead of realizing it can keep the `<li>Duke</li>` and `<li>Villanova</li>` subtrees intact. This inefficiency can be a problem.
+React 会改变每个子节点，而没有意识到可以保持 `<li>Duke</li>` 和 `<li>Villanova</li>` 子树。这种低效率可能是一个问题。
 
 ### Keys
 
-In order to solve this issue, React supports a `key` attribute. When children have keys, React uses the key to match children in the original tree with children in the subsequent tree. For example, adding a `key` to our inefficient example above can make the tree conversion efficient:
+React 支持 `key` 属性来解决这个问题。当子节点带有 key 时，React 使用 key 来匹配原始树和新树的子节点。例如，增加一个 `key` 到上面低效的例子中，这能让树的转换变得高效：
 
 ```xml
 <ul>
@@ -128,30 +128,30 @@ In order to solve this issue, React supports a `key` attribute. When children ha
 </ul>
 ```
 
-Now React knows that the element with key `'2014'` is the new one, and the elements with the keys `'2015'` and `'2016'` have just moved.
+现在 React 知道 key 为 `'2014'`的元素是新的，而 key 为 `'2015'` 和 `'2016'` 是移过来的。
 
-In practice, finding a key is usually not hard. The element you are going to display may already have a unique ID, so the key can just come from your data:
+在实践中，找到一个 key 通常不难。你要显示的元素可能已经有了一个唯一的 ID，所以 key 可以来自于你的数据：
 
 ```js
 <li key={item.id}>{item.name}</li>
 ```
 
-When that's not the case, you can add a new ID property to your model or hash some parts of the content to generate a key. The key only has to be unique among its siblings, not globally unique.
+如果情况不是这样，那可以将新的 ID 属性添加到你的模型中，或者对内容的某些部分进行 hash 来生成 key。key 必须在其兄弟节点中是唯一的，并不需要全局唯一。
 
-As a last resort, you can pass an item's index in the array as a key. This can work well if the items are never reordered, but reorders will be slow.
+不得已的情况下，你可以使用数组中的索引作为 key。如果数据项没有重新排序，可以这样做，但重新排序则会很慢。
 
-Reorders can also cause issues with component state when indexes are used as keys. Component instances are updated and reused based on their key. If the key is an index, moving an item changes it. As a result, component state for things like controlled inputs can get mixed up and updated in unexpected ways.
+当使用索引作为 key 时，重新排序也会导致组件的 state 问题。组件实例是根据其 key 进行更新和复用的。如果 key 是索引，移动其中一个数据就会改变这个索引。因此，像输入类的受控组件的 state 可能会搞混，并以意想不到的方式进行更新。
 
-[Here](codepen://reconciliation/index-used-as-key) is an example of the issues that can be caused by using indexes as keys on CodePen, and [here](codepen://reconciliation/no-index-used-as-key) is a updated version of the same example showing how not using indexes as keys will fix these reordering, sorting, and prepending issues.
+[这里](codepen://reconciliation/index-used-as-key)是一个在 CodePen 上使用索引作为 key 可能产生问题的例子，[这里](codepen://reconciliation/no-index-used-as-key)是同样例子的改进版，其展示了不使用索引作为 key 将解决排序和一些悬而未决的问题。
 
 ## 权衡
 
-It is important to remember that the reconciliation algorithm is an implementation detail. React could rerender the whole app on every action; the end result would be the same. Just to be clear, rerender in this context means calling `render` for all components, it doesn't mean React will unmount and remount them. It will only apply the differences following the rules stated in the previous sections.
+记住协调算法是一个实现细节是很重要的。React 可以在每次操作时重新渲染整个应用，其结果是一样的。需要清楚的是，在这种情况下，重新渲染意味着为所有组件调用 `render`，这并不意味着 React 会卸载和重载它们，它只会按照前面章节所述的规则进行处理。
 
-We are regularly refining the heuristics in order to make common use cases faster. In the current implementation, you can express the fact that a subtree has been moved amongst its siblings, but you cannot tell that it has moved somewhere else. The algorithm will rerender that full subtree.
+为了更快地创建通用用例，我们会定期改进启发式。在目前的实现中，可以表明一个事实，那就是一个子树已经在兄弟节点之间移动了，但是你无法告知移动的具体位置，这个算法会重新渲染整个子树。
 
-Because React relies on heuristics, if the assumptions behind them are not met, performance will suffer.
+因为 React 依赖于启发式，如果背后的假设不符合，将会影响性能：
 
-1. The algorithm will not try to match subtrees of different component types. If you see yourself alternating between two component types with very similar output, you may want to make it the same type. In practice, we haven't found this to be an issue.
+1. 该算法不会尝试匹配不同组件类型的子树。如果你发现两个输出非常相似的组件类型交替出现，那你可能需要使其类型相同。实际上，我们并没有发现这是一个问题。
 
-2. Keys should be stable, predictable, and unique. Unstable keys (like those produced by `Math.random()`) will cause many component instances and DOM nodes to be unnecessarily recreated, which can cause performance degradation and lost state in child components.
+2. key 应该是稳定的、可预测的和唯一的。不稳定 key（如 `Math.random()` 生产的）会使许多组件实例和 DOM 节点被不必要地重新创建，这会导致子组件中的性能下降和 state 丢失。
