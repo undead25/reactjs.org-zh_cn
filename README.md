@@ -30,7 +30,7 @@
     - [ ] Optimizing Performance
     - [ ] React Without ES6
     - [ ] React Without JSX
-    - [ ] [Reconciliation](/content/docs/reconciliation.md)
+    - [x] [Reconciliation](/content/docs/reconciliation.md)
     - [ ] Context
     - [x] [Fragments](/content/docs/fragments.md)
     - [ ] Portals
