@@ -4,19 +4,18 @@ title: Context
 permalink: docs/context.html
 ---
 
-> Note:
+> 注意：
 >
-> `React.PropTypes` has moved into a different package since React v15.5. Please use [the `prop-types` library instead](https://www.npmjs.com/package/prop-types) to define `contextTypes`.
+> `React.PropTypes` 在 React v15.5 之后已经被移到了其它的包中，请使用 [`prop-types`](https://www.npmjs.com/package/prop-types) 来定义 `contextTypes`.
 >
->We provide [a codemod script](/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes) to automate the conversion.
+> 我们提供了 [codemod 脚本](/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes) 来进行自动转换。
 
-With React, it's easy to track the flow of data through your React components. When you look at a component, you can see which props are being passed, which makes your apps easy to reason about.
+通过 React 组件可以很容易地追踪数据流。当你仔细观察一个组件时，你可以看到哪些 props 被传递了，这使得你的应用很容易理解。
 
-In some cases, you want to pass data through the component tree without having to pass the props down manually at every level.
-You can do this directly in React with the powerful "context" API.
+在某些情况下，你想通过组件树来传递数据，而不想在每一层上手动传递 props。
+你可以直接使用 React 强大的 “context” API 来做到。
 
-
-## Why Not To Use Context
+## 为什么不要使用 Context
 
 The vast majority of applications do not need to use context.
 
@@ -28,7 +27,7 @@ If you aren't an experienced React developer, don't use context. There is usuall
 
 If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.
 
-## How To Use Context
+## 如何使用 Context
 
 Suppose you have a structure like:
 
@@ -115,7 +114,7 @@ By adding `childContextTypes` and `getChildContext` to `MessageList` (the contex
 
 If `contextTypes` is not defined, then `context` will be an empty object.
 
-## Parent-Child Coupling
+## 父子组件解耦
 
 Context can also let you build an API where parents and children communicate. For example, one library that works this way is [React Router V4](https://reacttraining.com/react-router):
 
@@ -145,7 +144,7 @@ By passing down some information from the `Router` component, each `Link` and `R
 
 Before you build components with an API similar to this, consider if there are cleaner alternatives. For example, you can pass entire React components as props if you'd like to.
 
-## Referencing Context in Lifecycle Methods
+## 在生命周期方法中引用 Context
 
 If `contextTypes` is defined within a component, the following [lifecycle methods](/docs/react-component.html#the-component-lifecycle) will receive an additional parameter, the `context` object:
 
@@ -158,7 +157,7 @@ If `contextTypes` is defined within a component, the following [lifecycle method
 >
 > As of React 16, `componentDidUpdate` no longer receives `prevContext`.
 
-## Referencing Context in Stateless Functional Components
+## 在无状态函数组件中引用 Context
 
 Stateless functional components are also able to reference `context` if `contextTypes` is defined as a property of the function. The following code shows a `Button` component written as a stateless functional component.
 
@@ -173,7 +172,7 @@ const Button = ({children}, context) =>
 Button.contextTypes = {color: PropTypes.string};
 ```
 
-## Updating Context
+## 更新 Context
 
 Don't do it.
 
