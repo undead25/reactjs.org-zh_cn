@@ -4,7 +4,7 @@
 ## 动机 Motivation
 **Know more about React**
 
-> P.S. 优先翻译自己感兴趣的部分和简单的。
+> P.S. 优先翻译自己感兴趣的部分。
 
 ## TODO
 - Docs
