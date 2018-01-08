@@ -31,10 +31,10 @@
     - [ ] React Without ES6
     - [ ] React Without JSX
     - [x] [Reconciliation](/content/docs/reconciliation.md)
-    - [ ] [Context](/content/docs/context.md)
+    - [x] [Context](/content/docs/context.md)
     - [x] [Fragments](/content/docs/fragments.md)
     - [ ] Portals
-    - [ ] Error Boundaries
+    - [ ] [Error Boundaries](/content/docs/error-boundaries.md)
     - [ ] Web Components
     - [x] [Higher-Order Components](/content/docs/higher-order-components.md)
     - [ ] Integrating with Other Libraries
