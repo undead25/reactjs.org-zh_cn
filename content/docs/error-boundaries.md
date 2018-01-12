@@ -21,7 +21,7 @@ permalink: docs/error-boundaries.html
 > * 服务端渲染
 > * 错误边界自身抛出的异常（而不是其子组件）
 
-A class component becomes an error boundary if it defines a new lifecycle method called `componentDidCatch(error, info)`:
+如果一个类组件定义了一个新的 `componentDidCatch(error, info)` 生命周期方法，那么它就成了一个错误编辑：
 
 ```js{7-12,15-18}
 class ErrorBoundary extends React.Component {
@@ -47,7 +47,7 @@ class ErrorBoundary extends React.Component {
 }
 ```
 
-Then you can use it as a regular component:
+然后你可以把它作为一个普通组件来使用：
 
 ```js
 <ErrorBoundary>
@@ -55,21 +55,21 @@ Then you can use it as a regular component:
 </ErrorBoundary>
 ```
 
-The `componentDidCatch()` method works like a JavaScript `catch {}` block, but for components. Only class components can be error boundaries. In practice, most of the time you’ll want to declare an error boundary component once and use it throughout your application.
+`componentDidCatch()` 方法像 JavaScript 的 `catch {}` 一样，但它只针对组件。只有类组件可以成为错误边界。实际上，大多数时候你只需要声明一个错误边界组件，然后在整个应用中使用它。
 
-Note that **error boundaries only catch errors in the components below them in the tree**. An error boundary can’t catch an error within itself. If an error boundary fails trying to render the error message, the error will propagate to the closest error boundary above it. This, too, is similar to how catch {} block works in JavaScript.
+需要注意的是**错误边界仅捕获其子组件树中的错误**。错误边界不能捕获其自身的错误。如果错误边界渲染错误信息失败，那错误会冒泡到其最近的错误边界。这也类似于 JavaScript 中 `catch {}`。
 
 ### componentDidCatch 参数
 
-`error` is an error that has been thrown.
+`error` 是被抛出的错误。
 
-`info` is an object with `componentStack` key. The property has information about component stack during thrown error.
+`info` 是一个包含 `componentStack` 键的对象。这个属性包含了抛出错误时关于组件的堆栈信息。
 
 ```js
 //...
 componentDidCatch(error, info) {
   
-  /* Example stack information:
+  /* 堆栈信息示例：
      in ComponentThatThrows (created by App)
      in ErrorBoundary (created by App)
      in div (created by App)
@@ -83,13 +83,12 @@ componentDidCatch(error, info) {
 
 ## 在线示例
 
-Check out [this example of declaring and using an error boundary](https://codepen.io/gaearon/pen/wqvxGa?editors=0010) with [React 16 beta](https://github.com/facebook/react/issues/10294).
+查看这个使用  [React 16 beta](https://github.com/facebook/react/issues/10294) 来[声明和使用错误边界的示例](https://codepen.io/gaearon/pen/wqvxGa?editors=0010)。
 
 
 ## 何处放置错误边界
 
-The granularity of error boundaries is up to you. You may wrap top-level route components to display a “Something went wrong” message to the user, just like server-side frameworks often handle crashes. You may also wrap individual widgets in an error boundary to protect them from crashing the rest of the application.
-
+错误边界的粒度取决于你。你可以包裹顶层的路由组件来向用户展示一个“出错”信息，就像服务端框架通常处理崩溃一样。你也可以将独立插件包裹在错误边界中来保护应用不受其崩溃而影响。
 
 ## Uncaught Errors 的新行为
 
