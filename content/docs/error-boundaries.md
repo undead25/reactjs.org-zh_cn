@@ -21,7 +21,7 @@ permalink: docs/error-boundaries.html
 > * 服务端渲染
 > * 错误边界自身抛出的异常（而不是其子组件）
 
-如果一个类组件定义了一个新的 `componentDidCatch(error, info)` 生命周期方法，那么它就成了一个错误编辑：
+如果一个类组件定义了一个新的 `componentDidCatch(error, info)` 生命周期方法，那么它就成了一个错误边界：
 
 ```js{7-12,15-18}
 class ErrorBoundary extends React.Component {
