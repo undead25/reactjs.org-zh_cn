@@ -90,17 +90,17 @@ componentDidCatch(error, info) {
 
 错误边界的粒度取决于你。你可以包裹顶层的路由组件来向用户展示一个“出错”信息，就像服务端框架通常处理崩溃一样。你也可以将独立插件包裹在错误边界中来保护应用不受其崩溃而影响。
 
-## Uncaught Errors 的新行为
+## 未捕获错误的新行为
 
-This change has an important implication. **As of React 16, errors that were not caught by any error boundary will result in unmounting of the whole React component tree.**
+这一变化具有重要意义。**从 React 16 开始，任何没有被错误边界捕获的错误会导致整个 React 组件树的卸载。**
 
-We debated this decision, but in our experience it is worse to leave corrupted UI in place than to completely remove it. For example, in a product like Messenger leaving the broken UI visible could lead to somebody sending a message to the wrong person. Similarly, it is worse for a payments app to display a wrong amount than to render nothing.
+这个决定饱受争议，但根据我们的经验，保留错误的 UI 会比完全移除它更糟糕。例如，在像 Messenger 的产品中，保留错误的 UI 可见会导致有人向错误的人发送信息。同样地，在支付应用中展示一个错误的金额会比什么都不渲染更糟糕。
 
-This change means that as you migrate to React 16, you will likely uncover existing crashes in your application that have been unnoticed before. Adding error boundaries lets you provide better user experience when something goes wrong.
+这个变化意味着，随着你迁移到 React 16，你可能会发现一些你以前在你的应用中没有注意到的崩溃。添加错误边界可以在发生错误时提供更好的用户体验。
 
-For example, Facebook Messenger wraps content of the sidebar, the info panel, the conversation log, and the message input into separate error boundaries. If some component in one of these UI areas crashes, the rest of them remain interactive.
+例如，Facebook Messenger 将侧边栏、信息面板、聊天记录和信息输入框包裹在各自的错误边界中。如果这些 UI 中的某个组件崩溃了，其余部分仍然可用。
 
-We also encourage you to use JS error reporting services (or build your own) so that you can learn about unhandled exceptions as they happen in production, and fix them.
+我们也鼓励你使用 JS 错误报告服务（或者自行构建）以便你可以可以发现生产环境产生的异常并修复它们。
 
 
 ## 组件栈追踪
