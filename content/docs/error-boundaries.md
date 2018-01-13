@@ -105,24 +105,24 @@ componentDidCatch(error, info) {
 
 ## 组件栈追踪
 
-React 16 prints all errors that occurred during rendering to the console in development, even if the application accidentally swallows them. In addition to the error message and the JavaScript stack, it also provides component stack traces. Now you can see where exactly in the component tree the failure has happened:
+在开发模式下，React 16 会在渲染过程中打印所有发生的错误到控制台，即使应用掩盖了它们。除了错误信息和 JavaScript 栈信息外，它还提供组件堆栈追踪。现在你可以看到错误发生在组件树中的确切位置：
 
 <img src="../images/docs/error-boundaries-stack-trace.png" style="max-width:100%" alt="Error caught by Error Boundary component">
 
-You can also see the filenames and line numbers in the component stack trace. This works by default in [Create React App](https://github.com/facebookincubator/create-react-app) projects:
+你也可以在组件的堆栈追踪中看到文件名和行数。这在 [Create React App](https://github.com/facebookincubator/create-react-app) 创建的项目中是默认开启的。
 
 <img src="../images/docs/error-boundaries-stack-trace-line-numbers.png" style="max-width:100%" alt="Error caught by Error Boundary component with line numbers">
 
-If you don’t use Create React App, you can add [this plugin](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source) manually to your Babel configuration. Note that it’s intended only for development and **must be disabled in production**.
+如果你没有使用 Create React App，你可以手动添加这个[插件](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source)到你的 Babel 配置中。需要注意的是这只适用于开发环境，**禁止在生产环境使用**。
 
-> Note
+> 注意
 > 
-> Component names displayed in the stack traces depend on the [`Function.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name) property. If you support older browsers and devices which may not yet provide this natively (e.g. IE 11), consider including a `Function.name` polyfill in your bundled application, such as [`function.name-polyfill`](https://github.com/JamesMGreene/Function.name). Alternatively, you may explicitly set the [`displayName`](/docs/react-component.html#displayname) property on all your components.
+> 在堆栈追踪中显示的组件名称依赖于 [`Function.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name) 属性。如果要支持的旧版本浏览器和设备没有原生提供此属性（例如 IE 11），请考虑添加 `Function.name` 的 polyfill 到你的应用中，例如 [`function.name-polyfill`](https://github.com/JamesMGreene/Function.name)。或者你可以在你所有的组件中显式设置 [`displayName`](/docs/react-component.html#displayname) 属性。
 
 
-## try/catch 怎么样？
+## 为什么不使用 try/catch？
 
-`try` / `catch` is great but it only works for imperative code:
+`try` / `catch` 很好，但只适用于命令式代码：
 
 ```js
 try {
@@ -132,17 +132,17 @@ try {
 }
 ```
 
-However, React components are declarative and specify *what* should be rendered:
+然而，React 组件是声明式的，需要指明**什么**需要被渲染：
 
 ```js
 <Button />
 ```
 
-Error boundaries preserve the declarative nature of React, and behave as you would expect. For example, even if an error occurs in a `componentDidUpdate` hook caused by a `setState` somewhere deep in the tree, it will still correctly propagate to the closest error boundary.
+错误边界保留了 React 声明式的特性，并按照你的预期工作。例如，在组件树中某处由 `setState` 引起的、发生在 `componentDidUpdate` 生命周期钩子中的错误，它仍然会正确地冒泡到最近的错误边界。
 
-## How About Event Handlers?
+## 怎么处理事件？
 
-Error boundaries **do not** catch errors inside event handlers.
+错误边界**无法**捕捉到事件处理器内部的错误。
 
 React doesn't need error boundaries to recover from errors in event handlers. Unlike the render method and lifecycle hooks, the event handlers don't happen during rendering. So if they throw, React still knows what to display on the screen.
 
