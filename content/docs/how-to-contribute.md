@@ -126,9 +126,9 @@ The easiest way to try your changes is to run `yarn build core,dom --type=UMD` a
 If you want to try your changes in your existing React project, you may copy `build/dist/react.development.js`, `build/dist/react-dom.development.js`, or any other build products into your app and use them instead of the stable version. If your project uses React from npm, you may delete `react` and `react-dom` in its dependencies and use `yarn link` to point them to your local `build` folder:
 
 ```sh
-cd ~/path_to_your_react_clone/build/packages/react
+cd ~/path_to_your_react_clone/build/node_modules/react
 yarn link
-cd ~/path_to_your_react_clone/build/packages/react-dom
+cd ~/path_to_your_react_clone/build/node_modules/react-dom
 yarn link
 cd /path/to/your/project
 yarn link react react-dom
@@ -158,6 +158,8 @@ You may be interested in watching [this short video](https://www.youtube.com/wat
 - [8:25](https://youtu.be/wUpPsEcGsg8?t=8m25s) - Organizing code
 - [14:43](https://youtu.be/wUpPsEcGsg8?t=14m43s) - React npm registry
 - [19:15](https://youtu.be/wUpPsEcGsg8?t=19m15s) - Adding new React features
+
+For a realistic overview of what it _feels_ like to contribute to React for the first time, check out [this entertaining ReactNYC talk](https://www.youtube.com/watch?v=GWCcZ6fnpn4).
 
 ### Meeting Notes
 
