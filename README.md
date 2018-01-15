@@ -33,7 +33,7 @@
     - [x] [Reconciliation](/content/docs/reconciliation.md)
     - [x] [Context](/content/docs/context.md)
     - [x] [Fragments](/content/docs/fragments.md)
-    - [ ] Portals
+    - [ ] [Portals](/content/docs/portals.md)
     - [x] [Error Boundaries](/content/docs/error-boundaries.md)
     - [ ] Web Components
     - [x] [Higher-Order Components](/content/docs/higher-order-components.md)
