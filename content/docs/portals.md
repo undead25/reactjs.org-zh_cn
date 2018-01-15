@@ -4,7 +4,7 @@ title: Portals
 permalink: docs/portals.html
 ---
 
-Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+Portals 提供了一个不错的方式来将子节点渲染到父组件 DOM 以外的节点中，
 
 ```js
 ReactDOM.createPortal(child, container)
@@ -12,7 +12,7 @@ ReactDOM.createPortal(child, container)
 
 The first argument (`child`) is any [renderable React child](/docs/react-component.html#render), such as an element, string, or fragment. The second argument (`container`) is a DOM element.
 
-## Usage
+## 用法
 
 Normally, when you return an element from a component's render method, it's mounted into the DOM as a child of the nearest parent node:
 
@@ -48,7 +48,7 @@ A typical use case for portals is when a parent component has an `overflow: hidd
 
 [Try it on CodePen.](https://codepen.io/gaearon/pen/yzMaBd)
 
-## Event Bubbling Through Portals
+## 通过 Portals 进行事件冒泡
 
 Even though a portal can be anywhere in the DOM tree, it behaves like a normal React child in every other way. Features like context work exactly the same regardless of whether the child is a portal, as the portal still exists in the *React tree* regardless of position in the *DOM tree*.
 
