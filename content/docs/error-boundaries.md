@@ -144,9 +144,9 @@ try {
 
 错误边界**无法**捕捉到事件处理器内部的错误。
 
-React doesn't need error boundaries to recover from errors in event handlers. Unlike the render method and lifecycle hooks, the event handlers don't happen during rendering. So if they throw, React still knows what to display on the screen.
+React 不需要错误边界从事件处理器的错误中来恢复。不像 render 方法和生命周期钩子，事件处理器不会在渲染过程中触发。所以如果它们抛出错误，React 仍然知道在屏幕上展示什么。
 
-If you need to catch an error inside event handler, use the regular JavaScript `try` / `catch` statement:
+如果你需要在事件处理器中捕获错误，请使用普通的 `try` / `catch` 语句。
 
 ```js{8-12,16-19}
 class MyComponent extends React.Component {
@@ -157,7 +157,7 @@ class MyComponent extends React.Component {
   
   handleClick = () => {
     try {
-      // Do something that could throw
+      // 做一些可能抛出错误的操作
     } catch (error) {
       this.setState({ error });
     }
@@ -172,10 +172,10 @@ class MyComponent extends React.Component {
 }
 ```
 
-Note that the above example is demonstrating regular JavaScript behavior and doesn't use error boundaries.
+需要注意的是，上面的例子没有使用错误边界，只是演示普通的 JavaScript 行为。
 
-## React 15 后的名称变更
+## React 15 后名称的变更
 
-React 15 included a very limited support for error boundaries under a different method name: `unstable_handleError`. This method no longer works, and you will need to change it to `componentDidCatch` in your code starting from the first 16 beta release.
+React 15 在一个不同的方法名下 —— `unstable_handleError`，包含了对错误边界有限的支持。自 React 16 beta 发布，这个方法已不再工作，你需要在你的代码中将它改为 `componentDidCatch`。
 
-For this change, we’ve provided a [codemod](https://github.com/reactjs/react-codemod#error-boundaries) to automatically migrate your code.
+对于这个改变，我们提供了一个 [codemod](https://github.com/reactjs/react-codemod#error-boundaries) 来自动迁移你的代码。
