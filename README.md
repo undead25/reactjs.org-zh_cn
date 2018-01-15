@@ -34,7 +34,7 @@
     - [x] [Context](/content/docs/context.md)
     - [x] [Fragments](/content/docs/fragments.md)
     - [ ] Portals
-    - [ ] [Error Boundaries](/content/docs/error-boundaries.md)
+    - [x] [Error Boundaries](/content/docs/error-boundaries.md)
     - [ ] Web Components
     - [x] [Higher-Order Components](/content/docs/higher-order-components.md)
     - [ ] Integrating with Other Libraries
