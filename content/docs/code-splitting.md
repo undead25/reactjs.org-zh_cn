@@ -1,6 +1,6 @@
 ---
 id: code-splitting
-title: Code-Splitting
+title: 代码分割
 permalink: docs/code-splitting.html
 ---
 

@@ -33,9 +33,11 @@
     - [x] [Reconciliation](/content/docs/reconciliation.md)
     - [x] [Context](/content/docs/context.md)
     - [x] [Fragments](/content/docs/fragments.md)
-    - [ ] [Portals](/content/docs/portals.md)
+    - [x] [Portals](/content/docs/portals.md)
     - [x] [Error Boundaries](/content/docs/error-boundaries.md)
     - [ ] Web Components
     - [x] [Higher-Order Components](/content/docs/higher-order-components.md)
+    - [ ] Render Props
     - [ ] Integrating with Other Libraries
     - [ ] Accessibility
+    - [ ] [Code-Splitting](/content/docs/code-splitting.md)
