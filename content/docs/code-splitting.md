@@ -6,7 +6,7 @@ permalink: docs/code-splitting.html
 
 ## 打包
 
-大多数 React 应用都会使用像 [Webpack](https://webpack.js.org/) 或者 [Browserify](http://browserify.org/) 这样的工具来对文件进行打包。打包是根据导入的文件来将它们合并到一个 `bundle` 文件的过程。然后这个 `bundle` 可以被包含在一个网页上，来一次性加载整个应用。
+大多数 React 应用都会使用像 [Webpack](https://webpack.js.org/) 或者 [Browserify](http://browserify.org/) 这样的工具来对文件进行打包。打包是根据导入的文件来将它们合并到一个包文件的过程。然后这个包文件可以被包含在一个网页上，来一次性加载整个应用。
 
 #### 示例
 
@@ -46,11 +46,11 @@ console.log(add(16, 26)); // 42
 
 ## 代码分割
 
-Bundling is great, but as your app grows, your bundle will grow too. Especially if you are including large third-party libraries. You need to keep an eye on the code you are including in your bundle so that you don't accidentally make it so large that your app takes a long time to load.
+打包很好，但随着应用的增长，你的包体积也会随着增长。特别是你引入了大型的第三方库。你需要密切关注包中的代码以便你不会意外地使包体积变得非常大，这样你的应用需要花很长的时间来加载它。
 
-To avoid winding up with a large bundle, it's good to get ahead of the problem and start "splitting" your bundle. [Code-Splitting](https://webpack.js.org/guides/code-splitting/) is a feature supported by bundlers like Webpack and Browserify (via [factor-bundle](https://github.com/browserify/factor-bundle)) which can create multiple bundles that can be dynamically loaded at runtime.
+为了避免大体积的包，最好先解决问题并开始“分割”你的包。[代码分割](https://webpack.js.org/guides/code-splitting/)是像 Webpack 和 Browserify（通过[factor-bundle](https://github.com/browserify/factor-bundle)）这样的打包工具支持的一个功能，它们可以创建多个在运行时可以被动态加载的包。
 
-Code-splitting your app can help you "lazy-load" just the things that are currently needed by the user, which can dramatically improve the performance of your app. While you haven't reduced the overall amount of code in your app, you've avoided loading code that the user may never need, and reduced the amount of code needed during the initial load.
+在你的应用中分割代码可以帮助你“懒加载”那些用户当前所需的东西，这可以明显提高应用的性能。虽然你没有减少应用的代码总量，但你避免了加载用户可能永远都不会需要的代码，并减少了首次加载所需的代码。
 
 ## `import()`
 
