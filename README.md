@@ -27,7 +27,7 @@
     - [ ] Static Type Checking
     - [ ] Refs and the DOM
     - [ ] Uncontrolled Components
-    - [ ] Optimizing Performance
+    - [ ] [Optimizing Performance](/content/docs/optimizing-performance.md)
     - [ ] React Without ES6
     - [ ] React Without JSX
     - [x] [Reconciliation](/content/docs/reconciliation.md)
@@ -40,4 +40,4 @@
     - [ ] Render Props
     - [ ] Integrating with Other Libraries
     - [ ] Accessibility
-    - [ ] [Code-Splitting](/content/docs/code-splitting.md)
+    - [x] [Code-Splitting](/content/docs/code-splitting.md)
