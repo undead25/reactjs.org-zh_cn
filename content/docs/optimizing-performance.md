@@ -9,35 +9,35 @@ redirect_from: "docs/advanced-performance.html"
 
 ## 使用生产版本
 
-If you're benchmarking or experiencing performance problems in your React apps, make sure you're testing with the minified production build.
+如果你在 React 应用中进行基准测试或遇到性能问题时，请确保你正在使用压缩过的生产版本。
 
-By default, React includes many helpful warnings. These warnings are very useful in development. However, they make React larger and slower so you should make sure to use the production version when you deploy the app.
+默认情况下，React 包含了许多有用的警告。这些警告在开发环境下非常有用。然而，它们会使 React 更大更慢，所以当你部署应用时请确保使用了生产版本。
 
-If you aren't sure whether your build process is set up correctly, you can check it by installing [React Developer Tools for Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi). If you visit a site with React in production mode, the icon will have a dark background:
+如果你不确定构建流程是否正确，可以通过安装 [Chrome 的 React 开发者工具](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) 来检查。如果访问生产模式的 React 应用，这个图标会有一个深色背景：
 
 <img src="../images/docs/devtools-prod.png" style="max-width:100%" alt="React DevTools on a website with production version of React">
 
-If you visit a site with React in development mode, the icon will have a red background:
+如果访问开发模式的 React 应用，这个图标会有一个红色背景：
 
 <img src="../images/docs/devtools-dev.png" style="max-width:100%" alt="React DevTools on a website with development version of React">
 
-It is expected that you use the development mode when working on your app, and the production mode when deploying your app to the users.
+开发应用时使用开发模式，部署应用时使用生产模式。
 
-You can find instructions for building your app for production below.
+你可以在下面找到构建生产环境应用的指导。
 
-### 使用 Create React App
+### Create React App
 
-If your project is built with [Create React App](https://github.com/facebookincubator/create-react-app), run:
+如果你的项目是通过 [Create React App](https://github.com/facebookincubator/create-react-app) 创建的，运行：
 
 ```
 npm run build
 ```
 
-This will create a production build of your app in the `build/` folder of your project.
+这会在项目的 `build/` 文件夹中创建一个生产版本的应用。
 
-Remember that this is only necessary before deploying to production. For normal development, use `npm start`.
+请记住，项目部署到生产环境时才这样做。对于正常的开发，使用 `npm start`。
 
-### Single-File Builds
+### 单文件生产版本
 
 We offer production-ready versions of React and React DOM as single files:
 
