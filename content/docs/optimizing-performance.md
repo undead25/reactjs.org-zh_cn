@@ -5,9 +5,9 @@ permalink: docs/optimizing-performance.html
 redirect_from: "docs/advanced-performance.html"
 ---
 
-Internally, React uses several clever techniques to minimize the number of costly DOM operations required to update the UI. For many applications, using React will lead to a fast user interface without doing much work to specifically optimize for performance. Nevertheless, there are several ways you can speed up your React application.
+在 React 内部使用了一些巧妙的技术来最小化更新 UI 所需的昂贵的 DOM 操作。对于许多应用来说，使用 React 不需要做太多的性能优化工作就可以做到快速的用户界面。不过，这里有几种方法可以加快你的 React 应用。
 
-## Use the Production Build
+## 使用生产版本
 
 If you're benchmarking or experiencing performance problems in your React apps, make sure you're testing with the minified production build.
 
@@ -25,7 +25,7 @@ It is expected that you use the development mode when working on your app, and t
 
 You can find instructions for building your app for production below.
 
-### Create React App
+### 使用 Create React App
 
 If your project is built with [Create React App](https://github.com/facebookincubator/create-react-app), run:
 
