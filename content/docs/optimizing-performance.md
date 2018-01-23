@@ -157,31 +157,31 @@ new webpack.optimize.UglifyJsPlugin()
 
 需要注意的是只有生产版本才需要这样做。在开发时不需要应用 `UglifyJsPlugin` 插件或者在 `DefinePlugin` 插件中设置 `'production'` 值，因为那会隐藏掉 React 有用的警告并使得构建过程更慢。
 
-## 使用 Chrome 性能选项卡中的 Profiling 组件
+## 使用 Chrome Performance 选项卡中的 Profiling 组件
 
-In the **development** mode, you can visualize how components mount, update, and unmount, using the performance tools in supported browsers. For example:
+在 **开发**模式下，你可以在支持的浏览器中使用性能工具来直观地了解组件是如何挂载、更新和卸载的，例如：
 
 <center><img src="../images/blog/react-perf-chrome-timeline.png" style="max-width:100%" alt="React components in Chrome timeline" /></center>
 
-To do this in Chrome:
+在 Chrome 浏览器中这么做：
 
-1. Temporarily **disable all Chrome extensions, especially React DevTools**. They can significantly skew the results!
+1. 暂时**禁用所有 Chrome 拓展程序，特别是 React 开发者工具**。它们会明显地歪曲结果。
 
-2. Make sure you're running the application in the development mode.
+2. 确保在应用在开发模式下运行。
 
-3. Open the Chrome DevTools **[Performance](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/timeline-tool)** tab and press **Record**.
+3. 打开 Chrome 开发者工具的 **[Performance](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/timeline-tool)** 选项卡，然后点击 **Record**。
 
-4. Perform the actions you want to profile. Don't record more than 20 seconds or Chrome might hang.
+4. 执行你想要分析的操作。记录不要超过 20 秒，否则 Chrome 可能会挂起。
 
-5. Stop recording.
+5. 停止记录。
 
-6. React events will be grouped under the **User Timing** label.
+6. React 事件会被分组显示在 **User Timing** 标签下。
 
-For a more detailed walkthrough, check out [this article by Ben Schwarz](https://building.calibreapp.com/debugging-react-performance-with-react-16-and-chrome-devtools-c90698a522ad).
+更详细的操作演示请查看 [Ben Schwarz 写的这篇文章](https://building.calibreapp.com/debugging-react-performance-with-react-16-and-chrome-devtools-c90698a522ad)。
 
-Note that **the numbers are relative so components will render faster in production**. Still, this should help you realize when unrelated UI gets updated by mistake, and how deep and how often your UI updates occur.
+需要注意的是**这些数字是相对的，所以组件在生产环境下会渲染得更快**。不过，这应该可以帮助你了解到什么时候哪些无关的 UI 被错误地更新了，以及 UI 更新的深度和频度。
 
-Currently Chrome, Edge, and IE are the only browsers supporting this feature, but we use the standard [User Timing API](https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API) so we expect more browsers to add support for it.
+目前只有 Chrome、Edge 和 IE 支持这个功能，但我们使用的是标准的 [User Timing API](https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API)，所以我们可以期待更多的浏览器添加对这个功能的支持。
 
 ## Virtualize Long Lists
 
