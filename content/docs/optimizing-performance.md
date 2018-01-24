@@ -183,37 +183,37 @@ new webpack.optimize.UglifyJsPlugin()
 
 目前只有 Chrome、Edge 和 IE 支持这个功能，但我们使用的是标准的 [User Timing API](https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API)，所以我们可以期待更多的浏览器添加对这个功能的支持。
 
-## Virtualize Long Lists
+## 虚拟化长列表
 
-If your application renders long lists of data (hundreds or thousands of rows), we recommended using a technique known as "windowing". This technique only renders a small subset of your rows at any given time, and can dramatically reduce the time it takes to re-render the components as well as the number of DOM nodes created.
+如果你的应用渲染大量数据（数百或数千行），我们建议使用称为“窗口”的技术。这种技术只在任何给定时间里渲染一小部分数据，并且可以明显减少组件重新渲染的时间以及 DOM 节点创建的数量。
 
-[React Virtualized](https://bvaughn.github.io/react-virtualized/) is one popular windowing library. It provides several reusable components for displaying lists, grids, and tabular data. You can also create your own windowing component, like [Twitter did](https://medium.com/@paularmstrong/twitter-lite-and-high-performance-react-progressive-web-apps-at-scale-d28a00e780a3), if you want something more tailored to your application's specific use case.
+[React Virtualized](https://bvaughn.github.io/react-virtualized/) 是一个流行的窗口库。它提供了多个可复用的列表、网格和表格数据组件。你也可以创建自己的窗口组件，如果你想要更适合应用特定用例的东西，你可以像 [Twitter 这样做](https://medium.com/@paularmstrong/twitter-lite-and-high-performance-react-progressive-web-apps-at-scale-d28a00e780a3)。
 
-## Avoid Reconciliation
+## 避免重新渲染
 
-React builds and maintains an internal representation of the rendered UI. It includes the React elements you return from your components. This representation lets React avoid creating DOM nodes and accessing existing ones beyond necessity, as that can be slower than operations on JavaScript objects. Sometimes it is referred to as a "virtual DOM", but it works the same way on React Native.
+React 创建并维护一份所渲染 UI 的内部实现。它包含从组件返回的 React 元素。这个实现让 React 避免了不必要的 DOM 节点创建和现有节点的访问，因为这可能比JavaScript 对象操作更慢。有时它被称为“虚拟 DOM”，但它在 React Native 上的工作方式是相同的。
 
-When a component's props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM.
+当组件的 props 或 state 发生变化时，React 通过比较新返回的元素和先前渲染的元素来决定是否需要更新实际的 DOM。当它们不相等时，React 会更新 DOM。
 
-You can now visualize these re-renders of the virtual DOM with React DevTools:
+现在你可以使用 React 开发者工具来可视化这些重新渲染的虚拟 DOM：
 
-- [Chrome Browser Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-- [Firefox Browser Extension](https://addons.mozilla.org/en-GB/firefox/addon/react-devtools/)
-- [Standalone Node Package](https://www.npmjs.com/package/react-devtools)
+- [Chrome 浏览器拓展程序](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+- [Firefox 浏览器拓展程序](https://addons.mozilla.org/en-GB/firefox/addon/react-devtools/)
+- [独立的 Node 包](https://www.npmjs.com/package/react-devtools)
 
-In the developer console select the **Highlight Updates** option in the **React** tab:
+在开发人员控制台中，选择 **React** 选项卡中的 **Highlight Updates** 选项：
 
 <center><img src="../images/blog/devtools-highlight-updates.png" style="max-width:100%; margin-top:10px;" alt="How to enable highlight updates" /></center>
 
-Interact with your page and you should see colored borders momentarily appear around any components that have re-rendered. This lets you spot re-renders that were not necessary. You can learn more about this React DevTools feature from this [blog post](https://blog.logrocket.com/make-react-fast-again-part-3-highlighting-component-updates-6119e45e6833) from [Ben Edelstein](https://blog.logrocket.com/@edelstein).
+与页面进行交互，你应该会看到任何重新渲染的组件的周围都会出现彩色边框。这可以让你发现没有必要的重新渲染。你可以从 [Ben Edelstein](https://blog.logrocket.com/@edelstein) 的[博客文章](https://blog.logrocket.com/make-react-fast-again-part-3-highlighting-component-updates-6119e45e6833)了解更多有关 React 开发者工具功能的信息。
 
-Consider this example:
+考虑下这个示例：
 
 <center><img src="../images/blog/highlight-updates-example.gif" style="max-width:100%; margin-top:20px;" alt="React DevTools Highlight Updates example" /></center>
 
-Note that when we're entering a second todo, the first todo also flashes on the screen on every keystroke. This means it is being re-rendered by React together with the input. This is sometimes called a "wasted" render. We know it is unnecessary because the first todo content has not changed, but React doesn't know this.
+请注意，当我们进入第二个待办事项时，每次按键第一个待办事项也会在屏幕上闪烁。这意味着它正在被 React 和输入一起重新渲染。这有时被称为“浪费”的渲染。我们知道这是没有必要的，因为第一个待办事项的内容没有改变，但 React 并不知道。
 
-Even though React only updates the changed DOM nodes, re-rendering still takes some time. In many cases it's not a problem, but if the slowdown is noticeable, you can speed all of this up by overriding the lifecycle function `shouldComponentUpdate`, which is triggered before the re-rendering process starts. The default implementation of this function returns `true`, leaving React to perform the update:
+即使 React 只更新变化的 DOM 节点，但重新渲染仍然需要一些时间。在许多情况下，这不是问题，但是如果有很明显的缓慢，那可以通过重写生命周期函数 `shouldComponentUpdate` 来加速，它是在重新渲染过程开始之前触发的，默认实现是返回 `true` 来让 React 执行更新：
 
 ```javascript
 shouldComponentUpdate(nextProps, nextState) {
@@ -221,9 +221,9 @@ shouldComponentUpdate(nextProps, nextState) {
 }
 ```
 
-If you know that in some situations your component doesn't need to update, you can return `false` from `shouldComponentUpdate` instead, to skip the whole rendering process, including calling `render()` on this component and below.
+如果你知道在某些情况下你的组件不需要更新，你可以在 `shouldComponentUpdate` 中返回 `false` 来跳过整个渲染过程，包括在这个组件的 `render()` 调用和其子组件。
 
-In most cases, instead of writing `shouldComponentUpdate()` by hand, you can inherit from [`React.PureComponent`](/docs/react-api.html#reactpurecomponent). It is equivalent to implementing `shouldComponentUpdate()` with a shallow comparison of current and previous props and state.
+在大多数情况下，可以不用手写 `shouldComponentUpdate()`，而是继承 [`React.PureComponent`](/docs/react-api.html#reactpurecomponent)。这相当于通过浅对比当前和之前的 props 和 state 来实现`shouldComponentUpdate()`。
 
 ## shouldComponentUpdate In Action
 
