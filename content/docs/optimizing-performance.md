@@ -239,9 +239,9 @@ shouldComponentUpdate(nextProps, nextState) {
 
 需要注意的是 React 只需要更新 C6，因为这是不可避免的。对于 C8 来说，通过比较渲染的 React 元素没有进行更新，对于 C2 的子树和 C7 来说，甚至都不需要进行比较，因为我们在 `shouldComponentUpdate` 上就阻止了更新，`render` 没有被调用。
 
-## Examples
+## 示例
 
-If the only way your component ever changes is when the `props.color` or the `state.count` variable changes, you could have `shouldComponentUpdate` check that:
+如果组件改变的唯一方式是当 `props.color` 或 `state.count` 变量发生变化时，那你可以通过 `shouldComponentUpdate` 来检查：
 
 ```javascript
 class CounterButton extends React.Component {
