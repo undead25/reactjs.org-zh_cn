@@ -225,19 +225,19 @@ shouldComponentUpdate(nextProps, nextState) {
 
 在大多数情况下，可以不用手写 `shouldComponentUpdate()`，而是继承 [`React.PureComponent`](/docs/react-api.html#reactpurecomponent)。这相当于通过浅对比当前和之前的 props 和 state 来实现`shouldComponentUpdate()`。
 
-## shouldComponentUpdate In Action
+## 使用 shouldComponentUpdate
 
-Here's a subtree of components. For each one, `SCU` indicates what `shouldComponentUpdate` returned, and `vDOMEq` indicates whether the rendered React elements were equivalent. Finally, the circle's color indicates whether the component had to be reconciled or not.
+下面一个组件的子树。对于其子组件，每个 `SCU` 表示 `shouldComponentUpdate` 返回的内容，`vDOMEq` 表示渲染的 React 元素是否一致。最后，圆圈的颜色表示组件是否需要重新渲染。
 
 <figure><img src="../images/docs/should-component-update.png" style="max-width:100%" /></figure>
 
-Since `shouldComponentUpdate` returned `false` for the subtree rooted at C2, React did not attempt to render C2, and thus didn't even have to invoke `shouldComponentUpdate` on C4 and C5.
+由于以 C2 为根的子树的 `shouldComponentUpdate` 返回 `false`，所以 React 不会试图去渲染 C2，甚至不需要在 C4 和 C5 里调用 `shouldComponentUpdate`。
 
-For C1 and C3, `shouldComponentUpdate` returned `true`, so React had to go down to the leaves and check them. For C6 `shouldComponentUpdate` returned `true`, and since the rendered elements weren't equivalent React had to update the DOM.
+对于 C1 和 C3 来说，`shouldComponentUpdate` 返回 `true`，所以 React 会深入到子树中，并检查它们。C6 的 `shouldComponentUpdate` 返回 `true`，由于渲染的元素不一致，React 会更新 DOM。
 
-The last interesting case is C8. React had to render this component, but since the React elements it returned were equal to the previously rendered ones, it didn't have to update the DOM.
+最后一个有趣的是 C8，React 需要渲染这个组件，但是由于它返回的 React 元素和之前渲染的一致，所以不需要更新 DOM。
 
-Note that React only had to do DOM mutations for C6, which was inevitable. For C8, it bailed out by comparing the rendered React elements, and for C2's subtree and C7, it didn't even have to compare the elements as we bailed out on `shouldComponentUpdate`, and `render` was not called.
+需要注意的是 React 只需要更新 C6，因为这是不可避免的。对于 C8 来说，通过比较渲染的 React 元素没有进行更新，对于 C2 的子树和 C7 来说，甚至都不需要进行比较，因为我们在 `shouldComponentUpdate` 上就阻止了更新，`render` 没有被调用。
 
 ## Examples
 
