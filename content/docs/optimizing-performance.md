@@ -388,10 +388,10 @@ function updateColorMap(colormap) {
 [Immutable.js](https://github.com/facebook/immutable-js) 是解决这个问题的另一种方式。它通过结构共享来提供不可变的，持久的集合：
 
 * **不可变**: 一旦创建，集合就不能在另一个时间点改变。
-* **持久化**: new collections can be created from a previous collection and a mutation such as set. The original collection is still valid after the new collection is created.
-* **结构共享**: new collections are created using as much of the same structure as the original collection as possible, reducing copying to a minimum to improve performance.
+* **持久化**: 可以根据之前的集合以及突变来创建新的集合，例如 set。原始集合在新的集合被创建后仍然有效。
+* **结构共享**: 尽可能多的使用原始集合的结构来创建新集合，将复制降到最小来提高性能。
 
-Immutability makes tracking changes cheap. A change will always result in a new object so we only need to check if the reference to the object has changed. For example, in this regular JavaScript code:
+不可变使得变化追踪很简单。每个变化始终会产生一个新的对象，所以我们只需要检查对象的引用是否改变。例如，在下面的代码中：
 
 ```javascript
 const x = { foo: 'bar' };
@@ -400,7 +400,7 @@ y.foo = 'baz';
 x === y; // true
 ```
 
-Although `y` was edited, since it's a reference to the same object as `x`, this comparison returns `true`. You can write similar code with immutable.js:
+尽管 `y` 被修改了，由于它和 `x` 都是同一个对象的引用，这个比较返回 `true`。你可以用 immutable.js 编写同样的代码：
 
 ```javascript
 const SomeRecord = Immutable.Record({ foo: null });
@@ -411,8 +411,8 @@ x === y; // false
 x === z; // true
 ```
 
-In this case, since a new reference is returned when mutating `x`, we can use a reference equality check `(x === y)` to verify that the new value stored in `y` is different than the original value stored in `x`.
+在这个例子中，由于在改变 `x` 时返回了一个新的引用，所以我们可以使用一个引用相等性检查 `(x === y)` 来验证存储在 `y` 中的新值与存储在 `x` 中的原始值是不同的。
 
-Two other libraries that can help use immutable data are [seamless-immutable](https://github.com/rtfeldman/seamless-immutable) and [immutability-helper](https://github.com/kolodny/immutability-helper).
+另外两个库可以帮助我们使用不可变数据是 [seamless-immutable](https://github.com/rtfeldman/seamless-immutable) 和 [immutability-helper](https://github.com/kolodny/immutability-helper)。
 
-Immutable data structures provide you with a cheap way to track changes on objects, which is all we need to implement `shouldComponentUpdate`. This can often provide you with a nice performance boost.
+不可变数据结构提供了简单的方式来追踪对象变化，这是我们实现 `shouldComponentUpdate` 所需要的。这通常可以为你提供不错的性能提升。
