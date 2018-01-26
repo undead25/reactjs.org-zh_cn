@@ -22,12 +22,12 @@
     - [ ] Composition vs Inheritance
     - [ ] Thinking In React
   - ADVANCED GUIDES
-    - [ ] JSX In Depth
+    - [ ] [JSX In Depth](/content/docs/jsx-in-depth.md)
     - [ ] Typechecking With PropTypes
     - [ ] Static Type Checking
     - [ ] Refs and the DOM
     - [ ] Uncontrolled Components
-    - [ ] [Optimizing Performance](/content/docs/optimizing-performance.md)
+    - [x] [Optimizing Performance](/content/docs/optimizing-performance.md)
     - [ ] React Without ES6
     - [ ] React Without JSX
     - [x] [Reconciliation](/content/docs/reconciliation.md)
