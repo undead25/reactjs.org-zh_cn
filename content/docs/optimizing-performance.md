@@ -272,7 +272,7 @@ class CounterButton extends React.Component {
 }
 ```
 
-In this code, `shouldComponentUpdate` is just checking if there is any change in `props.color` or `state.count`. If those values don't change, the component doesn't update. If your component got more complex, you could use a similar pattern of doing a "shallow comparison" between all the fields of `props` and `state` to determine if the component should update. This pattern is common enough that React provides a helper to use this logic - just inherit from `React.PureComponent`. So this code is a simpler way to achieve the same thing:
+在这份代码中，`shouldComponentUpdate` 只检查 `props.color` 或者 `state.count` 是否有变化。如果这些值没有变，组件不会更新。如果你的组件变得更复杂，你可以使用“浅对比” `props` 和 `state` 的模式来决定组件是否需要更新。这种模式很常见，所以 React 提供了一个辅助类来使用这个逻辑 —— 只需要继承 `React.PureComponent`。下面的代码是更简单的实现来达到同样的效果：
 
 ```js
 class CounterButton extends React.PureComponent {
@@ -293,9 +293,9 @@ class CounterButton extends React.PureComponent {
 }
 ```
 
-Most of the time, you can use `React.PureComponent` instead of writing your own `shouldComponentUpdate`. It only does a shallow comparison, so you can't use it if the props or state may have been mutated in a way that a shallow comparison would miss.
+大多数情况，你可以使用 `React.PureComponent` 而不用编写你自己的 `shouldComponentUpdate`。这只做了一个浅对比，所以如果 props 或者 state 会以某种方式突变，那你不能这么使用，因为浅对比会忽略这些突变。
 
-This can be a problem with more complex data structures. For example, let's say you want a `ListOfWords` component to render a comma-separated list of words, with a parent `WordAdder` component that lets you click a button to add a word to the list. This code does *not* work correctly:
+对于更复杂的数据结构这可能会是一个问题。例如，加入你想要一个 `ListOfWords` 组件来渲染一个逗号分隔的单词列表，并有一个 `WordAdder` 父组件来点击按钮添加单词。下面的代码**不会**正确工作：
 
 ```javascript
 class ListOfWords extends React.PureComponent {
@@ -314,7 +314,7 @@ class WordAdder extends React.Component {
   }
 
   handleClick() {
-    // This section is bad style and causes a bug
+    // 这部分的代码很糟糕，并且有 bug
     const words = this.state.words;
     words.push('marklar');
     this.setState({words: words});
@@ -331,11 +331,11 @@ class WordAdder extends React.Component {
 }
 ```
 
-The problem is that `PureComponent` will do a simple comparison between the old and new values of `this.props.words`. Since this code mutates the `words` array in the `handleClick` method of `WordAdder`, the old and new values of `this.props.words` will compare as equal, even though the actual words in the array have changed. The `ListOfWords` will thus not update even though it has new words that should be rendered.
+问题是 `PureComponent` 只会在 `this.props.words` 的新旧值之间做一个简单的比较。由于代码中 `WordAdder` 的 `handleClick` 方法会改变 `words` 数组，尽管数组中实际的单词已经改变了，但 `this.props.words` 的新旧值也会相等。因此，即便 `ListOfWords` 有需要被更新的新单词，它也不会更新。
 
-## The Power Of Not Mutating Data
+## 不变数据的力量
 
-The simplest way to avoid this problem is to avoid mutating values that you are using as props or state. For example, the `handleClick` method above could be rewritten using `concat` as:
+避免这个问题最简单的方式是避免可变值作为 props 或者 state 来使用。例如，上面的 `handleClick` 方法可以使用 `concat` 来重写：
 
 ```javascript
 handleClick() {
@@ -345,7 +345,7 @@ handleClick() {
 }
 ```
 
-ES6 supports a [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) for arrays which can make this easier. If you're using Create React App, this syntax is available by default.
+ES6 支持的数组[拓展语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)可以简单实现。如果你正在使用 Create React App，那这个语法是默认可用的。
 
 ```js
 handleClick() {
@@ -355,7 +355,7 @@ handleClick() {
 };
 ```
 
-You can also rewrite code that mutates objects to avoid mutation, in a similar way. For example, let's say we have an object named `colormap` and we want to write a function that changes `colormap.right` to be `'blue'`. We could write:
+你也可以用类似的方式重写来避免可变对象的变化。例如，假设你有一个叫做 `colormap` 的对象，我们想写一个函数来让 `colormap.right` 变成 `'blue'`。我们可以这样写：
 
 ```js
 function updateColorMap(colormap) {
@@ -363,7 +363,7 @@ function updateColorMap(colormap) {
 }
 ```
 
-To write this without mutating the original object, we can use [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) method:
+为了不改变原始对象，我们可以使用 [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) 方法：
 
 ```js
 function updateColorMap(colormap) {
@@ -371,9 +371,9 @@ function updateColorMap(colormap) {
 }
 ```
 
-`updateColorMap` now returns a new object, rather than mutating the old one. `Object.assign` is in ES6 and requires a polyfill.
+`updateColorMap` 现在返回了一个新的对象，而不是改变原始对象。`Object.assign` 是 ES6 语法，需要 polyfill。
 
-There is a JavaScript proposal to add [object spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread) to make it easier to update objects without mutation as well:
+还有一种更简单的更新对象，而不改变原始对象的方法就是使用[对象拓展属性](https://github.com/sebmarkbage/ecmascript-rest-spread)，它是一个 JavaScript 提议：
 
 ```js
 function updateColorMap(colormap) {
@@ -381,15 +381,15 @@ function updateColorMap(colormap) {
 }
 ```
 
-If you're using Create React App, both `Object.assign` and the object spread syntax are available by default.
+如果你正在使用 Create React App，`Object.assign` 和对象拓展语法都是默认可用的。
 
-## Using Immutable Data Structures
+## 使用不可变的数据结构
 
-[Immutable.js](https://github.com/facebook/immutable-js) is another way to solve this problem. It provides immutable, persistent collections that work via structural sharing:
+[Immutable.js](https://github.com/facebook/immutable-js) 是解决这个问题的另一种方式。它通过结构共享来提供不可变的，持久的集合：
 
-* *Immutable*: once created, a collection cannot be altered at another point in time.
-* *Persistent*: new collections can be created from a previous collection and a mutation such as set. The original collection is still valid after the new collection is created.
-* *Structural Sharing*: new collections are created using as much of the same structure as the original collection as possible, reducing copying to a minimum to improve performance.
+* **不可变**: 一旦创建，集合就不能在另一个时间点改变。
+* **持久化**: new collections can be created from a previous collection and a mutation such as set. The original collection is still valid after the new collection is created.
+* **结构共享**: new collections are created using as much of the same structure as the original collection as possible, reducing copying to a minimum to improve performance.
 
 Immutability makes tracking changes cheap. A change will always result in a new object so we only need to check if the reference to the object has changed. For example, in this regular JavaScript code:
 
