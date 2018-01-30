@@ -133,7 +133,7 @@ function HelloWorld() {
 
 ### 在运行时选择类型
 
-You cannot use a general expression as the React element type. If you do want to use a general expression to indicate the type of the element, just assign it to a capitalized variable first. This often comes up when you want to render a different component based on a prop:
+你不能使用通用表达式来作为 React 元素类型。如果你确实想使用通用表达式来指明元素的类型，只需首先将它赋值给首字母大写的变量。这在你想根据 prop 渲染不同的组件时很常见。
 
 ```js{10,11}
 import React from 'react';
@@ -145,12 +145,12 @@ const components = {
 };
 
 function Story(props) {
-  // Wrong! JSX type can't be an expression.
+  // 错误！元素类型不能是一个表达式。
   return <components[props.storyType] story={props.story} />;
 }
 ```
 
-To fix this, we will assign the type to a capitalized variable first:
+要解决这个问题，我们首先需要将其赋值给首字母大写的变量：
 
 ```js{10-12}
 import React from 'react';
@@ -162,7 +162,7 @@ const components = {
 };
 
 function Story(props) {
-  // Correct! JSX type can be a capitalized variable.
+  // 正确！元素类型可以是一个首字母大写的变量。
   const SpecificStory = components[props.storyType];
   return <SpecificStory story={props.story} />;
 }
@@ -170,19 +170,19 @@ function Story(props) {
 
 ## JSX 中的 Props
 
-There are several different ways to specify props in JSX.
+在 JSX 中有几种不同的方式来指定 prop。
 
 ### JavaScript Expressions as Props
 
-You can pass any JavaScript expression as a prop, by surrounding it with `{}`. For example, in this JSX:
+你可以传递通过 `{}` 包裹的 JavaScript 表达式来作为 prop。例如下面的 JSX：
 
 ```js
 <MyComponent foo={1 + 2 + 3 + 4} />
 ```
 
-For `MyComponent`, the value of `props.foo` will be `10` because the expression `1 + 2 + 3 + 4` gets evaluated.
+对于 `MyComponent`，由于表达式 `1 + 2 + 3 + 4` 的求值，所以 `props.foo` 的值会是 `10`。
 
-`if` statements and `for` loops are not expressions in JavaScript, so they can't be used in JSX directly. Instead, you can put these in the surrounding code. For example:
+`if` 语句和 `for` 循环不是 JavaScript 表达式，所以它们不能在 JSX 中直接使用。你可以把它们放在周围的代码中。例如：
 
 ```js{3-7}
 function NumberDescriber(props) {
@@ -196,11 +196,11 @@ function NumberDescriber(props) {
 }
 ```
 
-You can learn more about [conditional rendering](/docs/conditional-rendering.html) and [loops](/docs/lists-and-keys.html) in the corresponding sections.
+你可在相应的章节中了解到关于[条件渲染](/docs/conditional-rendering.html)和[循环](/docs/lists-and-keys.html)的更多信息。
 
-### String Literals
+### 字符串字面量
 
-You can pass a string literal as a prop. These two JSX expressions are equivalent:
+你可以传递字符串字面量来作为属性。下面的两个 JSX 表达式是相同的：
 
 ```js
 <MyComponent message="hello world" />
@@ -208,7 +208,7 @@ You can pass a string literal as a prop. These two JSX expressions are equivalen
 <MyComponent message={'hello world'} />
 ```
 
-When you pass a string literal, its value is HTML-unescaped. So these two JSX expressions are equivalent:
+当你传递字符串字面量时，它不会被 HTML 转义。所以下面两个 JSX 表达式是相同的：
 
 ```js
 <MyComponent message="&lt;3" />
@@ -216,11 +216,11 @@ When you pass a string literal, its value is HTML-unescaped. So these two JSX ex
 <MyComponent message={'<3'} />
 ```
 
-This behavior is usually not relevant. It's only mentioned here for completeness.
+这种行为通常都不相关。这里提到是为了完整性。
 
-### Props Default to "True"
+### Props 默认为 `true`
 
-If you pass no value for a prop, it defaults to `true`. These two JSX expressions are equivalent:
+如果 prop 没有传值，那它的值默认是 `true`。下面两个 JSX 表达式是相同的：
 
 ```js
 <MyTextBox autocomplete />
@@ -228,11 +228,11 @@ If you pass no value for a prop, it defaults to `true`. These two JSX expression
 <MyTextBox autocomplete={true} />
 ```
 
-In general, we don't recommend using this because it can be confused with the [ES6 object shorthand](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015) `{foo}` which is short for `{foo: foo}` rather than `{foo: true}`. This behavior is just there so that it matches the behavior of HTML.
+一般情况下，我们不推荐这么使用，因为这会和 [ES6 的对象简写](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015)混淆，比如 `{foo}` 是 `{foo: foo}` 的简写，而不是 `{foo: true}`。这种行为只是为匹配 HTML 的行为。
 
-### Spread Attributes
+### 属性拓展
 
-If you already have `props` as an object, and you want to pass it in JSX, you can use `...` as a "spread" operator to pass the whole props object. These two components are equivalent:
+如果你已经有了一个 `props` 对象，并且想在 JSX 中传递它，你可以使用 `...` 作为“拓展”操作符来传递整个 props 对象。下面这两个组件是相同的：
 
 ```js{7}
 function App1() {
@@ -245,7 +245,7 @@ function App2() {
 }
 ```
 
-You can also pick specific props that your component will consume while passing all other props using the spread operator.
+你也可以选择组件会消费的确切 props，同时使用拓展操作符来传递所有其他的 props。
 
 ```js{2}
 const Button = props => {
@@ -265,10 +265,10 @@ const App = () => {
 };
 ```
 
-In the example above, the `kind` prop is safely consumed and *is not* passed on to the `<button>` element in the DOM.
-All other props are passed via the `...other` object making this component really flexible. You can see that it passes an `onClick` and `children` props.
+在上面的例子中，`kind` prop 被安全的消费了，并且**不会**传递给 DOM 中的 `<button>` 元素。
+所有其他的 props 都通过 `...other` 对象传递，这使得这个组件非常灵活。你可以看到它传递了 `onClick` 和 `children` props。
 
-Spread attributes can be useful but they also make it easy to pass unnecessary props to components that don't care about them or to pass invalid HTML attributes to the DOM. We recommend using this syntax sparingly.  
+属性拓展很有用，但它们也会很容易地向组件传递不必要的 props，或者向 DOM 传递无效的 HTML 属性。我们建议少用这个语法。
 
 ## Children in JSX
 
