@@ -270,19 +270,19 @@ const App = () => {
 
 属性拓展很有用，但它们也会很容易地向组件传递不必要的 props，或者向 DOM 传递无效的 HTML 属性。我们建议少用这个语法。
 
-## Children in JSX
+## JSX 子节点
 
-In JSX expressions that contain both an opening tag and a closing tag, the content between those tags is passed as a special prop: `props.children`. There are several different ways to pass children:
+在同时包含了开始标签和结束标签的 JSX 表达式中，这些标签中间的内容被作为特殊的 prop 传递：`props.children`。有几种不同的方式来传递子节点：
 
-### String Literals
+### 字符串字面量
 
-You can put a string between the opening and closing tags and `props.children` will just be that string. This is useful for many of the built-in HTML elements. For example:
+你可以在开始和结束标签中放置字符串，`props.children` 就是那个字符串。这对很多内置的 HTML 元素很有用。例如：
 
 ```js
 <MyComponent>Hello world!</MyComponent>
 ```
 
-This is valid JSX, and `props.children` in `MyComponent` will simply be the string `"Hello world!"`. HTML is unescaped, so you can generally write JSX just like you would write HTML in this way:
+这是一个有效的 JSX，在 `MyComponent` 中的 `props.children` 是字符串 `"Hello world!"`。HTML 没有转义，所以你可以像写 HTML 一样来写 JSX。
 
 ```html
 <div>This is valid HTML &amp; JSX at the same time.</div>
