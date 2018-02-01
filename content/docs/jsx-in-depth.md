@@ -198,9 +198,9 @@ function NumberDescriber(props) {
 
 你可在相应的章节中了解到关于[条件渲染](/docs/conditional-rendering.html)和[循环](/docs/lists-and-keys.html)的更多信息。
 
-### 字符串字面量
+### 字符串文字
 
-你可以传递字符串字面量来作为属性。下面的两个 JSX 表达式是相同的：
+你可以传递字符串文字来作为属性。下面的两个 JSX 表达式是相同的：
 
 ```js
 <MyComponent message="hello world" />
@@ -208,7 +208,7 @@ function NumberDescriber(props) {
 <MyComponent message={'hello world'} />
 ```
 
-当你传递字符串字面量时，它不会被 HTML 转义。所以下面两个 JSX 表达式是相同的：
+当你传递字符串文字时，它不会被 HTML 转义。所以下面两个 JSX 表达式是相同的：
 
 ```js
 <MyComponent message="&lt;3" />
@@ -274,7 +274,7 @@ const App = () => {
 
 在同时包含了开始标签和结束标签的 JSX 表达式中，这些标签中间的内容被作为特殊的 prop 传递：`props.children`。有几种不同的方式来传递子节点：
 
-### 字符串字面量
+### 字符串文字
 
 你可以在开始和结束标签中放置字符串，`props.children` 就是那个字符串。这对很多内置的 HTML 元素很有用。例如：
 
@@ -288,7 +288,7 @@ const App = () => {
 <div>This is valid HTML &amp; JSX at the same time.</div>
 ```
 
-JSX removes whitespace at the beginning and ending of a line. It also removes blank lines. New lines adjacent to tags are removed; new lines that occur in the middle of string literals are condensed into a single space. So these all render to the same thing:
+JSX 会删除行首和行尾的空格、空行、标签临近的新行，字符串文字中间的新行会被压缩成一个空格。所以下面所渲染的结果是一样的：
 
 ```js
 <div>Hello World</div>
@@ -308,9 +308,9 @@ JSX removes whitespace at the beginning and ending of a line. It also removes bl
 </div>
 ```
 
-### JSX Children
+### JSX 子节点
 
-You can provide more JSX elements as the children. This is useful for displaying nested components:
+你可以提供更多的 JSX 元素作为子节点。这在显示嵌套组件时很有用：
 
 ```js
 <MyContainer>
@@ -319,7 +319,7 @@ You can provide more JSX elements as the children. This is useful for displaying
 </MyContainer>
 ```
 
-You can mix together different types of children, so you can use string literals together with JSX children. This is another way in which JSX is like HTML, so that this is both valid JSX and valid HTML:
+你可以混合不同类型的子节点，因此字符串文字和 JSX 子节点可以搭配一起使用。这是 JSX 像 HTML 的另一种形式，所以下面是有效的 JSX 和 HTML：
 
 ```html
 <div>
@@ -331,13 +331,13 @@ You can mix together different types of children, so you can use string literals
 </div>
 ```
 
-A React component can also return an array of elements:
+React 组件也可以返回一个元素数组：
 
 ```js
 render() {
-  // No need to wrap list items in an extra element!
+  // 不需要额外的元素来包裹列表项！
   return [
-    // Don't forget the keys :)
+    // 不要忘记了 keys :)
     <li key="A">First item</li>,
     <li key="B">Second item</li>,
     <li key="C">Third item</li>,
@@ -345,9 +345,9 @@ render() {
 }
 ```
 
-### JavaScript Expressions as Children
+### JavaScript 表达式作为子节点
 
-You can pass any JavaScript expression as children, by enclosing it within `{}`. For example, these expressions are equivalent:
+你可以将任何 JavaScript 表达式包裹在 `{}` 中来作为子节点。例如，下面的表达式是相同的：
 
 ```js
 <MyComponent>foo</MyComponent>
@@ -355,7 +355,7 @@ You can pass any JavaScript expression as children, by enclosing it within `{}`.
 <MyComponent>{'foo'}</MyComponent>
 ```
 
-This is often useful for rendering a list of JSX expressions of arbitrary length. For example, this renders an HTML list:
+这通常用于渲染任意长度的 JSX 表达式列表。例如下面渲染一个 HTML 列表：
 
 ```js{2,9}
 function Item(props) {
@@ -372,7 +372,7 @@ function TodoList() {
 }
 ```
 
-JavaScript expressions can be mixed with other types of children. This is often useful in lieu of string templates:
+JavaScript 表达式可以混合其他类型的子节点。这通常用于字符串模板：
 
 ```js{2}
 function Hello(props) {
@@ -380,7 +380,7 @@ function Hello(props) {
 }
 ```
 
-### Functions as Children
+### 函数作为子节点
 
 Normally, JavaScript expressions inserted in JSX will evaluate to a string, a React element, or a list of those things. However, `props.children` works just like any other prop in that it can pass any sort of data, not just the sorts that React knows how to render. For example, if you have a custom component, you could have it take a callback as `props.children`:
 
@@ -405,7 +405,7 @@ function ListOfTenThings() {
 
 Children passed to a custom component can be anything, as long as that component transforms them into something React can understand before rendering. This usage is not common, but it works if you want to stretch what JSX is capable of.
 
-### Booleans, Null, and Undefined Are Ignored
+### 布尔值、Null 和 Undefined 会被忽略
 
 `false`, `null`, `undefined`, and `true` are valid children. They simply don't render. These JSX expressions will all render to the same thing:
 
