@@ -382,10 +382,10 @@ function Hello(props) {
 
 ### 函数作为子节点
 
-Normally, JavaScript expressions inserted in JSX will evaluate to a string, a React element, or a list of those things. However, `props.children` works just like any other prop in that it can pass any sort of data, not just the sorts that React knows how to render. For example, if you have a custom component, you could have it take a callback as `props.children`:
+通常情况下，插入到 JavaScript 表达式会当作字符串、React 元素或者它们的集合。然而，`props.children` 工作起来就像和其他 prop 一样，可以传递任何数据，而不仅仅是 React 知道如何渲染的元素。例如，你有一个自定义组件，你可以把它作为 `props.children` 的回调：
 
 ```js{4,13}
-// Calls the children callback numTimes to produce a repeated component
+// 调用子节点的回调 numTimes 来生成一个重复的组件
 function Repeat(props) {
   let items = [];
   for (let i = 0; i < props.numTimes; i++) {
@@ -403,11 +403,11 @@ function ListOfTenThings() {
 }
 ```
 
-Children passed to a custom component can be anything, as long as that component transforms them into something React can understand before rendering. This usage is not common, but it works if you want to stretch what JSX is capable of.
+传递给自定义组件的子节点可以是任何元素，只要这个组件在它们被渲染前转换成 React 可以理解的东西。这种用法不常见，但如果你想拓展 JSX 的功能，那这就能工作。
 
 ### 布尔值、Null 和 Undefined 会被忽略
 
-`false`, `null`, `undefined`, and `true` are valid children. They simply don't render. These JSX expressions will all render to the same thing:
+`false`、`null`、`undefined`、和 `true` 都是有效的子节点。它们不会被渲染。下面的 JSX 表达式都会渲染一样的东西：
 
 ```js
 <div />
@@ -423,7 +423,7 @@ Children passed to a custom component can be anything, as long as that component
 <div>{true}</div>
 ```
 
-This can be useful to conditionally render React elements. This JSX only renders a `<Header />` if `showHeader` is `true`:
+这在条件渲染 React 元素时很有用。下面的 JSX 只会在 `showHeader` 是 `true` 时才会渲染 `<Header />`：
 
 ```js{2}
 <div>
@@ -432,7 +432,7 @@ This can be useful to conditionally render React elements. This JSX only renders
 </div>
 ```
 
-One caveat is that some ["falsy" values](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), such as the `0` number, are still rendered by React. For example, this code will not behave as you might expect because `0` will be printed when `props.messages` is an empty array:
+需要注意的是，一些[“falsy”的值](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)，比如数字 `0`，它们仍然会被 React 渲染。例如，下面的代码可能不会如你预期工作，因为当 `props.messages` 是一个空数组时 `0` 会被渲染： 
 
 ```js{2}
 <div>
@@ -442,7 +442,7 @@ One caveat is that some ["falsy" values](https://developer.mozilla.org/en-US/doc
 </div>
 ```
 
-To fix this, make sure that the expression before `&&` is always boolean:
+要解决这个问题，请确保在 `&&` 之前的表达式始终为布尔值：
 
 ```js{2}
 <div>
@@ -452,7 +452,7 @@ To fix this, make sure that the expression before `&&` is always boolean:
 </div>
 ```
 
-Conversely, if you want a value like `false`, `true`, `null`, or `undefined` to appear in the output, you have to [convert it to a string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion) first:
+相反，如果你想输出像 `false`、`true`、`null` 或者 `undefined` 这样的值，你需要先将它[转换成字符串](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion)：
 
 ```js{2}
 <div>
