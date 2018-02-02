@@ -22,7 +22,7 @@
     - [ ] Composition vs Inheritance
     - [ ] Thinking In React
   - ADVANCED GUIDES
-    - [ ] [JSX In Depth](/content/docs/jsx-in-depth.md)
+    - [x] [JSX In Depth](/content/docs/jsx-in-depth.md)
     - [ ] Typechecking With PropTypes
     - [ ] Static Type Checking
     - [ ] Refs and the DOM
@@ -39,5 +39,5 @@
     - [x] [Higher-Order Components](/content/docs/higher-order-components.md)
     - [ ] Render Props
     - [ ] Integrating with Other Libraries
-    - [ ] Accessibility
+    - [ ] [Accessibility](/content/docs/accessibility.md)
     - [x] [Code-Splitting](/content/docs/code-splitting.md)
