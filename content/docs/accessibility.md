@@ -1,26 +1,26 @@
 ---
 id: accessibility
-title: Accessibility
+title: 可访问性
 permalink: docs/accessibility.html
 ---
 
-## Why Accessibility?
+## 什么是可访问性
 
-Web accessibility (also referred to as [**a11y**](https://en.wiktionary.org/wiki/a11y)) is the design and creation of websites that can be used by everyone. Accessibility support is necessary to allow assistive technology to interpret web pages.
+Web 可访问性（也被称为 [**a11y**](https://en.wiktionary.org/wiki/a11y)）指的是设计和创建可以被每个人使用的网站。可访问性支持是必要的，让辅助技术来解释网页。
 
-React fully supports building accessible websites, often by using standard HTML techniques.
+React 完全支持创建可访问性网站，通常使用标准的 HTML 技术。
 
-## Standards and Guidelines
+## 标准和指南
 
 ### WCAG
 
-The [Web Content Accessibility Guidelines](https://www.w3.org/WAI/intro/wcag) provides guidelines for creating accessible web sites.
+[网络内容可访问性指南](https://www.w3.org/WAI/intro/wcag)为创建可访问性站点提供了指导。
 
-The following WCAG checklists provide an overview:
+下面的 WCAG 列表提供了一个概览：
 
-- [WCAG checklist from Wuhcag](https://www.wuhcag.com/wcag-checklist/)
-- [WCAG checklist from WebAIM](http://webaim.org/standards/wcag/checklist)
-- [Checklist from The A11Y Project](http://a11yproject.com/checklist.html)
+- [Wuhcag 的 WCAG 列表](https://www.wuhcag.com/wcag-checklist/)
+- [WebAIM 的 WCAG 列表](http://webaim.org/standards/wcag/checklist)
+- [A11Y 项目的列表](http://a11yproject.com/checklist.html)
 
 ### WAI-ARIA
 
