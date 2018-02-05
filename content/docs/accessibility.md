@@ -23,10 +23,9 @@ React 完全支持创建可访问性网站，通常使用标准的 HTML 技术�
 - [A11Y 项目的列表](http://a11yproject.com/checklist.html)
 
 ### WAI-ARIA
+[Web Accessibility Initiative - Accessible Rich Internet Applications](https://www.w3.org/WAI/intro/aria)文档包含了构建完全可访问的 JavaScript 部件的技术
 
-The [Web Accessibility Initiative - Accessible Rich Internet Applications](https://www.w3.org/WAI/intro/aria) document contains techniques for building fully accessible JavaScript widgets.
-
-Note that all `aria-*` HTML attributes are fully supported in JSX. Whereas most DOM properties and attributes in React are camelCased, these attributes should be lowercased:
+需要注意的是，JSX 完全支持所有的 `aria-*` HTML 属性。尽管 React 中大多数的 DOM 属性都是小驼峰命名的，但是这些属性应该是小写的：
 
 ```javascript{3,4}
 <input
@@ -39,17 +38,15 @@ Note that all `aria-*` HTML attributes are fully supported in JSX. Whereas most 
 />
 ```
 
-## Semantic HTML
-Semantic HTML is the foundation of accessibility in a web application. Using the various HTML elements to reinforce the meaning of information
-in our websites will often give us accessibility for free.
+## 语义化 HTML
+语义化 HTML 是 Web 应用程序可访问性的基础。使用各种 HTML 元素来加强网站信息的含义，通常会使得网站易于访问。
 
-- [MDN HTML elements reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+- [MDN 上的 HTML 元素参考](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
-Sometimes we break HTML semantics when we add `<div>` elements to our JSX to make our React code work, especially when working with lists (`<ol>`, `<ul>` and `<dl>`) and the HTML `<table>`.
-In these cases we should rather use React Fragments to group together multiple elements.
+为了让 React 代码正常工作，我们有时会打破 HTML 语义化，在 JSX 中添加 `<div>` 元素，特别是在使用列表（`<ol>`、`<ul>` 和 `<dl>`）以及 HTML `<table>` 的时候。在这些情况下，我们应该使用 React Fragments 来将多个元素组合在一起。
 
-Use `<Fragment>` when a `key` prop is required:
- 
+当需要 `key` prop 时，使用 `<Fragment>`：
+
 ```javascript{1,8,11}
 import React, { Fragment } from 'react';
 
@@ -57,7 +54,7 @@ function Glossary(props) {
   return (
     <dl>
       {props.items.map(item => (
-        // Without the `key`, React will fire a key warning
+        // 没有 `key` 会触发 React 的 key 警告
         <Fragment key={item.id}>
           <dt>{item.term}</dt>
           <dd>{item.description}</dd>
@@ -68,7 +65,7 @@ function Glossary(props) {
 }
 ```
 
-Use `<></>` syntax everywhere else:
+也可以在任何地方使用 `<></>`：
 
 ```javascript
 function ListItem({ item }) {
