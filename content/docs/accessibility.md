@@ -78,38 +78,38 @@ function ListItem({ item }) {
 }
 ``` 
 
-## Accessible Forms
+## 可访问表单
 
-### Labeling
-Every HTML form control, such as `<input>` and `<textarea>`, needs to be labeled accessibly. We need to provide descriptive labels that are also exposed to screen readers.
+### 标签
+每个 HTML 表单控件，例如 `<input>` 和 `<textarea>`，都需要打上可访问标签。我们需要提供描述性标签展示给屏幕阅读器。
 
-The following resources show us how to do this:
+下列资源向我们展示了如何去做：
 
-- [The W3C shows us how to label elements](https://www.w3.org/WAI/tutorials/forms/labels/)
-- [WebAIM shows us how to label elements](http://webaim.org/techniques/forms/controls)
-- [The Paciello Group explains accessible names](https://www.paciellogroup.com/blog/2017/04/what-is-an-accessible-name/)
+- [W3C 如何标记元素的说明](https://www.w3.org/WAI/tutorials/forms/labels/)
+- [WebAIM 如何标记元素的说明](http://webaim.org/techniques/forms/controls)
+- [Paciello 小组阐述的可访问性名称](https://www.paciellogroup.com/blog/2017/04/what-is-an-accessible-name/)
 
-Although these standard HTML practices can be directly used in React, note that the `for` attribute is written as `htmlFor` in JSX:
+虽然这些标准的 HTML 实践可以直接在 React 中使用，需要注意的是，在 JSX 中，`for` 属性被写作 `htmlFor`:
 
 ```javascript{1}
 <label htmlFor="namedInput">Name:</label>
 <input id="namedInput" type="text" name="name"/>
 ```
 
-### Notifying the user of errors
+### 告知用户异常
 
 Error situations need to be understood by all users. The following link shows us how to expose error texts to screen readers as well:
 
 - [The W3C demonstrates user notifications](https://www.w3.org/WAI/tutorials/forms/notifications/)
 - [WebAIM looks at form validation](http://webaim.org/techniques/formvalidation/)
 
-## Focus Control
+## 焦点控件
 
 Ensure that your web application can be fully operated with the keyboard only: 
 
 - [WebAIM talks about keyboard accessibility](http://webaim.org/techniques/keyboard/)
 
-### Keyboard focus and focus outline
+### 键盘聚焦和焦点边框
 
 Keyboard focus refers to the current element in the DOM that is selected to accept input from the keyboard. We see it everywhere as a focus outline similar to that shown in the following image:
 
