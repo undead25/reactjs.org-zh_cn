@@ -31,7 +31,7 @@ class Greeting extends React.Component {
 }
 ```
 
-If you don't use ES6 yet, you may use the [`create-react-class`](/docs/react-api.html#createclass) module instead. Take a look at [Using React without ES6](/docs/react-without-es6.html) to learn more.
+If you don't use ES6 yet, you may use the `create-react-class` module instead. Take a look at [Using React without ES6](/docs/react-without-es6.html) to learn more.
 
 Note that **we don't recommend creating your own base component classes**. Code reuse is primarily achieved through composition rather than inheritance in React. Take a look at [these common scenarios](/docs/composition-vs-inheritance.html) to get a feel for how to use composition.
 
@@ -216,7 +216,7 @@ componentWillReceiveProps(nextProps)
 
 `componentWillReceiveProps()` is invoked before a mounted component receives new props. If you need to update the state in response to prop changes (for example, to reset it), you may compare `this.props` and `nextProps` and perform state transitions using `this.setState()` in this method.
 
-Note that React may call this method even if the props have not changed, so make sure to compare the current and next values if you only want to handle changes. This may occur when the parent component causes your component to re-render.
+Note that React will call this method even if the props have not changed, so make sure to compare the current and next values if you only want to handle changes. This may occur when the parent component causes your component to re-render.
 
 React doesn't call `componentWillReceiveProps()` with initial props during [mounting](#mounting). It only calls this method if some of component's props may update. Calling `this.setState()` generally doesn't trigger `componentWillReceiveProps()`.
 
@@ -367,7 +367,11 @@ this.setState((prevState) => {
 });
 ```
 
-For more detail, see the [State and Lifecycle guide](/docs/state-and-lifecycle.html).
+For more detail, see:
+
+* [State and Lifecycle guide](/docs/state-and-lifecycle.html)
+* [In depth: When and why are `setState()` calls batched?](https://stackoverflow.com/a/48610973/458193)
+* [In depth: Why isn't `this.state` updated immediately?](https://github.com/facebook/react/issues/11527#issuecomment-360199710)
 
 * * *
 
