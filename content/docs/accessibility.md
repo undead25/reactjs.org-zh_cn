@@ -98,44 +98,42 @@ function ListItem({ item }) {
 
 ### 告知用户异常
 
-Error situations need to be understood by all users. The following link shows us how to expose error texts to screen readers as well:
+异常情况需要被所有用户理解。下面的链接向我们展示了如何将错误文本展示给屏幕阅读器：
 
-- [The W3C demonstrates user notifications](https://www.w3.org/WAI/tutorials/forms/notifications/)
-- [WebAIM looks at form validation](http://webaim.org/techniques/formvalidation/)
+- [W3C 演示用户通知](https://www.w3.org/WAI/tutorials/forms/notifications/)
+- [WebAIM 检查表单验证](http://webaim.org/techniques/formvalidation/)
 
 ## 焦点控件
 
-Ensure that your web application can be fully operated with the keyboard only: 
+确保你的应用完全可以仅通过键盘进行操作：
 
-- [WebAIM talks about keyboard accessibility](http://webaim.org/techniques/keyboard/)
+- [WebAIM 谈论键盘可访问性](http://webaim.org/techniques/keyboard/)
 
 ### 键盘聚焦和焦点边框
 
-Keyboard focus refers to the current element in the DOM that is selected to accept input from the keyboard. We see it everywhere as a focus outline similar to that shown in the following image:
+键盘聚焦指的是 DOM 中键盘选中，用于接受输入的当前元素。类似下面图片中的焦点边框，键盘聚焦到处可见：
 
 <img src="../images/docs/keyboard-focus.png" alt="Blue keyboard focus outline around a selected link." />
 
-Only ever use CSS that removes this outline, for example by setting `outline: 0`, if you are replacing it with another focus outline implementation.
+如果你想用其他焦点边框，只能用 CSS 移除这个边框，例如设置 `outline: 0`。
 
-### Mechanisms to skip to desired content
+### 跳转到期望内容的机制
 
-Provide a mechanism to allow users to skip past navigation sections in your application as this assists and speeds up keyboard navigation.
+提供一个机制来让用户跳过应用中之前的导航部分，因为这有助于加速键盘导航。
 
-Skiplinks or Skip Navigation Links are hidden navigation links that only become visible when keyboard users interact with the page. They are very easy to implement with 
-internal page anchors and some styling:
+Skiplinks 或者 Skip Navigation Links 隐藏在导航链接中，只有当用户用键盘与页面进行交互时可见。他们可以很容易地通过页面内部锚点和一些样式来实现：
 
 - [WebAIM - Skip Navigation Links](http://webaim.org/techniques/skipnav/)
 
-Also use landmark elements and roles, such as `<main>` and `<aside>`, to demarcate page regions as assistive technology allow the user to quickly navigate to these sections.
+同样，使用标记元素和角色来划分页面区域，例如 `<main>` 和 `<aside>`，因为辅助技术允许用户快速导航到这些部分。
 
-Read more about the use of these elements to enhance accessibility here:
+阅读更多关于使用这些元素来增强可访问性的信息：
 
-- [Deque University - HTML 5 and ARIA Landmarks](https://dequeuniversity.com/assets/html/jquery-summit/html5/slides/landmarks.html)
+- [Deque 大学 —— HTML 5 和 ARIA 标记](https://dequeuniversity.com/assets/html/jquery-summit/html5/slides/landmarks.html)
 
-### Programmatically managing focus
+### 编程式焦点管理
 
-Our React applications continuously modify the HTML DOM during runtime, sometimes leading to keyboard focus being lost or set to an unexpected element. In order to repair this, 
-we need to programmatically nudge the keyboard focus in the right direction. For example, by resetting keyboard focus to a button that opened a modal window after that modal window is closed.
+Our React applications continuously modify the HTML DOM during runtime, sometimes leading to keyboard focus being lost or set to an unexpected element. In order to repair this, we need to programmatically nudge the keyboard focus in the right direction. For example, by resetting keyboard focus to a button that opened a modal window after that modal window is closed.
 
 The Mozilla Developer Network takes a look at this and describes how we can build [keyboard-navigable JavaScript widgets](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets).
 
