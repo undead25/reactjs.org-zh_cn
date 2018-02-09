@@ -133,18 +133,17 @@ Skiplinks 或者 Skip Navigation Links 隐藏在导航链接中，只有当用�
 
 ### 编程式焦点管理
 
-Our React applications continuously modify the HTML DOM during runtime, sometimes leading to keyboard focus being lost or set to an unexpected element. In order to repair this, we need to programmatically nudge the keyboard focus in the right direction. For example, by resetting keyboard focus to a button that opened a modal window after that modal window is closed.
+我们的 React 应用会在运行时持续修改 HTML DOM，有时会导致键盘焦点丢失或者聚焦到了未知的元素上。为了修复这个问题，我们需要编程式微调键盘焦点到正确的方向。例如，在模态框窗口关闭后，重设键盘焦点到打开它的按钮上。
 
-The Mozilla Developer Network takes a look at this and describes how we can build [keyboard-navigable JavaScript widgets](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets).
+MDN 研究和描述了如何建立 [JavaScript 键盘导航部件](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets)。
 
-To set focus in React, we can use [Refs to DOM elements](refs-and-the-dom.html).
+在 React 中设置焦点，我们可以使用 [DOM 元素的 ref](refs-and-the-dom.html)。
 
-Using this, we first create a ref to an element in the JSX of a component class:
+我们首先在类组件的 JSX 中为某个元素指定一个 ref：
 
-```javascript{2-3,7}
+```javascript{2,6}
 render() {
-  // Use the `ref` callback to store a reference to the text input DOM
-  // element in an instance field (for example, this.textInput).
+  // 使用 `ref` 回调在实例字段（例如，this.textInput）中存储对文本输入 DOM 元素的引用。
   return (
     <input
       type="text"
@@ -153,34 +152,32 @@ render() {
 }
 ```
 
-Then we can focus it elsewhere in our component when needed:
+然后，我们可以在需要时在组件的某个地方聚焦它：
 
  ```javascript
  focus() {
-   // Explicitly focus the text input using the raw DOM API
+   // 使用原始 DOM API 聚焦文本输入
    this.textInput.focus();
  }
  ```
  
-Sometimes a parent component needs to set focus to an element in a child component. Although we can create [refs to class components](refs-and-the-dom.html#adding-a-ref-to-a-class-component), 
-we need a pattern that also works with functional components and when [using refs with HOCs](higher-order-components.html#refs-arent-passed-through). 
-To ensure that our parent component can always access the ref, we pass a callback as a prop to the child component to [expose the ref to the parent component](refs-and-the-dom.html#exposing-dom-refs-to-parent-components).
+有些时候，父组件需要设置焦点到子组件中的某个元素。尽管我们可以给[类组件创建 ref](refs-and-the-dom.html#adding-a-ref-to-a-class-component)，但在使用函数组件以及[通过高阶组件使用 ref](higher-order-components.html#refs-arent-passed-through)时，我们需要一个模式来让它工作。为了确保父组件总是可以访问 ref，我们需要给子组件传递一个回调 prop 来将子组件的 [ref 暴露给父组件](refs-and-the-dom.html#exposing-dom-refs-to-parent-components)。
 
 ```js
-// Expose the ref with a callback prop
+// 通过回调 prop 来暴露 ref
 function Field({ inputRef, ...rest }) {
   return <input ref={inputRef} {...rest} />;
 }
 
-// Inside a parent class component's render method...
+// 在父类组件的 render 函数中...
 <Field
   inputRef={(inputEl) => {
-    // This callback gets passed through as a regular prop
+    // 这个回调会作为普通 prop 传递
     this.inputEl = inputEl
   }}
 />
 
-// Now you can set focus when required.
+// 现在你可以根据回调设置焦点
 this.inputEl.focus();
 ```
 
@@ -193,7 +190,7 @@ initially triggered the modal.
 >While this is a very important accessibility feature, it is also a technique that should be used judiciously. Use it to repair the keyboard focus flow when it is disturbed, not to try and anticipate how
 >users want to use applications.
 
-## More Complex Widgets
+## 更为复杂的部件
 
 A more complex user experience should not mean a less accessible one. Whereas accessibility is most easily achieved by coding as close to HTML as possible,
 even the most complex widget can be coded accessibly.
