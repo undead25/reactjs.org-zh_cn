@@ -181,46 +181,42 @@ function Field({ inputRef, ...rest }) {
 this.inputEl.focus();
 ```
 
-A great focus management example is the [react-aria-modal](https://github.com/davidtheclark/react-aria-modal). This is a relatively rare example of a fully accessible modal window. Not only does it set initial focus on 
-the cancel button (preventing the keyboard user from accidentally activating the success action) and trap keyboard focus inside the modal, it also resets focus back to the element that 
-initially triggered the modal.
+一个比较不错的焦点管理示例是 [react-aria-modal](https://github.com/davidtheclark/react-aria-modal)。这是一个比较少见的完全可访问的模态框窗口的例子。它不仅仅给初始聚焦到了取消按钮（阻止用户意外地通过键盘触发成功操作）以及在模态框内部启用键盘聚焦，还重置焦点回到起初触发模态框的元素上。
 
->Note:
+> 注意：
 >
->While this is a very important accessibility feature, it is also a technique that should be used judiciously. Use it to repair the keyboard focus flow when it is disturbed, not to try and anticipate how
->users want to use applications.
+> 虽然这是一个很重要的可访问性功能，但它也是一个应该审慎使用的技术。在遇到中断时使用它来修复键盘焦点，而不是尝试和预测用户如何使用应用。
 
 ## 更为复杂的部件
 
-A more complex user experience should not mean a less accessible one. Whereas accessibility is most easily achieved by coding as close to HTML as possible,
-even the most complex widget can be coded accessibly.
+更复杂的用户体验并不意味着更少的可访问性。尽管通过尽可能地接近 HTML 编码来实现可访问性是最容易的，但是，即使最复杂的部件也可以进行可访问性编码。
 
-Here we require knowledge of [ARIA Roles](https://www.w3.org/TR/wai-aria/roles) as well as [ARIA States and Properties](https://www.w3.org/TR/wai-aria/states_and_properties). 
-These are toolboxes filled with HTML attributes that are fully supported in JSX and enable us to construct fully accessible, highly functional React components.
+在这里我们需要了解 [ARIA 角色](https://www.w3.org/TR/wai-aria/roles) 以及 [ARIA 状态和属性](https://www.w3.org/TR/wai-aria/states_and_properties)。这些工具箱涵盖了 JSX 完全支持的 HTML 属性，使得我们建立完全可访问、功能强大的 React 组件。
 
-Each type of widget has a specific design pattern and is expected to function in a certain way by users and user agents alike:
 
-- [WAI-ARIA Authoring Practices - Design Patterns and Widgets](https://www.w3.org/TR/wai-aria-practices/#aria_ex)
-- [Heydon Pickering - ARIA Examples](http://heydonworks.com/practical_aria_examples/)
-- [Inclusive Components](https://inclusive-components.design/)
+每一种部件都有一个特定的设计模式，并由用户和用户代理以某种方式运行：
 
-## Other Points for Consideration
+- [WAI-ARIA 开发实践 —— 设计模式和部件](https://www.w3.org/TR/wai-aria-practices/#aria_ex)
+- [Heydon Pickering —— ARIA 示例](http://heydonworks.com/practical_aria_examples/)
+- [包容性组件](https://inclusive-components.design/)
 
-### Setting the language
+## 其他要点
 
-Indicate the human language of page texts as screen reader software uses this to select the correct voice settings:
+### 设置语言
 
-- [WebAIM - Document Language](http://webaim.org/techniques/screenreader/#language)
+声明页面文字语言，因为屏幕阅读器软件使用它来选择正确的发音设置：
 
-### Setting the document title
+- [WebAIM —— 文档语言](http://webaim.org/techniques/screenreader/#language)
 
-Set the document `<title>` to correctly describe the current page content as this ensures that the user remains aware of the current page context:
+### 设置文档标题
 
-- [WCAG - Understanding the Document Title Requirement](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
+设置文档 `<title>` 来正确描述当前页面内容，因为这可以确保用户对当前页面的理解：
 
-We can set this in React using the [React Document Title Component](https://github.com/gaearon/react-document-title).
+- [WCAG —— 了解文档标题需求](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
 
-### Color contrast
+我们可以使用 [React 文档标题组件](https://github.com/gaearon/react-document-title)来进行设置。
+
+### 颜色对比
 
 Ensure that all readable text on your website has sufficient color contrast to remain maximally readable by users with low vision:
 
@@ -237,11 +233,11 @@ If you want to extend your contrast testing abilities you can use these tools:
 - [WebAIM - Color Contrast Checker](http://webaim.org/resources/contrastchecker/)
 - [The Paciello Group - Color Contrast Analyzer](https://www.paciellogroup.com/resources/contrastanalyser/)
 
-## Development and Testing Tools
+## 开发及测试工具
 
 There are a number of tools we can use to assist in the creation of accessible web applications.
 
-### The keyboard
+### 键盘
 
 By far the easiest and also one of the most important checks is to test if your entire website can be reached and used with the keyboard alone. Do this by:
 
@@ -250,7 +246,7 @@ By far the easiest and also one of the most important checks is to test if your 
 1. Using `Enter` to activate elements.
 1. Where required, using your keyboard arrow keys to interact with some elements, such as menus and dropdowns. 
 
-### Development assistance
+### 开发助手
 
 We can check some accessibility features directly in our JSX code. Often intellisense checks are already provided in JSX aware IDE's for the ARIA roles, states and properties. We also 
 have access to the following tool:
