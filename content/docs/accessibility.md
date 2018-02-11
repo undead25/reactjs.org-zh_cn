@@ -216,49 +216,45 @@ this.inputEl.focus();
 
 我们可以使用 [React 文档标题组件](https://github.com/gaearon/react-document-title)来进行设置。
 
-### 颜色对比
+### 颜色对比度
 
-Ensure that all readable text on your website has sufficient color contrast to remain maximally readable by users with low vision:
+确保网站上所有的可读文本都有足够的色彩对比度，以保障低视力用户的最大可读性：
 
-- [WCAG - Understanding the Color Contrast Requirement](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)
-- [Everything About Color Contrast And Why You Should Rethink It](https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/)
-- [A11yProject - What is Color Contrast](http://a11yproject.com/posts/what-is-color-contrast/)
+- [WCAG —— 了解颜色对比度需求](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)
+- [关于颜色对比度的以及为何需要重新审视它](https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/)
+- [A11yProject —— 什么是颜色对比度](http://a11yproject.com/posts/what-is-color-contrast/)
 
-It can be tedious to manually calculate the proper color combinations for all cases in your website so instead, you can [calculate an entire accessible color palette with Colorable](http://jxnblk.com/colorable/).
+手动计算网站中所有用例的适当颜色组合可能非常繁琐，因此你可以[使用 Colorable 来计算整个可访问的调色板](http://jxnblk.com/colorable/)。
 
-Both the aXe and WAVE tools mentioned below also include color contrast tests and will report on contrast errors.
+下面提到的 aXe 和 WAVE 工具都包含颜色对比度测试，以及报告对比度误差。
 
-If you want to extend your contrast testing abilities you can use these tools:
-
-- [WebAIM - Color Contrast Checker](http://webaim.org/resources/contrastchecker/)
-- [The Paciello Group - Color Contrast Analyzer](https://www.paciellogroup.com/resources/contrastanalyser/)
+如果你想扩展对比度测试功能，你可以使用这些工具：
+- [WebAIM —— 颜色对比度检查器](http://webaim.org/resources/contrastchecker/)
+- [Paciello 组织 —— 颜色对比度分析器](https://www.paciellogroup.com/resources/contrastanalyser/)
 
 ## 开发及测试工具
 
-There are a number of tools we can use to assist in the creation of accessible web applications.
+我们可以使用许多工具来协助创建可访问的 web 应用程序。
 
 ### 键盘
 
-By far the easiest and also one of the most important checks is to test if your entire website can be reached and used with the keyboard alone. Do this by:
+目前最简单也是最重要的检查是测试整个网站是否可以通过键盘使用。做法如下：
 
-1. Plugging out your mouse.
-1. Using `Tab` and `Shift+Tab` to browse.
-1. Using `Enter` to activate elements.
-1. Where required, using your keyboard arrow keys to interact with some elements, such as menus and dropdowns. 
+1. 拔掉你的鼠标。
+1. 使用 `Tab` 和 `Shift+Tab` 来浏览。
+1. 使用 `Enter` 激活元素。
+1. 如果需要，使用方向键来与某些元素交互，例如菜单和下拉列表。
 
 ### 开发助手
 
-We can check some accessibility features directly in our JSX code. Often intellisense checks are already provided in JSX aware IDE's for the ARIA roles, states and properties. We also 
-have access to the following tool:
+我们可以直接在 JSX 代码中检查一些可访问性功能。通常情况下，在可以识别 JSX 语法的 IDE 中已经提供了针对 ARIA 角色、状态和属性的智能检测。我们也可以采用以下工具：
 
 #### eslint-plugin-jsx-a11y
 
-The [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) plugin for ESLint provides AST linting feedback regarding accessibility issues in your JSX. Many
-IDE's allow you to integrate these findings directly into code analysis and source code windows.
+ESLint 的 [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) 插件提供了对于 JSX 中可访问性问题的 AST 检测反馈。许多 IDE 允许你将这些发现直接集成到代码分析和源码窗口中。
 
-[Create React App](https://github.com/facebookincubator/create-react-app) has this plugin with a subset of rules activated. If you want to enable even more accessibility rules, 
-you can create an `.eslintrc` file in the root of your project with this content:
-                                                                                                      
+[Create React App](https://github.com/facebookincubator/create-react-app) 包含了这个插件并激活了部分规则。如果想要支持更多的可访问性规则，你可以在项目的根目录创建一个包含了以下内容的 `.eslintrc` 文件。
+
   ```json
   {
     "extends": ["react-app", "plugin:jsx-a11y/recommended"],
@@ -266,63 +262,61 @@ you can create an `.eslintrc` file in the root of your project with this content
   }
   ```
 
-### Testing accessibility in the browser
+### 浏览器中的可访问性测试
 
-A number of tools exist that can run accessibility audits on web pages in your browser. Please use them in combination with other accessibility checks mentioned here as they can only
-test the technical accessibility of your HTML.
+很多现成的工具都可以在浏览器中运行对于页面的可访问性检测。因为它们仅仅可以测试 HTML 中技术上的可访问性，所以请配合本文提到的其他可访问性检测工具一起使用。
 
-#### aXe, aXe-core and react-axe
+#### aXe、aXe-core 和 react-axe
 
-Deque Systems offers [aXe-core](https://www.deque.com/products/axe-core/) for automated and end-to-end accessibility tests of your applications. This module includes integrations for Selenium.
+Deque Systems 提供的 [aXe-core](https://www.deque.com/products/axe-core/) 可以对你的应用进行自动化和端到端的可访问性测试。这个模块包含了对 Selenium 的集成。
 
-[The Accessibility Engine](https://www.deque.com/products/axe/) or aXe, is an accessibility inspector browser extension built on `aXe-core`.
+[可访问性引擎](https://www.deque.com/products/axe/) 或者 aXe 是一个基于 `aXe-core` 的可访问性检测浏览器拓展工具。
 
-You can also use the [react-axe](https://github.com/dylanb/react-axe) module to report these accessibility findings directly to the console while developing and debugging.
+你也可以在开发和调试模式下使用 [react-axe](https://github.com/dylanb/react-axe) 模块来在控制台直接输出这些可访问性发现。
 
 #### WebAIM WAVE
 
-The [Web Accessibility Evaluation Tool](http://wave.webaim.org/extension/) is another accessibility browser extension.
+[Web Accessibility Evaluation Tool](http://wave.webaim.org/extension/) 是另外一个可访问性浏览器拓展工具。
 
-#### Accessibility inspectors and the Accessibility Tree
+#### 可访问性检测器和可访问性树
 
-[The Accessibility Tree](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/) is a subset of the DOM tree that contains accessible objects for every DOM element that should be exposed 
-to assistive technology, such as screen readers.
+[可访问性树](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/) 是 DOM 树的子集，它包含了每个 DOM 元素应该暴露给辅助技术（例如屏幕阅读器）的可访问性对象。
 
-In some browsers we can easily view the accessibility information for each element in the accessibility tree:
+在某些浏览器中我们可以很容易地查看到可访问性树中每个元素的可访问性信息：
 
-- [Activate the Accessibility Inspector in Chrome](https://gist.github.com/marcysutton/0a42f815878c159517a55e6652e3b23a)
-- [Using the Accessibility Inspector in OS X Safari](https://developer.apple.com/library/content/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXTestingApps.html)
+- [在 Chrome 中激活可访问性检测器](https://gist.github.com/marcysutton/0a42f815878c159517a55e6652e3b23a)
+- [在 OS X 的 Safari 中使用可访问性检测器](https://developer.apple.com/library/content/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXTestingApps.html)
 
-### Screen readers
+### 屏幕阅读器
 
-Testing with a screen reader should form part of your accessibility tests.
+使用屏幕阅读器进行测试应该是可访问性测试的一部分。
 
-Please note that browser / screen reader combinations matter. It is recommended that you test your application in the browser best suited to your screen reader of choice.
+请注意浏览器/屏幕阅读器的结合。建议在浏览器中选择最适合的屏幕阅读器来测试你的应用程序。
 
-#### NVDA in Firefox
+#### Firefox 的 NVDA
 
-[NonVisual Desktop Access](https://www.nvaccess.org/) or NVDA is an open source Windows screen reader that is widely used.
+[NonVisual Desktop Access](https://www.nvaccess.org/) 或者 NVDA 是一个广泛使用的开源屏幕阅读器。
 
-Refer to the following guides on how to best use NVDA:
+关于如何更好地使用 NVDA 请参考以下指南：
 
-- [WebAIM - Using NVDA to Evaluate Web Accessibility](http://webaim.org/articles/nvda/)
-- [Deque - NVDA Keyboard Shortcuts](https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts)
+- [WebAIM —— 使用 NVDA 来评估可访问性](http://webaim.org/articles/nvda/)
+- [Deque —— NVDA 快捷键](https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts)
 
-#### VoiceOver in Safari
+#### Safari 的 VoiceOver
 
-VoiceOver is an integrated screen reader on Apple devices. 
+VoiceOver 一个集成在苹果设备上的屏幕阅读器。
 
-Refer to the following guides on how activate and use VoiceOver:
+关于如激活合和使用 VoiceOver 请参考以下指南：
 
-- [WebAIM - Using VoiceOver to Evaluate Web Accessibility](http://webaim.org/articles/voiceover/)
-- [Deque - VoiceOver for OS X Keyboard Shortcuts](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
-- [Deque - VoiceOver for iOS Shortcuts](https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts)
+- [WebAIM —— 使用 VoiceOver 来评估可访问性](http://webaim.org/articles/voiceover/)
+- [Deque —— VoiceOver OS X 快捷键](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
+- [Deque —— VoiceOver iOS 快捷键](https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts)
 
-#### JAWS in Internet Explorer
+#### Internet Explorer 的 JAWS
 
-[Job Access With Speech](http://www.freedomscientific.com/Products/Blindness/JAWS) or JAWS, is a prolifically used screen reader on Windows. 
+[Job Access With Speech](http://www.freedomscientific.com/Products/Blindness/JAWS) 或者 JAWS 是一个广泛使用在 Windows 上的屏幕阅读器。
 
-Refer to the following guides on how to best use JAWS:
+关于如何更好地使用 JAWS 请参考以下指南：
 
-- [WebAIM - Using JAWS to Evaluate Web Accessibility](http://webaim.org/articles/jaws/)
-- [Deque - JAWS Keyboard Shortcuts](https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts)
+- [WebAIM —— 使用 JAWS 来评估可访问性](http://webaim.org/articles/jaws/)
+- [Deque —— JAWS 快捷键](https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts)
