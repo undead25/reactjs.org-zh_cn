@@ -1,6 +1,6 @@
 ---
 id: refs-and-the-dom
-title: Refs and the DOM
+title: Refs 和 DOM
 redirect_from:
   - "docs/working-with-the-browser.html"
   - "docs/more-about-refs.html"
@@ -11,9 +11,9 @@ redirect_from:
 permalink: docs/refs-and-the-dom.html
 ---
 
-In the typical React dataflow, [props](/docs/components-and-props.html) are the only way that parent components interact with their children. To modify a child, you re-render it with new props. However, there are a few cases where you need to imperatively modify a child outside of the typical dataflow. The child to be modified could be an instance of a React component, or it could be a DOM element. For both of these cases, React provides an escape hatch.
+在典型的 React 数据流中，[props](/docs/components-and-props.html) 是父组件与子组件通信的唯一方式。要修改子组件，你需要通过新的 props 来重新渲染它。然而，某些情况下，你需要在典型的数据流之外强制修改子组件。需要修改的子组件可以是一个 React 组件实例，也可以是一个 DOM 元素。对于这两种情况，React 提供了一个解决方案。
 
-### When to Use Refs
+### 何时使用 Refs
 
 There are a few good use cases for refs:
 
@@ -25,7 +25,7 @@ Avoid using refs for anything that can be done declaratively.
 
 For example, instead of exposing `open()` and `close()` methods on a `Dialog` component, pass an `isOpen` prop to it.
 
-### Don't Overuse Refs
+### 请勿过度使用 Refs
 
 Your first inclination may be to use refs to "make things happen" in your app. If this is the case, take a moment and think more critically about where state should be owned in the component hierarchy. Often, it becomes clear that the proper place to "own" that state is at a higher level in the hierarchy. See the [Lifting State Up](/docs/lifting-state-up.html) guide for examples of this.
 
@@ -220,6 +220,6 @@ All things considered, we advise against exposing DOM nodes whenever possible, b
 
 If you worked with React before, you might be familiar with an older API where the `ref` attribute is a string, like `"textInput"`, and the DOM node is accessed as `this.refs.textInput`. We advise against it because string refs have [some issues](https://github.com/facebook/react/pull/8333#issuecomment-271648615), are considered legacy, and **are likely to be removed in one of the future releases**. If you're currently using `this.refs.textInput` to access refs, we recommend the callback pattern instead.
 
-### Caveats
+### 注意事项
 
 If the `ref` callback is defined as an inline function, it will get called twice during updates, first with `null` and then again with the DOM element. This is because a new instance of the function is created with each render, so React needs to clear the old ref and set up the new one. You can avoid this by defining the `ref` callback as a bound method on the class, but note that it shouldn't matter in most cases.
