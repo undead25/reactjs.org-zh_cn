@@ -25,7 +25,7 @@
     - [x] [JSX In Depth](/content/docs/jsx-in-depth.md)
     - [ ] Typechecking With PropTypes
     - [ ] Static Type Checking
-    - [ ] Refs and the DOM
+    - [ ] [Refs and the DOM](/content/docs/refs-and-the-dom.md)
     - [ ] Uncontrolled Components
     - [x] [Optimizing Performance](/content/docs/optimizing-performance.md)
     - [ ] React Without ES6
@@ -39,5 +39,5 @@
     - [x] [Higher-Order Components](/content/docs/higher-order-components.md)
     - [ ] Render Props
     - [ ] Integrating with Other Libraries
-    - [ ] [Accessibility](/content/docs/accessibility.md)
+    - [x] [Accessibility](/content/docs/accessibility.md)
     - [x] [Code-Splitting](/content/docs/code-splitting.md)
