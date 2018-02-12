@@ -15,23 +15,23 @@ permalink: docs/refs-and-the-dom.html
 
 ### 何时使用 Refs
 
-There are a few good use cases for refs:
+以下是几个使用 refs 很好的例子：
 
-* Managing focus, text selection, or media playback.
-* Triggering imperative animations.
-* Integrating with third-party DOM libraries.
+* 管理焦点、文本选择或者媒体播放。
+* 触发命令式动画。
+* 与第三方 DOM 库集成。
 
-Avoid using refs for anything that can be done declaratively.
+避免在可以使用声明式实现的情况下使用 refs。
 
-For example, instead of exposing `open()` and `close()` methods on a `Dialog` component, pass an `isOpen` prop to it.
+例如，不要在 `Dialog` 组件暴露 `open()` 和 `close()` 方法，通过 `isOpen` prop 传递。
 
 ### 请勿过度使用 Refs
 
-Your first inclination may be to use refs to "make things happen" in your app. If this is the case, take a moment and think more critically about where state should be owned in the component hierarchy. Often, it becomes clear that the proper place to "own" that state is at a higher level in the hierarchy. See the [Lifting State Up](/docs/lifting-state-up.html) guide for examples of this.
+你在应用中使用 refs 的目的是为了“让事情发生”。如果是这种情况，请花点时间仔细考虑一下在组件层次结构中的哪个位置放置 state。通常情况下，显然是在层次结构中较高的位置。相关示例请参考 [State 提升](/docs/lifting-state-up.html) 指南。
 
-### Adding a Ref to a DOM Element
+### 给 DOM 元素添加 Ref
 
-React supports a special attribute that you can attach to any component. The `ref` attribute takes a callback function, and the callback will be executed immediately after the component is mounted or unmounted.
+React 支持你给任何组件添加一个特殊的属性。`ref` 属性接受一个回调函数参数，这个回调会在组件挂载或者卸载时立即被执行。
 
 When the `ref` attribute is used on an HTML element, the `ref` callback receives the underlying DOM element as its argument. For example, this code uses the `ref` callback to store a reference to a DOM node:
 
