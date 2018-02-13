@@ -33,9 +33,9 @@ permalink: docs/refs-and-the-dom.html
 
 React 支持你给任何组件添加一个特殊的属性。`ref` 属性接受一个回调函数参数，这个回调会在组件挂载或者卸载时立即被执行。
 
-When the `ref` attribute is used on an HTML element, the `ref` callback receives the underlying DOM element as its argument. For example, this code uses the `ref` callback to store a reference to a DOM node:
+当 `ref` 属性在 HTML 元素上使用时，`ref` 回调会接收底层的 DOM 元素作为参数。例如，下面的代码使用 `ref` 回调来存储 DOM 节点的引用：
 
-```javascript{8,9,19}
+```javascript{8,9,18}
 class CustomTextInput extends React.Component {
   constructor(props) {
     super(props);
@@ -43,13 +43,12 @@ class CustomTextInput extends React.Component {
   }
 
   focusTextInput() {
-    // Explicitly focus the text input using the raw DOM API
+    // 使用原生 DOM API 来聚焦稳步输入
     this.textInput.focus();
   }
 
   render() {
-    // Use the `ref` callback to store a reference to the text input DOM
-    // element in an instance field (for example, this.textInput).
+    // 使用 `ref` 回调在实例字段中存储对文本输入 DOM 元素的引用（例如，this.textInput）。
     return (
       <div>
         <input
@@ -66,13 +65,14 @@ class CustomTextInput extends React.Component {
 }
 ```
 
-React will call the `ref` callback with the DOM element when the component mounts, and call it with `null` when it unmounts. `ref` callbacks are invoked before `componentDidMount` or `componentDidUpdate` lifecycle hooks.
+React 会在组件挂载时调用带有 DOM 元素的 `ref` 回调，并在挂载时调用带有 `null` 的回调。`ref` 回调会在 `componentDidMount` 或者 `componentDidUpdate` 生命周期钩子之前执行。
 
-Using the `ref` callback just to set a property on the class is a common pattern for accessing DOM elements. The preferred way is to set the property in the `ref` callback like in the above example. There is even a shorter way to write it: `ref={input => this.textInput = input}`. 
+使用 `ref` 回调来设置类的属性是访问 DOM 元素的常用模式。首选的方法是像上面的例子那样在 `ref` 回调中设置属性。甚至有更短的写法：`ref={input => this.textInput = input}`。
 
-### Adding a Ref to a Class Component
+### 给类组件添加 Ref
 
 When the `ref` attribute is used on a custom component declared as a class, the `ref` callback receives the mounted instance of the component as its argument. For example, if we wanted to wrap the `CustomTextInput` above to simulate it being clicked immediately after mounting:
+
 
 ```javascript{3,9}
 class AutoFocusTextInput extends React.Component {
