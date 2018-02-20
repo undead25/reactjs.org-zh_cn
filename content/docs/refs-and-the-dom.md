@@ -71,7 +71,7 @@ React 会在组件挂载时调用带有 DOM 元素的 `ref` 回调，并在挂�
 
 ### 给类组件添加 Ref
 
-When the `ref` attribute is used on a custom component declared as a class, the `ref` callback receives the mounted instance of the component as its argument. For example, if we wanted to wrap the `CustomTextInput` above to simulate it being clicked immediately after mounting:
+当 `ref` 属性被用于声明为类的自定义组件时，`ref` 回调接收挂载组件的实例作为参数。例如，如果我们想包裹上面的 `CustomTextInput` 组件，来实现挂载后立即点击的效果：
 
 
 ```javascript{3,9}
@@ -89,7 +89,7 @@ class AutoFocusTextInput extends React.Component {
 }
 ```
 
-Note that this only works if `CustomTextInput` is declared as a class:
+需要注意的是，这只适用于以类声明的 `CustomTextInput`：
 
 ```js{1}
 class CustomTextInput extends React.Component {
@@ -97,9 +97,9 @@ class CustomTextInput extends React.Component {
 }
 ```
 
-### Refs and Functional Components
+### Refs 与函数式组件
 
-**You may not use the `ref` attribute on functional components** because they don't have instances:
+**你不能在函数式组件上使用 `ref` 属性**，因为它们没有实例：
 
 ```javascript{1,7}
 function MyFunctionalComponent() {
@@ -108,7 +108,7 @@ function MyFunctionalComponent() {
 
 class Parent extends React.Component {
   render() {
-    // This will *not* work!
+    // 这**不会**工作！
     return (
       <MyFunctionalComponent
         ref={(input) => { this.textInput = input; }} />
@@ -117,13 +117,13 @@ class Parent extends React.Component {
 }
 ```
 
-You should convert the component to a class if you need a ref to it, just like you do when you need lifecycle methods or state.
+如果你需要使用 ref，你需要将组件转换成类，就像你需要生命周期方法或者 state 时一样。
 
-You can, however, **use the `ref` attribute inside a functional component** as long as you refer to a DOM element or a class component:
+但是，你可以**在函数式组件内部使用 `ref` 属性**，只要其指向的是一个 DOM 元素或者类组件：
 
 ```javascript{2,3,6,13}
 function CustomTextInput(props) {
-  // textInput must be declared here so the ref callback can refer to it
+  // textInput 必须在这里声明，这样 ref 回调才可以引用它
   let textInput = null;
 
   function handleClick() {
