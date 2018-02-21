@@ -145,15 +145,15 @@ function CustomTextInput(props) {
 }
 ```
 
-### Exposing DOM Refs to Parent Components
+### 暴露 DOM Refs 给父组件
 
-In rare cases, you might want to have access to a child's DOM node from a parent component. This is generally not recommended because it breaks component encapsulation, but it can occasionally be useful for triggering focus or measuring the size or position of a child DOM node.
+在极少数情况下，你可能想从父组件中访问子组件的 DOM 节点。通常不建议你这样做，因为这会破坏组件的封装，但偶尔有助于触发聚焦或者计算子 DOM 节点的大小或位置。
 
-While you could [add a ref to the child component](#adding-a-ref-to-a-class-component), this is not an ideal solution, as you would only get a component instance rather than a DOM node. Additionally, this wouldn't work with functional components.
+虽然你可以 [添加一个 ref 到子组件](#adding-a-ref-to-a-class-component)，但这不是一个理想的解决方案，因为你只能获取组件实例，而不是 DOM 节点。另外，这不适用于函数式组件。
 
-Instead, in such cases we recommend exposing a special prop on the child. The child would take a function prop with an arbitrary name (e.g. `inputRef`) and attach it to the DOM node as a `ref` attribute. This lets the parent pass its ref callback to the child's DOM node through the component in the middle.
+在这种情况下，我们推荐在子组件上暴露一个特殊的 prop。子组件接收一个任意名称（例如 `inputRef`）的函数 prop，并将其作为 `ref` 属性附加到 DOM 节点。这让父组件通过中间组件将其 ref 回调传递个子组件的 DOM 节点。
 
-This works both for classes and for functional components.
+这适用于类组件和函数式组件。
 
 ```javascript{4,13}
 function CustomTextInput(props) {
@@ -175,13 +175,13 @@ class Parent extends React.Component {
 }
 ```
 
-In the example above, `Parent` passes its ref callback as an `inputRef` prop to the `CustomTextInput`, and the `CustomTextInput` passes the same function as a special `ref` attribute to the `<input>`. As a result, `this.inputElement` in `Parent` will be set to the DOM node corresponding to the `<input>` element in the `CustomTextInput`.
+在上面的例子中，`Parent` 将其 ref 回调作为一个 `inputRef` prop 传递给了 `CustomTextInput`，并且 `CustomTextInput` 将同样的函数作为一个特殊的 `ref` 传递了 `input`。结果是 `Parent` 中的 `this.inputElement` 会被设置为 `CustomTextInput` 中 `<input>` 元素对应的 DOM 节点。
 
-Note that the name of the `inputRef` prop in the above example has no special meaning, as it is a regular component prop. However, using the `ref` attribute on the `<input>` itself is important, as it tells React to attach a ref to its DOM node.
+需要注意的是，在上面的例子中，`inputRef` 这个名称没有特殊的含义，它只是一个普通的组件 prop。然而，在 `<input>` 上使用 `ref` 属性很重要，因为这会告诉 React 将 ref 附加到它的 DOM 节点。
 
-This works even though `CustomTextInput` is a functional component. Unlike the special `ref` attribute which can [only be specified for DOM elements and for class components](#refs-and-functional-components), there are no restrictions on regular component props like `inputRef`.
+即使 `CustomTextInput` 是一个函数式组件也有效。这与[只能为 DOM 元素和类组件指定的](#refs-and-functional-components) `ref` 属性不同，对于像 `inputRef` 这样的普通组件 prop 是没有限制的。
 
-Another benefit of this pattern is that it works several components deep. For example, imagine `Parent` didn't need that DOM node, but a component that rendered `Parent` (let's call it `Grandparent`) needed access to it. Then we could let the `Grandparent` specify the `inputRef` prop to the `Parent`, and let `Parent` "forward" it to the `CustomTextInput`:
+这种模式的另外一个好处是它作用于多层级组件。例如，想象一下 `Parent` 不需要那个 DOM 节点，但是渲染 `Parent`（让我们叫它 `Grandparent`）的组件需要访问那个 DOM 节点。然后我们可以在 `Grandparent` 里指定 `Parent` 的 `inputRef` prop，并让 `Parent` 将其转发给 `CustomTextInput`：
 
 ```javascript{4,12,22}
 function CustomTextInput(props) {
@@ -212,11 +212,11 @@ class Grandparent extends React.Component {
 }
 ```
 
-Here, the ref callback is first specified by `Grandparent`. It is passed to the `Parent` as a regular prop called `inputRef`, and the `Parent` passes it to the `CustomTextInput` as a prop too. Finally, the `CustomTextInput` reads the `inputRef` prop and attaches the passed function as a `ref` attribute to the `<input>`. As a result, `this.inputElement` in `Grandparent` will be set to the DOM node corresponding to the `<input>` element in the `CustomTextInput`.
+在这里，`Grandparent` 首先指定了 ref 回调。它作为一个叫做 `inputRef` 的普通 prop 被传递给了 `Parent`，`Parent` 也将其作为一个 prop 传递给了 `CustomTextInput`。最终，`CustomTextInput` 读取了 `inputRef` prop，并将传递的函数作为一个 `ref` 属性传递给了 `<input>`。结果是，在 `Grandparent` 中的 `this.inputElement` 将被设置为 `CustomTextInput` 中 `<input>` 元素对应的 DOM 节点。
 
-All things considered, we advise against exposing DOM nodes whenever possible, but this can be a useful escape hatch. Note that this approach requires you to add some code to the child component. If you have absolutely no control over the child component implementation, your last option is to use [`findDOMNode()`](/docs/react-dom.html#finddomnode), but it is discouraged.
+总而言之，我们建议尽可能地不要暴露 DOM 节点，但这可能是一个可用的方法。需要注意的是，这种方法需要你在子组件中添加一些代码。如果你无法完全控制子组件的实现，你的最终选择则是使用 [`findDOMNode()`](/docs/react-dom.html#finddomnode)，但不推荐。
 
-### Legacy API: String Refs
+### 旧版 API：字符串 Refs
 
 If you worked with React before, you might be familiar with an older API where the `ref` attribute is a string, like `"textInput"`, and the DOM node is accessed as `this.refs.textInput`. We advise against it because string refs have [some issues](https://github.com/facebook/react/pull/8333#issuecomment-271648615), are considered legacy, and **are likely to be removed in one of the future releases**. If you're currently using `this.refs.textInput` to access refs, we recommend the callback pattern instead.
 
