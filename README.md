@@ -23,9 +23,9 @@
     - [ ] Thinking In React
   - ADVANCED GUIDES
     - [x] [JSX In Depth](/content/docs/jsx-in-depth.md)
-    - [ ] Typechecking With PropTypes
+    - [ ] [Typechecking With PropTypes](/content/docs/typechecking-with-proptypes.md)
     - [ ] Static Type Checking
-    - [ ] [Refs and the DOM](/content/docs/refs-and-the-dom.md)
+    - [x] [Refs and the DOM](/content/docs/refs-and-the-dom.md)
     - [ ] Uncontrolled Components
     - [x] [Optimizing Performance](/content/docs/optimizing-performance.md)
     - [ ] React Without ES6
