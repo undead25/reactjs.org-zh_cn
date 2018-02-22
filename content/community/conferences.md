@@ -11,6 +11,17 @@ Do you know of a local React.js conference? Add it here! (Please keep the list c
 
 ## Upcoming Conferences
 
+### ReactFest 2018
+March 8-9 in London, UK
+
+[Website](https://reactfest.uk/) [Twitter](https://twitter.com/ReactFest) 
+
+### Reactathon 2018
+March 20-22 in San Francisco, USA
+
+[Website](https://www.reactathon.com/) [Twitter](https://twitter.com/reactathon)
+
+
 ### React Native Camp UA 2018
 March 31 in Kiev, Ukraine
 
@@ -40,6 +51,11 @@ July 11-13 in Portland, Oregon USA
 August 16-17 in Salt Lake City, Utah USA
 
 [Website](http://www.reactrally.com) - [Twitter](https://twitter.com/reactrally)
+
+### React Native EU 2018
+September 5-6 in Wrocław, Poland
+
+[Website](https://react-native.eu) - [Twitter](https://twitter.com/react_native_eu) - [Facebook](https://www.facebook.com/reactnativeeu)
 
 ### ReactNext 2018
 September 6 in Tel Aviv, Israel

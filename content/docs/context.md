@@ -23,7 +23,7 @@ permalink: docs/context.html
 
 如果你不熟悉类似 [Redux](https://github.com/reactjs/redux) 或者 [MobX](https://github.com/mobxjs/mobx) 的 state 管理库，请不要使用 context。对于许多实际应用，这些库和它们的 React 绑定是管理许多组件相关 state 的不错选择。Redux 可能是你需要的最佳解决方案，而不是 context。
 
-如果你不是一个很有经验的 React 开发者，请不要使用 context。通常只使用 props 和 state 来实现功能是一个更好的方式。
+如果你仍在学习 React，请不要使用 context。通常只使用 props 和 state 来实现功能是一个更好的方式。
 
 如果你还是坚持要使用 context，那么请尽量在一小部分地方使用它，并且尽量避免直接使用 context API 以便将来 API 变化时可以很容易地进行升级。
 
