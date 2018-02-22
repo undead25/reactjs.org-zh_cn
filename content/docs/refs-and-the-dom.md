@@ -218,8 +218,8 @@ class Grandparent extends React.Component {
 
 ### 旧版 API：字符串 Refs
 
-If you worked with React before, you might be familiar with an older API where the `ref` attribute is a string, like `"textInput"`, and the DOM node is accessed as `this.refs.textInput`. We advise against it because string refs have [some issues](https://github.com/facebook/react/pull/8333#issuecomment-271648615), are considered legacy, and **are likely to be removed in one of the future releases**. If you're currently using `this.refs.textInput` to access refs, we recommend the callback pattern instead.
+如果你之前使用过 React，那么你可能知道在老的 API 中 `ref` 属性是一个类似 `"textInput"` 的字符串，并且可以通过 `this.refs.textInput` 来访问 DOM 节点。我们不建议这样使用，因为字符串 ref [存在问题](https://github.com/facebook/react/pull/8333#issuecomment-271648615)，它已经过时并**可能会在未来的版本被移除**。如果你目前正在使用 `this.refs.textInput` 来访问 ref，我们推荐使用回调的方式来代替。
 
 ### 注意事项
 
-If the `ref` callback is defined as an inline function, it will get called twice during updates, first with `null` and then again with the DOM element. This is because a new instance of the function is created with each render, so React needs to clear the old ref and set up the new one. You can avoid this by defining the `ref` callback as a bound method on the class, but note that it shouldn't matter in most cases.
+如果 `ref` 回调被定义为一个内联函数，那在更新期间它会被调用两次，首先是 `null`，然后是 DOM 元素。这是因为每次渲染都会创建一个新的函数实例，所以 React 需要清除旧的引用并设置新的实例。你可以通过将 `ref` 回调定义为类的绑定方法来避免这种情况，但在大多数情况下，这应该不重要。
