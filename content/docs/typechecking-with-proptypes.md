@@ -1,18 +1,18 @@
 ---
 id: typechecking-with-proptypes
-title: Typechecking With PropTypes
+title: PropTypes 类型检测
 permalink: docs/typechecking-with-proptypes.html
 redirect_from:
   - "docs/react-api.html#typechecking-with-proptypes"
 ---
 
-> Note:
+> 注意：
 >
-> `React.PropTypes` has moved into a different package since React v15.5. Please use [the `prop-types` library instead](https://www.npmjs.com/package/prop-types).
+> `React.PropTypes` 自 React v15.5 起被移到了一个不同的包。请使用 [`prop-types`](https://www.npmjs.com/package/prop-types) 库。
 >
->We provide [a codemod script](/blog/2017/04/07/react-v15.5.0.html#migrating-from-reactproptypes) to automate the conversion.
+> 我们提供了 [codemod 脚本](/blog/2017/04/07/react-v15.5.0.html#migrating-from-reactproptypes) 来进行自动转换。
 
-As your app grows, you can catch a lot of bugs with typechecking. For some applications, you can use JavaScript extensions like [Flow](https://flowtype.org/) or [TypeScript](https://www.typescriptlang.org/) to typecheck your whole application. But even if you don't use those, React has some built-in typechecking abilities. To run typechecking on the props for a component, you can assign the special `propTypes` property:
+随着应用的日渐庞大，你可以通过类型检测来捕获大量错误。对于某些应用，你可以使用像 [Flow](https://flowtype.org/) 或者 [TypeScript](https://www.typescriptlang.org/) 一样的 JavaScript 拓展来对整个应用进行类型检测。但即使你不使用它们，React 也有一些内置的类型检测功能。要检测组件的属性，你可以给组件定义特殊的 `propTypes` 属性：
 
 ```javascript
 import PropTypes from 'prop-types';
@@ -30,11 +30,11 @@ Greeting.propTypes = {
 };
 ```
 
-`PropTypes` exports a range of validators that can be used to make sure the data you receive is valid. In this example, we're using `PropTypes.string`. When an invalid value is provided for a prop, a warning will be shown in the JavaScript console. For performance reasons, `propTypes` is only checked in development mode.
+`PropTypes` 导出了一系列验证器用于确保接收数据的有效性。在上面的例子中，我们使用的是 `PropTypes.string`。当给 prop 提供一个无效值时，JavaScript 控制台会显示一条警告。出于性能考虑，`propTypes` 仅在开发环境下进行验证。
 
 ### PropTypes
 
-Here is an example documenting the different validators provided:
+下面是提供不同验证器的例子：
 
 ```javascript
 import PropTypes from 'prop-types';
@@ -143,7 +143,7 @@ MyComponent.propTypes = {
 };
 ```
 
-### Default Prop Values
+### Prop 默认值
 
 You can define default values for your `props` by assigning to the special `defaultProps` property:
 
