@@ -19,11 +19,11 @@
     - [ ] Lists and Keys
     - [ ] Forms
     - [ ] Lifting State Up
-    - [ ] Composition vs Inheritance
+    - [ ] [Composition vs Inheritance](/content/docs/composition-vs-inheritance.md)
     - [ ] Thinking In React
   - ADVANCED GUIDES
     - [x] [JSX In Depth](/content/docs/jsx-in-depth.md)
-    - [ ] [Typechecking With PropTypes](/content/docs/typechecking-with-proptypes.md)
+    - [x] [Typechecking With PropTypes](/content/docs/typechecking-with-proptypes.md)
     - [ ] Static Type Checking
     - [x] [Refs and the DOM](/content/docs/refs-and-the-dom.md)
     - [ ] Uncontrolled Components
