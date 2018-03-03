@@ -11,7 +11,7 @@ React 有一个强大的组合模型，我们推荐使用组合而不是继承�
 
 在本章节中，我们将考虑 React 开发者新手经常遇到的一些问题，并展示如何使用组合来解决它们。
 
-## Containment
+## 包含
 
 一些组件不会预先知道它们的子节点是什么。尤其是像 `Sidebar` 或者 `Dialog` 这样代表“盒子”的通用组件。
 
@@ -81,11 +81,11 @@ function App() {
 
 像 `<Contacts />` 和 `<Chat />` 这样的 React 元素只是一个对象，所以你可以像其他数据一样将它们作为 props 传递。这种方法可能会让你想起其他库中的 “slots”，但在 React 中，可以作为 props 传递的内容是没有限制的。
 
-## Specialization
+## 特例
 
-Sometimes we think about components as being "special cases" of other components. For example, we might say that a `WelcomeDialog` is a special case of `Dialog`.
+有些时候我们会将组件视为其它组件的“特例”。例如，我们可以说 `WelcomeDialog` 是 `Dialog` 的特例。
 
-In React, this is also achieved by composition, where a more "specific" component renders a more "generic" one and configures it with props:
+在 React 中，这也可以通过组合来实现，一个更“特定”的组件渲染一个更“通用”的组件，并使用 props 进行配置：
 
 ```js{5,8,16-18}
 function Dialog(props) {
@@ -112,7 +112,7 @@ function WelcomeDialog() {
 
 [在 CodePen 上尝试](https://codepen.io/gaearon/pen/kkEaOZ?editors=0010)
 
-Composition works equally well for components defined as classes:
+组合同样使用于类组件：
 
 ```js{10,27-31}
 function Dialog(props) {
@@ -164,8 +164,8 @@ class SignUpDialog extends React.Component {
 
 ## 那什么是继承呢？
 
-At Facebook, we use React in thousands of components, and we haven't found any use cases where we would recommend creating component inheritance hierarchies.
+在 Facebook 我们在数千个组件中使用 React，并且我们还没有发现任何建议创建组件继承层次结构的用例。
 
-Props and composition give you all the flexibility you need to customize a component's look and behavior in an explicit and safe way. Remember that components may accept arbitrary props, including primitive values, React elements, or functions.
+Props 和组合提供了所有我们需要的灵活性，通过明确和安全的方式自定义组件的外观和行为。请记住，组件可以接受任意 props，包括原始值、React 元素或者函数。
 
-If you want to reuse non-UI functionality between components, we suggest extracting it into a separate JavaScript module. The components may import it and use that function, object, or a class, without extending it.
+如果你想在组件之间重用非 UI 功能，我们建议将其分离到单独的 JavaScript 模块中。组件可以将其导入并使用该函数、对象或类，而不对其进行扩展。
