@@ -19,8 +19,8 @@
     - [ ] Lists and Keys
     - [ ] Forms
     - [ ] Lifting State Up
-    - [ ] [Composition vs Inheritance](/content/docs/composition-vs-inheritance.md)
-    - [ ] Thinking In React
+    - [x] [Composition vs Inheritance](/content/docs/composition-vs-inheritance.md)
+    - [ ] [Thinking In React](/content/docs/thinking-in-react.md)
   - ADVANCED GUIDES
     - [x] [JSX In Depth](/content/docs/jsx-in-depth.md)
     - [x] [Typechecking With PropTypes](/content/docs/typechecking-with-proptypes.md)
