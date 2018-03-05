@@ -1,6 +1,6 @@
 ---
 id: thinking-in-react
-title: Thinking in React
+title: React 思想
 permalink: docs/thinking-in-react.html
 redirect_from:
   - 'blog/2013/11/05/thinking-in-react.html'
@@ -8,17 +8,17 @@ redirect_from:
 prev: composition-vs-inheritance.html
 ---
 
-React is, in our opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram.
+在我们看来，React 是通过 JavaScript 构建大型高性能 Web 应用的首选。它在我们的 Facebook 和 Instagram 上表现得很好。
 
-One of the many great parts of React is how it makes you think about apps as you build them. In this document, we'll walk you through the thought process of building a searchable product data table using React.
+React 的重要组成部分之一就是让你思考如何构建应用。在本文中，我们将介绍使用 React 构建可搜索的产品数据表格的思考过程。
 
-## Start With A Mock
+## 从原型开始
 
-Imagine that we already have a JSON API and a mock from our designer. The mock looks like this:
+想象我们已有一个 JSON API 和一个设计师设计的原型。原型是这样的：
 
 ![Mockup](../images/blog/thinking-in-react-mock.png)
 
-Our JSON API returns some data that looks like this:
+JSON API 返回的数据是这样的：
 
 ```
 [
@@ -31,7 +31,7 @@ Our JSON API returns some data that looks like this:
 ];
 ```
 
-## Step 1: Break The UI Into A Component Hierarchy
+## 步骤 1：将 UI 拆解为组件结构
 
 The first thing you'll want to do is to draw boxes around every component (and subcomponent) in the mock and give them all names. If you're working with a designer, they may have already done this, so go talk to them! Their Photoshop layer names may end up being the names of your React components!
 
