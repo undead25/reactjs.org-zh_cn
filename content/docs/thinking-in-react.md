@@ -33,25 +33,25 @@ JSON API 返回的数据是这样的：
 
 ## 步骤 1：将 UI 拆解为组件结构
 
-The first thing you'll want to do is to draw boxes around every component (and subcomponent) in the mock and give them all names. If you're working with a designer, they may have already done this, so go talk to them! Their Photoshop layer names may end up being the names of your React components!
+你要做的第一件事就是在原型中的每个组件（和子组件）周围画框并命名。如果你正在与设计师一起工作，他们可能已经完成了这项工作，和他们谈谈！他们的 Photoshop 图层名称可能最终会成为你的 React 组件的名称！
 
-But how do you know what should be its own component? Just use the same techniques for deciding if you should create a new function or object. One such technique is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents.
+但你怎么知道自己的组件应该是什么呢？只需使用决定是否应该创建新的函数或对象一样的技巧。其中一种技术是[单一责任原则](https://en.wikipedia.org/wiki/Single_responsibility_principle)，也就是说，一个组件理想情况下只应该做一件事。如果它最终增长，那么它应该被分解成更小的子组件。
 
-Since you're often displaying a JSON data model to a user, you'll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely. That's because UI and data models tend to adhere to the same *information architecture*, which means the work of separating your UI into components is often trivial. Just break it up into components that represent exactly one piece of your data model.
+由于你经常向用户展示 JSON 数据模型，你会发现，如果你的模型构建正确，那么 UI（以及组件结构）将会很好地映射。这是因为 UI 和数据模型都倾向于遵循相同的**信息架构**，这意味着将 UI 分解为组件通常比较琐碎。只需将其分解为与某部分数据模型对应的组件。
 
-![Component diagram](../images/blog/thinking-in-react-components.png)
+![组件图](../images/blog/thinking-in-react-components.png)
 
-You'll see here that we have five components in our simple app. We've italicized the data each component represents.
+在这里你会看到，在这个简单的应用中我们有五个组件。我们将每个组件所代表的数据用粗斜体表示。
 
-  1. **`FilterableProductTable` (orange):** contains the entirety of the example
-  2. **`SearchBar` (blue):** receives all *user input*
-  3. **`ProductTable` (green):** displays and filters the *data collection* based on *user input*
-  4. **`ProductCategoryRow` (turquoise):** displays a heading for each *category*
-  5. **`ProductRow` (red):** displays a row for each *product*
+  1. **`FilterableProductTable`（橙色）：** 包含整个示例
+  2. **`SearchBar`（蓝色）：** 接收所有的**用户输入**
+  3. **`ProductTable`（绿色）：** 根据**用户输入**展示和过滤**数据集**
+  4. **`ProductCategoryRow`（宝石绿）：** 展示每个**类别**的标题
+  5. **`ProductRow`（红色）：** 展示每条**产品**
 
-If you look at `ProductTable`, you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference, and there's an argument to be made either way. For this example, we left it as part of `ProductTable` because it is part of rendering the *data collection* which is `ProductTable`'s responsibility. However, if this header grows to be complex (i.e. if we were to add affordances for sorting), it would certainly make sense to make this its own `ProductTableHeader` component.
+如果你观察 `ProductTable`，你会看到表头（包含“名称”和“价格”标签）不是它自己的组件。这个是个人偏好的问题，有受争论的其他方法。对于这个例子，我们将它作为 `ProductTable` 的一部分，因为它是*产品集合*渲染的一部分，这是 `ProductTable` 的责任。但如果这个头部变得复杂（比如为分类添加排序功能），那独立一个 `ProductTableHeader` 组件会更好。
 
-Now that we've identified the components in our mock, let's arrange them into a hierarchy. This is easy. Components that appear within another component in the mock should appear as a child in the hierarchy:
+现在我们已经确定了原型中的组件，让我们将它们排列到一个层次结构中。这很容易。在原型中，出现在另一个组件内部的组件应该作为子组件出现在层次结构中：
 
   * `FilterableProductTable`
     * `SearchBar`
@@ -59,7 +59,7 @@ Now that we've identified the components in our mock, let's arrange them into a 
       * `ProductCategoryRow`
       * `ProductRow`
 
-## Step 2: Build A Static Version in React
+## Step 2: 在 React 中构建一个静态版本
 
 <p data-height="600" data-theme-id="0" data-slug-hash="BwWzwm" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/BwWzwm">Thinking In React: Step 2</a> on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
