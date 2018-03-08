@@ -1,6 +1,6 @@
 ---
 id: thinking-in-react
-title: React 思想
+title: React 编程思想
 permalink: docs/thinking-in-react.html
 redirect_from:
   - 'blog/2013/11/05/thinking-in-react.html'
@@ -64,21 +64,21 @@ JSON API 返回的数据是这样的：
 <p data-height="600" data-theme-id="0" data-slug-hash="BwWzwm" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/BwWzwm">Thinking In React: Step 2</a> on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-Now that you have your component hierarchy, it's time to implement your app. The easiest way is to build a version that takes your data model and renders the UI but has no interactivity. It's best to decouple these processes because building a static version requires a lot of typing and no thinking, and adding interactivity requires a lot of thinking and not a lot of typing. We'll see why.
+现在你已经拥有了组件的层次结构，是时候实施你的应用了。最简单的方法是构建一个接收数据模型并渲染 UI 但不具有交互的版本。最好解耦这些过程，因为构建一个静态版本需要大量的代码和少量思考，而添加交互需要大量的思考，而不是大量的代码。我们会看到这是为什么。
 
-To build a static version of your app that renders your data model, you'll want to build components that reuse other components and pass data using *props*. *props* are a way of passing data from parent to child. If you're familiar with the concept of *state*, **don't use state at all** to build this static version. State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don't need it.
+要构建渲染数据模型的静态版本应用，你需要构建可以重用其他组件，并使用 **props** 传递数据的组件。**props** 是一种将数据从父组件传递给子组件的方式。如果你熟悉 **state** 的概念，**请不要使用 state** 来构建这个静态版本。状态仅用于交互，即数据随时会改变。由于这是静态版本的应用，所以你不需要它。
 
-You can build top-down or bottom-up. That is, you can either start with building the components higher up in the hierarchy (i.e. starting with `FilterableProductTable`) or with the ones lower in it (`ProductRow`). In simpler examples, it's usually easier to go top-down, and on larger projects, it's easier to go bottom-up and write tests as you build.
+您可以自上而下或者自下而上进行构建。也就是说，你可以从层次结构中较高的组件（即从 `FilterableProductTable` 开始）或者较低的组件（`ProductRow`）开始构建。在更简单的例子中，自上而下通常会更容易，而在大型项目中，自下而上和在构建时编写测试会更容易。
 
-At the end of this step, you'll have a library of reusable components that render your data model. The components will only have `render()` methods since this is a static version of your app. The component at the top of the hierarchy (`FilterableProductTable`) will take your data model as a prop. If you make a change to your underlying data model and call `ReactDOM.render()` again, the UI will be updated. It's easy to see how your UI is updated and where to make changes since there's nothing complicated going on. React's **one-way data flow** (also called *one-way binding*) keeps everything modular and fast.
+在这一步结束时，你会拥有一个渲染数据模型的可重用组件库。这些组件只有 `render()` 方法，因为这是一个静态版本。层次结构顶部的组件（`FilterableProductTable`）会把你的数据模型作为一个 prop。如果对底层数据模型进行更改，并再次调用 `ReactDOM.render()`，那UI 将会更新。这有利于观察 UI 是如何更新的以及在哪里进行更改，因为这里没有任何复杂的事情发生。React 的**单向数据流**（也称为**单向绑定**）使得所有内容模块化和高性能。
 
-Simply refer to the [React docs](/docs/) if you need help executing this step.
+如果执行此步骤需要帮助，请参阅 [React文档](/docs/)。
 
-### A Brief Interlude: Props vs State
+### 小插曲：Props 和 State
 
-There are two types of "model" data in React: props and state. It's important to understand the distinction between the two; skim [the official React docs](/docs/interactivity-and-dynamic-uis.html) if you aren't sure what the difference is.
+在 React 中有两种类型的数据“模型”：props 和 state。理解它们之间的差别很重要，如果你不确定它们之间的区别，可以看下 [React 官方文档](/docs/interactivity-and-dynamic-uis.html)
 
-## Step 3: Identify The Minimal (but complete) Representation Of UI State
+## 步骤 3：确定最小（但完整）的 UI State
 
 To make your UI interactive, you need to be able to trigger changes to your underlying data model. React makes this easy with **state**.
 
