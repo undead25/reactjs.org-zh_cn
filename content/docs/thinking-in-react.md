@@ -80,29 +80,31 @@ JSON API 返回的数据是这样的：
 
 ## 步骤 3：确定最小（但完整）的 UI State
 
-To make your UI interactive, you need to be able to trigger changes to your underlying data model. React makes this easy with **state**.
+为了使 UI 可交互，你需要能够触发对底层数据模型的更改。React 通过 **state** 让这变得很简单。
 
-To build your app correctly, you first need to think of the minimal set of mutable state that your app needs. The key here is [DRY: *Don't Repeat Yourself*](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). Figure out the absolute minimal representation of the state your application needs and compute everything else you need on-demand. For example, if you're building a TODO list, just keep an array of the TODO items around; don't keep a separate state variable for the count. Instead, when you want to render the TODO count, simply take the length of the TODO items array.
+要正确构建应用，首先需要考虑应用所需要的最小可变 state 集。这里的关键是[DRY: *Don't Repeat Yourself*](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)。找出应用程序所需要的 state 的绝对最小表示形式，并计算其他所有需要的内容。 例如，如果您正在创建一个 TODO 列表，只保留一组 TODO 数组即可，不要为数量保留一个单独的 state 变量。相反，当渲染 TODO 数量时，只需简单计算 TODO 数组的长度。
 
-Think of all of the pieces of data in our example application. We have:
+观察下示例应用中的所有数据，我们有：
 
-  * The original list of products
-  * The search text the user has entered
-  * The value of the checkbox
-  * The filtered list of products
+  * 原始产品列表
+  * 用户输入的搜索文本
+  * 复选框的值
+  * 过滤后的产品列表
 
 Let's go through each one and figure out which one is state. Simply ask three questions about each piece of data:
 
-  1. Is it passed in from a parent via props? If so, it probably isn't state.
-  2. Does it remain unchanged over time? If so, it probably isn't state.
-  3. Can you compute it based on any other state or props in your component? If so, it isn't state.
+让我们一个一个来看，并确定哪一个是 state。只需对每个数据的问三个问题：
 
-The original list of products is passed in as props, so that's not state. The search text and the checkbox seem to be state since they change over time and can't be computed from anything. And finally, the filtered list of products isn't state because it can be computed by combining the original list of products with the search text and value of the checkbox.
+  1. 它是否通过 props 从父组件传入？如果是这样，那它可能不是 state。
+  2. 它是否会一直保持不变？如果是这样，那它可能不是 state。
+  3. 它是否可以根据组件中其他的 state 或者 props 计算出来？如果是这样，那它不是 state。
 
-So finally, our state is:
+原始产品列表是作为 props 传入的，所以它不是 state。由于搜索文本和复选框会发生变化，并且不能从其他内容计算得出，所以它们似乎 state。最后，由于过滤后的产品列表可以通过搜索文本和复选框的值从原始产品列表中计算得出，所以它不是 state。
 
-  * The search text the user has entered
-  * The value of the checkbox
+所以，最终我们的 state 是：
+
+  * 用户输入的搜索文本
+  * 复选框的值
 
 ## Step 4: Identify Where Your State Should Live
 
