@@ -110,18 +110,18 @@ Let's go through each one and figure out which one is state. Simply ask three qu
 
 <p data-height="600" data-theme-id="0" data-slug-hash="qPrNQZ" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/qPrNQZ">Thinking In React: Step 4</a> on <a href="http://codepen.io">CodePen</a>.</p>
 
-OK, so we've identified what the minimal set of app state is. Next, we need to identify which component mutates, or *owns*, this state.
+好的，我们已经确定了应用最小的 state。接下来我们需要确定哪个组件可变或者**拥有**这个 state。
 
-Remember: React is all about one-way data flow down the component hierarchy. It may not be immediately clear which component should own what state. **This is often the most challenging part for newcomers to understand,** so follow these steps to figure it out:
+请记住：React 是关于组件层次结构下的单项数据流。什么组件拥有什么 state 可能不会立即清楚。**这也是新手最难理解的一部分**，所以请按照下面的步骤来弄明白：
 
-For each piece of state in your application:
+对于应用中的每一个状态：
 
-  * Identify every component that renders something based on that state.
+  * 确定每个根据这个 state 渲染某些内容的组件。
   * Find a common owner component (a single component above all the components that need the state in the hierarchy).
   * Either the common owner or another component higher up in the hierarchy should own the state.
   * If you can't find a component where it makes sense to own the state, create a new component simply for holding the state and add it somewhere in the hierarchy above the common owner component.
 
-Let's run through this strategy for our application:
+在我们的应用中也使用这个策略：
 
   * `ProductTable` needs to filter the product list based on state and `SearchBar` needs to display the search text and checked state.
   * The common owner component is `FilterableProductTable`.
