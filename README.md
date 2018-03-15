@@ -20,7 +20,7 @@
     - [ ] Forms
     - [ ] Lifting State Up
     - [x] [Composition vs Inheritance](/content/docs/composition-vs-inheritance.md)
-    - [ ] [Thinking In React](/content/docs/thinking-in-react.md)
+    - [x] [Thinking In React](/content/docs/thinking-in-react.md)
   - ADVANCED GUIDES
     - [x] [JSX In Depth](/content/docs/jsx-in-depth.md)
     - [x] [Typechecking With PropTypes](/content/docs/typechecking-with-proptypes.md)
@@ -37,7 +37,7 @@
     - [x] [Error Boundaries](/content/docs/error-boundaries.md)
     - [ ] Web Components
     - [x] [Higher-Order Components](/content/docs/higher-order-components.md)
-    - [ ] Render Props
+    - [ ] [Render Props](/content/docs/render-props.md)
     - [ ] Integrating with Other Libraries
     - [x] [Accessibility](/content/docs/accessibility.md)
     - [x] [Code-Splitting](/content/docs/code-splitting.md)
