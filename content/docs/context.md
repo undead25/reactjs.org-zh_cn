@@ -15,6 +15,10 @@ permalink: docs/context.html
 在某些情况下，你想通过组件树来传递数据，而不想在每一层上手动传递 props。
 你可以直接使用 React 强大的 “context” API 来做到。
 
+> 注意：
+>
+> 在即将发布的 16.3，一个[新的、安全的 context](https://github.com/reactjs/rfcs/blob/master/text/0002-new-version-of-context.md) 正在开发中。
+
 ## 为什么不要使用 Context
 
 绝大多数的应用都不需要使用 context。

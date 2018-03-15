@@ -72,7 +72,7 @@ function ListItem({ item }) {
   return ( 
     <>
       <dt>{item.term}</dt>
-      <dd>{item.description}</dd>>
+      <dd>{item.description}</dd>
     </>
   );    
 }
@@ -129,7 +129,7 @@ Skiplinks 或者 Skip Navigation Links 隐藏在导航链接中，只有当用�
 
 阅读更多关于使用这些元素来增强可访问性的信息：
 
-- [Deque 大学 —— HTML 5 和 ARIA 标记](https://dequeuniversity.com/assets/html/jquery-summit/html5/slides/landmarks.html)
+- [可访问性里程碑](http://www.scottohara.me/blog/2018/03/03/landmarks.html)
 
 ### 编程式焦点管理
 
