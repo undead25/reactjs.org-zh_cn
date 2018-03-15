@@ -61,7 +61,7 @@ JSON API 返回的数据是这样的：
 
 ## Step 2: 在 React 中构建一个静态版本
 
-<p data-height="600" data-theme-id="0" data-slug-hash="BwWzwm" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/BwWzwm">Thinking In React: Step 2</a> on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="600" data-theme-id="0" data-slug-hash="BwWzwm" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">查看 <a href="http://codepen.io">CodePen</a> 上的 <a href="https://codepen.io/gaearon/pen/BwWzwm">React 编程思想：步骤 2</a>。</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 现在你已经拥有了组件的层次结构，是时候实施你的应用了。最简单的方法是构建一个接收数据模型并渲染 UI 但不具有交互的版本。最好解耦这些过程，因为构建一个静态版本需要大量的代码和少量思考，而添加交互需要大量的思考，而不是大量的代码。我们会看到这是为什么。
@@ -106,7 +106,7 @@ JSON API 返回的数据是这样的：
 
 ## Step 4: Identify Where Your State Should Live
 
-<p data-height="600" data-theme-id="0" data-slug-hash="qPrNQZ" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/qPrNQZ">Thinking In React: Step 4</a> on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="600" data-theme-id="0" data-slug-hash="qPrNQZ" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">查看<a href="http://codepen.io"> CodePen</a> 上的 <a href="https://codepen. io/gaearon/pen/qPrNQZ">React 编程思想：步骤 4</a>。</p>
 
 好的，我们已经确定了应用最小的 state。接下来我们需要确定哪个组件可变或者**拥有**这个 state。
 
@@ -131,7 +131,7 @@ JSON API 返回的数据是这样的：
 
 ## 步骤 5：添加反向数据流
 
-<p data-height="600" data-theme-id="0" data-slug-hash="LzWZvb" data-default-tab="js,result" data-user="rohan10" data-embed-version="2" data-pen-title="Thinking In React: Step 5" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/LzWZvb">Thinking In React: Step 5</a> on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="600" data-theme-id="0" data-slug-hash="LzWZvb" data-default-tab="js,result" data-user="rohan10" data-embed-version="2" data-pen-title="Thinking In React: Step 5" class="codepen">查看 <a href="http://codepen.io">CodePen</a> 上的 <a href="https://codepen.io/gaearon/pen/LzWZvb">React 编程思想：步骤 5</a>。</p>
 
 目前为止，我们已经构建了一个正确渲染的应用，其数据在层次结构中自上而下流动。现在是时候支持其他的数据流方式了：层次结构中的底层的表达组件需要更新 `FilterableProductTable` 中的 state。
 
@@ -143,6 +143,6 @@ React 使这个数据流清晰易懂，来让你理解你的程序是如何工�
 
 虽然这听起来很复杂，但实际上只有几行代码。而且这可以明确应用中的数据是如何流动的。
 
-## And That's It
+## 就是这样
 
-Hopefully, this gives you an idea of how to think about building components and applications with React. While it may be a little more typing than you're used to, remember that code is read far more than it's written, and it's extremely easy to read this modular, explicit code. As you start to build large libraries of components, you'll appreciate this explicitness and modularity, and with code reuse, your lines of code will start to shrink. :)
+希望这可以让你了解如何用 React 构建组件和应用。虽然这可能比你所习惯的要多写一些代码，但请记住，代码的可阅读性远比写代码重要，并且模块化、结构清晰的代码最易于阅读。当你开始构建大型组件库时，你会欣赏这种清晰明确、模块化，并且可重用的代码，你的代码量会开始减少。:)
