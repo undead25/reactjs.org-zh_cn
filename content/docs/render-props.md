@@ -4,9 +4,10 @@ title: Render Props
 permalink: docs/render-props.html
 ---
 
-The term ["render prop"](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce) refers to a simple technique for sharing code between React components using a prop whose value is a function.
+术语[“render prop”](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce)指的是使用一个值是函数的 prop 来在 React 组件之间共享代码的简单技术。
 
-A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic.
+带有 render prop 的组件包含一个返回 React 元素的函数，并且调用这个函数，而不是实现自己的渲染逻辑。
+
 
 ```jsx
 <DataProvider render={data => (
@@ -14,11 +15,11 @@ A component with a render prop takes a function that returns a React element and
 )}/>
 ```
 
-Libraries that use render props include [React Router](https://reacttraining.com/react-router/web/api/Route/Route-render-methods) and [Downshift](https://github.com/paypal/downshift).
+包括 [React Router](https://reacttraining.com/react-router/web/api/Route/Route-render-methods) 和 [Downshift](https://github.com/paypal/downshift) 这样的库都在使用 render props。
 
-In this document, we’ll discuss why render props are useful, and how to write your own.
+在本文中，我们会讨论为什么 render props 很实用，以及如何自己写一个。
 
-## Use Render Props for Cross-Cutting Concerns
+## Render Props 用于交叉关注
 
 Components are the primary unit of code reuse in React, but it's not always obvious how to share the state or behavior that one component encapsulates to other components that need that same state.
 
