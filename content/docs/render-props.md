@@ -21,9 +21,9 @@ permalink: docs/render-props.html
 
 ## Render Props 用于交叉关注
 
-Components are the primary unit of code reuse in React, but it's not always obvious how to share the state or behavior that one component encapsulates to other components that need that same state.
+组件是 React 中代码复用的主要单元，但是如何将一个组件所封装的 state 或者行为共享给需要相同状态的其他组件上不是很明显。
 
-For example, the following component tracks the mouse position in a web app:
+例如，下面的组件会追踪应用中的鼠标位置：
 
 ```js
 class MouseTracker extends React.Component {
@@ -51,14 +51,14 @@ class MouseTracker extends React.Component {
 }
 ```
 
-As the cursor moves around the screen, the component displays its (x, y) coordinates in a `<p>`.
+当光标在屏幕上移动时，组件在 `<p>` 里面显示对应的（x, y）。
 
-Now the question is: How can we reuse this behavior in another component? In other words, if another component needs to know about the cursor position, can we encapsulate that behavior so that we can easily share it with that component?
+现在的问题是：我们如何在另一个组件中复用这种行为？换句话说，如果另一个组件需要知道光标位置，我们是否可以封装该行为，以便我们可以轻松地与该组件共享它？
 
-Since components are the basic unit of code reuse in React, let's try refactoring the code a bit to use a `<Mouse>` component that encapsulates the behavior we need to reuse elsewhere.
+由于组件是 React 中代码复用的基本单元，那让我们尝试重构一下代码，使用一个 `<Mouse>` 组件来封装我们需要在别处复用的行为。
 
 ```js
-// The <Mouse> component encapsulates the behavior we need...
+// <Mouse> 组件封装我们需要的行为...
 class Mouse extends React.Component {
   constructor(props) {
     super(props);
@@ -77,7 +77,7 @@ class Mouse extends React.Component {
     return (
       <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
 
-        {/* ...but how do we render something other than a <p>? */}
+        {/* ...但我们如何渲染除了 <p> 以外的内容呢？*/}
         <p>The current mouse position is ({this.state.x}, {this.state.y})</p>
       </div>
     );
@@ -96,11 +96,11 @@ class MouseTracker extends React.Component {
 }
 ```
 
-Now the `<Mouse>` component encapsulates all behavior associated with listening for `mousemove` events and storing the (x, y) position of the cursor, but it's not yet truly reusable.
+现在 `<Mouse>` 组件封装了与监听 `mousemove` 事件和存储光标（x, y）位置相关的所有行为，但这还不是真正的复用。
 
-For example, let's say we have a `<Cat>` component that renders the image of a cat chasing the mouse around the screen. We might use a `<Cat mouse={{ x, y }}>` prop to tell the component the coordinates of the mouse so it knows where to position the image on the screen.
+例如，假设我们有一个`<Cat>` 组件来渲染猫在屏幕上抓老鼠的图片。我们可以使用一个 `<Cat mouse={{ x, y }}>` 的 prop 来告诉组件老鼠的位置，以便知道将图片放在屏幕上的哪个位置。
 
-As a first pass, you might try rendering the `<Cat>` *inside `<Mouse>`'s `render` method*, like this:
+首先，你可能会像这样**在 `<Mouse>` 的 `render` 方法中**渲染 `<Cat>`：
 
 ```js
 class Cat extends React.Component {
